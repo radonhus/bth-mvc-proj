@@ -1,0 +1,24 @@
+imports:
+    - php
+
+filter:
+    paths: ["app/Models/*", "app/Http/Controllers/*", "routes/web.php"]
+    excluded_paths: [vendor/*, build/*, app/Models/User.php]
+
+build:
+    nodes:
+        my-tests:
+            environment:
+                php:
+                    version: 7.4
+
+    tests:
+        before:
+            - cp .env.scrutinizer .env
+            - php artisan key:generate
+        override:
+            -
+                command: make phpunit
+                coverage:
+                    file: build/coverage.clover
+                    format: php-clover

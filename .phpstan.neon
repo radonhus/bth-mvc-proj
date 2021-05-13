@@ -1,0 +1,11 @@
+parameters:
+    level: 5
+    paths:
+        - app\Http\Controllers
+        - app\Models
+        - tests
+    bootstrapFiles:
+        - .phpstan.constants.php
+    universalObjectCratesClasses:
+        - app\Models\Book
+        - app\Models\Highscore

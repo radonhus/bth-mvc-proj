@@ -1,0 +1,19 @@
+{
+    "includes": [
+        "app/Models",
+        "app/Http/Controllers",
+        "routes/web.php"
+    ],
+    "exclude": [
+      "test[s]?",
+      "app/Http/Controllers/Controller"
+    ],
+    "report": {
+        "html": "build/phpmetrics-html/"
+    },
+    "plugins": {
+        "git": {
+            "binary": "git"
+        }
+    }
+}

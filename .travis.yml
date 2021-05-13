@@ -1,0 +1,15 @@
+language: php
+
+php:
+    - "7.4"
+    #- "8.0"
+
+before_script:
+    #- make install check
+    - make install
+    - composer install
+    - cp .env.travis .env
+    - php artisan key:generate
+
+script:
+    - make test
