@@ -23,7 +23,7 @@ class YatzyController extends Controller
         session()->put('yatzy', $yatzyObject);
 
         return view('yatzy', [
-            'title' => "Yatzy | DiceLaVerdad",
+            'title' => "Yatzy | YatzyBonanza",
             'data' => $data
         ]);
     }
@@ -47,7 +47,7 @@ class YatzyController extends Controller
         session()->put('yatzy', $yatzyObject);
 
         return view('yatzy', [
-            'title' => "Yatzy | DiceLaVerdad",
+            'title' => "Yatzy | YatzyBonanza",
             'data' => $data
         ]);
     }
@@ -65,7 +65,7 @@ class YatzyController extends Controller
         $highscores = $highscoreObject->getAllHighscores();
 
         return view('yatzyhighscores', [
-            'title' => "Yatzy | DiceLaVerdad",
+            'title' => "Yatzy | YatzyBonanza",
             'highscores' => $highscores
         ]);
     }

@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\YatzyController;
+use App\Http\Controllers\MyAccountController;
+use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\SessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +20,7 @@ use App\Http\Controllers\YatzyController;
 
 Route::get('/', function () {
     return view('start', [
-        'title' => "Home | DiceLaVerdad"
+        'title' => "Home | YatzyBonanza"
     ]);
 });
 
@@ -26,3 +29,12 @@ Route::post('/yatzy', [YatzyController::class, 'play']);
 
 Route::get('/yatzyScore', [YatzyController::class, 'highScores']);
 Route::post('/yatzyScore', [YatzyController::class, 'submitHighScore']);
+
+Route::get('/myaccount', [MyAccountController::class, 'start']);
+
+Route::get('/register', [RegistrationController::class, 'create']);
+Route::post('/register', [RegistrationController::class, 'store']);
+
+Route::get('/login', [SessionController::class, 'create']);
+Route::post('/login', [SessionController::class, 'store']);
+Route::get('/logout', [SessionController::class, 'destroy']);

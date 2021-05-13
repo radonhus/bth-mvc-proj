@@ -7,5 +7,4 @@ parameters:
     bootstrapFiles:
         - .phpstan.constants.php
     universalObjectCratesClasses:
-        - app\Models\Book
         - app\Models\Highscore

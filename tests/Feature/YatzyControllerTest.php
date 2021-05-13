@@ -21,7 +21,7 @@ class YatzyControllerTest extends TestCase
         $response = $this->get('/yatzy');
 
         $response->assertStatus(200);
-        $response->assertSee('DiceLaVerdad');
+        $response->assertSee('YatzyBonanza');
     }
 
     /**
