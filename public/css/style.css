@@ -198,42 +198,14 @@ th {
   font-weight: normal;
 }
 
-
-.game21-form {
-    background-color: #f2f2f2;
-    padding: 1em;
-    margin-bottom: 1em;
+.game-main-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
-.game21-form label {
-    font-weight: bold;
-}
-
-.game21-form label,
-.game21-form select,
-.game21-form .submit {
-    margin: 0.5em;
-}
-
-.game21-form .submit {
-    padding: 0.4em;
-    font-weight: bold;
-}
-
-.dice-utf8 {
-    font-size: 5em;
-    line-height: 0.5em;
-    margin: 0;
-}
-
-.dice-utf8 .dice-1::after { content: "\2680"; font-style: normal; }
-.dice-utf8 .dice-2::after { content: "\2681"; font-style: normal; }
-.dice-utf8 .dice-3::after { content: "\2682"; font-style: normal; }
-.dice-utf8 .dice-4::after { content: "\2683"; font-style: normal; }
-.dice-utf8 .dice-5::after { content: "\2684"; font-style: normal; }
-.dice-utf8 .dice-6::after { content: "\2685"; font-style: normal; }
-
- .yatzy-status {
+.yatzy-status {
      background-color: #eee;
      padding: 1em;
  }
@@ -300,30 +272,65 @@ th {
     background-color: #caf0f8;
 }
 
-.books-wrapper {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
+.scorecard-1::after {
+  content: "Ones";
 }
 
-.book-wrapper {
-    box-sizing: border-box;
-    width: 250px;
-    padding: 1em;
-    margin: 1em;
-    display: flex;
-    flex-direction: column;
-    border-radius: 0.2em;
-    border-width: 1px;
-    border-color: #ccc;
-    border-style: solid;
+.scorecard-2::after {
+  content: "Twos";
 }
 
-.book-image {
-    width: 200px;
+.scorecard-3::after {
+  content: "Threes";
 }
 
+.scorecard-4::after {
+  content: "Fours";
+}
+
+.scorecard-5::after {
+  content: "Fives";
+}
+
+.scorecard-6::after {
+  content: "Sixes";
+}
+
+.scorecard-one_pair::after {
+  content: "One pair";
+}
+
+.scorecard-two_pairs::after {
+  content: "Two pairs";
+}
+
+.scorecard-three::after {
+  content: "Three of a kind";
+}
+
+.scorecard-four::after {
+  content: "Four of a kind";
+}
+
+.scorecard-small_straight::after {
+  content: "Small straight";
+}
+
+.scorecard-large_straight::after {
+  content: "Large straight";
+}
+
+.scorecard-full_house::after {
+  content: "Full house";
+}
+
+.scorecard-chance::after {
+  content: "Chance";
+}
+
+.scorecard-yatzy::after {
+  content: "Yatzy";
+}
 
 .button {
   display: flex;

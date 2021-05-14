@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 * @method orderByDesc(string $string1)
 * @method where(string $string1, string $string2)
 */
-class Highscore extends Model
+class Result extends Model
 {
     use HasFactory;
 
@@ -27,39 +27,39 @@ class Highscore extends Model
     public $timestamps = false;
 
     /**
-     * Get all highscores from highscores table in database.
+     * Get all Results from results table in database.
      *
-     * @property object  $highscoresDBObject
-     * @property array $highscoresArray
+     * @property object  $resultsDBObject
+     * @property array $topTenArray
      * @property int $rank
-     * @property array $highscore
-     * @return array $highscoresArray
+     * @property array $result
+     * @return array $topTenArray
      */
-    public function getAllHighscores()
+    public function getAllResults()
     {
 
-        $highscoresDBObject = $this->orderByDesc('score')
+        $resultsDBObject = $this->orderByDesc('score')
                                 ->limit(10)
                                 ->get();
 
-        $highscoresArray = [];
+        $topTenArray = [];
         $rank = 0;
 
-        foreach ($highscoresDBObject as $highscore) {
+        foreach ($resultsDBObject as $result) {
             $rank += 1;
-            array_push($highscoresArray, [
+            array_push($topTenArray, [
                 'rank' => $rank,
-                'player' => $highscore->player,
-                'score' => $highscore->score,
-                'date_played' => substr($highscore->date_played, 0, 10)
+                'player' => $result->player,
+                'score' => $result->score,
+                'date_played' => substr($result->date_played, 0, 10)
             ]);
         }
 
-        return $highscoresArray;
+        return $topTenArray;
     }
 
     /**
-     * Save new result in highscore table
+     * Save new result in results table
      *
      * @param  string  $player
      * @param  string  $score

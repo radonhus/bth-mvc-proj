@@ -28,7 +28,7 @@ Route::get('/yatzy', [YatzyController::class, 'start']);
 Route::post('/yatzy', [YatzyController::class, 'play']);
 
 Route::get('/yatzyScore', [YatzyController::class, 'highScores']);
-Route::post('/yatzyScore', [YatzyController::class, 'submitHighScore']);
+Route::post('/yatzyScore', [YatzyController::class, 'submitResult']);
 
 Route::get('/myaccount', [MyAccountController::class, 'start']);
 

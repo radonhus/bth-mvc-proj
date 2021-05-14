@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use App\Http\Controllers\YatzyController;
 use App\Models\Yatzy\Yatzy;
-use App\Models\Yatzy\Highscore;
+use App\Models\Yatzy\Result;
 
 class YatzyControllerTest extends TestCase
 {
@@ -81,7 +81,7 @@ class YatzyControllerTest extends TestCase
      *
      * @return void
      */
-    public function testSubmitHighScore()
+    public function testSubmitResult()
     {
         $response = $this->withHeaders([
             'X-Header' => 'Value',
@@ -101,8 +101,8 @@ class YatzyControllerTest extends TestCase
      */
     protected function tearDown(): void
     {
-        $highscore = new Highscore();
+        $result = new Result();
 
-        $highscore->where('score', '999')->delete();
+        $result->where('score', '999')->delete();
     }
 }

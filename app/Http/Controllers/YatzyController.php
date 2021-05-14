@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Yatzy\Yatzy;
-use App\Models\Yatzy\Highscore;
+use App\Models\Yatzy\Result;
 use Illuminate\Http\Request;
 
 class YatzyController extends Controller
@@ -53,20 +53,20 @@ class YatzyController extends Controller
     }
 
     /**
-     * Present highscores
+     * Present top ten results
      *
-     * @property object  $highscoreObject
-     * @property array  $highscores
+     * @property object  $resultsDBObject
+     * @property array  $results
      * @return \Illuminate\Contracts\View\View
      */
     public function highScores()
     {
-        $highscoreObject = new Highscore();
-        $highscores = $highscoreObject->getAllHighscores();
+        $resultsDBObject = new Result();
+        $topTenArray = $resultsDBObject->getAllResults();
 
         return view('yatzyhighscores', [
             'title' => "Yatzy | YatzyBonanza",
-            'highscores' => $highscores
+            'highscores' => $topTenArray
         ]);
     }
 
@@ -79,12 +79,15 @@ class YatzyController extends Controller
      * @property object  $view
      * @return \Illuminate\Contracts\View\View
      */
-    public function submitHighScore(Request $request)
+    public function submitResult(Request $request)
     {
-        $newScore = new Highscore();
+        $newScore = new Result();
 
         if ($request and is_string(request('player')) and is_string(request('score'))) {
-            $newScore->saveResult(request('player'), request('score'));
+            $newScore->saveResult(
+                request('player'),
+                request('score')
+            );
         }
 
         $view = $this->highScores();

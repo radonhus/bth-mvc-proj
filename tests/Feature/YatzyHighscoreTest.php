@@ -4,36 +4,36 @@ declare(strict_types=1);
 
 namespace App\Models\Yatzy;
 
-use App\Models\Yatzy\Highscore;
+use App\Models\Yatzy\Result;
 
 use Tests\TestCase;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 /**
- * Test cases for the Highscore class of the Yatzy game.
+ * Test cases for the Result class of the Yatzy game.
  */
-class YatzyHighscoreTest extends TestCase
+class YatzyResultTest extends TestCase
 {
     /**
-     * Test that object is instance of Highscore
+     * Test that object is instance of Result
      */
-    public function testIsInstanceOfHighscore()
+    public function testIsInstanceOfResult()
     {
-        $highscoreObject = new Highscore();
+        $resultObject = new Result();
 
-        $this->assertInstanceOf("App\Models\Yatzy\Highscore", $highscoreObject);
+        $this->assertInstanceOf("App\Models\Yatzy\Result", $resultObject);
     }
 
     /**
-     * Test that getAllHighscores() returns an array
+     * Test that getAllResults() returns an array
      */
-    public function testgetAllHighscoresReturnsArray()
+    public function testgetAllResultsReturnsArray()
     {
-        $highscoreObject2 = new Highscore();
-        $arrayOfHighscores = $highscoreObject2->getAllHighscores();
+        $resultObject2 = new Result();
+        $arrayOfResults = $resultObject2->getAllResults();
 
-        $this->assertIsArray($arrayOfHighscores);
+        $this->assertIsArray($arrayOfResults);
     }
 
     /**
@@ -41,11 +41,11 @@ class YatzyHighscoreTest extends TestCase
      */
     public function testSaveResult()
     {
-        $highscoreObject3 = new Highscore();
+        $resultObject3 = new Result();
 
-        $result = $highscoreObject3->saveResult('Test', '999');
+        $result = $resultObject3->saveResult('Test', '999');
 
-        $databaseQuery = $highscoreObject3->orderByDesc('score')
+        $databaseQuery = $resultObject3->orderByDesc('score')
                                 ->limit(1)
                                 ->get();
 
@@ -62,8 +62,8 @@ class YatzyHighscoreTest extends TestCase
      */
     protected function tearDown(): void
     {
-        $highscoreObject4 = new Highscore();
+        $resultObject4 = new Result();
 
-        $highscoreObject4->where('score', '999')->delete();
+        $resultObject4->where('score', '999')->delete();
     }
 }

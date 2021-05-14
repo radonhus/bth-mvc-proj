@@ -1,2 +1,0 @@
-C:\Users\Richard\Documents\dbwebb\mvc\me\proj\app\Http\Controllers\RegistrationController.php:13	Avoid using undefined variables such as '$data' which will lead to PHP notices.
-C:\Users\Richard\Documents\dbwebb\mvc\me\proj\app\Http\Controllers\RegistrationController.php:13	Avoid unused local variables such as '$data'.

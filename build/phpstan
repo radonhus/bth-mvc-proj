@@ -1,10 +1,27 @@
- ------ ------------------------------------------------- 
- [32m Line [39m [32m app\Http\Controllers\RegistrationController.php [39m 
- ------ ------------------------------------------------- 
-  13     Undefined variable: $data                        
- ------ ------------------------------------------------- 
+ ------ ---------------------------------------------------------------------------------------------------------------------- 
+ [32m Line [39m [32m app\Http\Controllers\RegistrationController.php                                                                      [39m 
+ ------ ---------------------------------------------------------------------------------------------------------------------- 
+[39;49m  31     Method App\Http\Controllers\RegistrationController::store() should return Illuminate\Contracts\View\View but returns[39;49m[39;49m  [39;49m
+[39;49m         [39;49mIlluminate\Http\RedirectResponse.                                                                                     
+  41     Call to an undefined method App\Models\User::create().                                                                
+  43     Call to an undefined method Illuminate\Contracts\Auth\Factory|Illuminate\Contracts\Auth\Guard::login().               
+ ------ ---------------------------------------------------------------------------------------------------------------------- 
+
+ ------ --------------------------------------------------------------------------------------------------------------------------------------------------- 
+ [32m Line [39m [32m app\Http\Controllers\SessionController.php                                                                                                        [39m 
+ ------ --------------------------------------------------------------------------------------------------------------------------------------------------- 
+  26     Call to an undefined method Illuminate\Contracts\Auth\Factory|Illuminate\Contracts\Auth\Guard::attempt().                                          
+  27     Method App\Http\Controllers\SessionController::store() should return Illuminate\Contracts\View\View but returns Illuminate\Http\RedirectResponse.  
+  43     Call to an undefined method Illuminate\Contracts\Auth\Factory|Illuminate\Contracts\Auth\Guard::logout().                                           
+ ------ --------------------------------------------------------------------------------------------------------------------------------------------------- 
+
+ ------ ------------------------------------------------------- 
+ [32m Line [39m [32m app\Models\User.php                                   [39m 
+ ------ ------------------------------------------------------- 
+  71     Call to an undefined method App\Models\User::where().  
+ ------ ------------------------------------------------------- 
 
 [37;41m                                                                                                                        [39;49m
-[37;41m [ERROR] Found 1 error                                                                                                  [39;49m
+[37;41m [ERROR] Found 7 errors                                                                                                 [39;49m
 [37;41m                                                                                                                        [39;49m
 
