@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\YatzyController;
+use App\Http\Controllers\ResultsController;
 use App\Http\Controllers\MyAccountController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\SessionController;
@@ -27,8 +28,8 @@ Route::get('/', function () {
 Route::get('/yatzy', [YatzyController::class, 'start']);
 Route::post('/yatzy', [YatzyController::class, 'play']);
 
-Route::get('/yatzyScore', [YatzyController::class, 'highScores']);
-Route::post('/yatzyScore', [YatzyController::class, 'submitResult']);
+Route::get('/highscores', [ResultsController::class, 'highScores']);
+Route::post('/highscores', [ResultsController::class, 'submitResult']);
 
 Route::get('/myaccount', [MyAccountController::class, 'start']);
 

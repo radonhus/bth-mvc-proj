@@ -12,7 +12,7 @@
             @if( auth()->check() )
             <a href="{{ url('/yatzy') }}">Play!</a>
             @endif
-            <a href="{{ url('/yatzyScore') }}">Highscores</a>
+            <a href="{{ url('/highscores') }}">Highscores</a>
         </nav>
         <div class="header-right">
             @if( auth()->check() )

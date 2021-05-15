@@ -13,10 +13,9 @@
     <div class="yatzy-status" {{ $data['showOnGameOver'] }}>
         <p>Your final score: {{ $data['totalPoints'] }}</p>
 
-        <form method="post" class="yatzy-form" action="{{ url('/yatzyScore') }}">
+        <form method="post" class="yatzy-form" action="{{ url('/highscores') }}">
             @csrf
             <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
-            <input type="hidden" name="score" value="{{ $data['totalPoints'] }}">
             <input type="hidden" name="bonus" value="{{ $data['bonus'] }}">
             @foreach ($data['pointsPerRound'] as $key => $value)
                 <input type="hidden" name="{{ $key }}" value="{{ $value }}">

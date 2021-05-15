@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 * the model represents (to make phpstan happy)
 *
 * @property string $user_id
-* @property string $score
 * @property string  $result_bonus
 * @property string  $result_1
 * @property string  $result_2
@@ -50,39 +49,7 @@ class ResultTable extends Model
     public $timestamps = false;
 
     /**
-     * Get all results from results table in database.
-     *
-     * @property object  $result
-     * @property array $topTenArray
-     * @property int $rank
-     * @property array $result
-     * @return array $topTenArray
-     */
-    public function getAllResults()
-    {
-
-        $result = $this->orderByDesc('score')
-                                ->limit(10)
-                                ->get();
-
-        $topTenArray = [];
-        $rank = 0;
-
-        foreach ($result as $row) {
-            $rank += 1;
-            array_push($topTenArray, [
-                'rank' => $rank,
-                'user_id' => $row->user_id,
-                'score' => $row->score,
-                'date_played' => substr($row->date_played, 0, 10)
-            ]);
-        }
-
-        return $topTenArray;
-    }
-
-    /**
-     * Get all results from results table in database.
+     * Get the latest result from results table
      *
      * @property object  $result
      * @return object
@@ -99,7 +66,6 @@ class ResultTable extends Model
      * Save new result in results table
      *
      * @param  string  $user_id
-     * @param  string  $score
      * @param  string  $result_bonus
      * @param  string  $result_1
      * @param  string  $result_2
@@ -120,7 +86,6 @@ class ResultTable extends Model
      */
     public function saveResult(
         string $user_id,
-        string $score,
         string $result_bonus,
         string $result_1,
         string $result_2,
@@ -140,7 +105,6 @@ class ResultTable extends Model
         )
     {
         $this->user_id = $user_id;
-        $this->score = $score;
         $this->result_bonus = $result_bonus;
         $this->result_1 = $result_1;
         $this->result_2 = $result_2;
