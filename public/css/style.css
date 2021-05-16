@@ -2,6 +2,10 @@
   font-family: "Oswald";
   src: url("Oswald-VariableFont_wght.ttf") format("truetype");
 }
+* {
+  box-sizing: border-box;
+}
+
 html {
   font-family: Arial;
 }
@@ -105,17 +109,49 @@ h6 {
   font-family: "Oswald";
   font-weight: normal;
 }
-
-.orderstatus {
-  background-color: #fff;
-  font-size: 14px;
-  padding: 0.8em;
-  border: 2px solid;
-  border-radius: 5px;
-  margin-left: 3em;
+h1 span.red,
+h2 span.red,
+h3 span.red,
+h4 span.red,
+h5 span.red,
+h6 span.red {
+  color: #b56576;
+}
+h1 span.green,
+h2 span.green,
+h3 span.green,
+h4 span.green,
+h5 span.green,
+h6 span.green {
+  color: #a1C181;
 }
 
-.orderinfo-wrapper {
+.statusbox {
+  font-size: 14px;
+  padding: 0.8em;
+  background-color: #fefefe;
+  box-shadow: 1px 1px 5px #ccc;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #fefefe;
+  border-radius: 0.3rem;
+}
+.statusbox h2 {
+  margin: 0.5em 0;
+}
+.statusbox span.bold {
+  font-weight: bold;
+}
+.statusbox p {
+  padding-bottom: 0.8em;
+  margin: 0;
+}
+.statusbox p:last-child {
+  padding: 0;
+  padding-bottom: 0;
+}
+
+.infobox-content-wrapper {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -127,12 +163,12 @@ h6 {
   margin-bottom: 2em;
 }
 
-.orderinfo-wrapper .left {
+.infobox-content-wrapper .left {
   margin-left: 1em;
   text-align: right;
 }
 
-.orderinfo-wrapper .right {
+.infobox-content-wrapper .right {
   margin-left: 1em;
   text-align: left;
 }
@@ -227,9 +263,13 @@ table.scorecard td:last-child {
   text-align: center;
   width: 80px;
 }
-table.scorecard tr:last-child {
-  background-color: #ddd;
+table.scorecard tr.bonus,
+table.scorecard tr.totalpoints {
+  background-color: #eee;
   color: #333;
+}
+table.scorecard tr.totalpoints {
+  font-weight: bold;
 }
 
 table.highscore {
@@ -261,49 +301,39 @@ table.highscore th {
 .yatzy-status {
   background-color: #eee;
   padding: 1em;
+  width: 100%;
 }
 
 .yatzy-form {
   display: flex;
   flex-direction: column;
-  padding: 1em;
-  border-width: 2px;
-  border-color: #000;
+  width: 100%;
 }
-
-.yatzy-form select {
-  margin: 1em;
-  width: 3em;
-  height: 2em;
-  font-weight: bold;
-}
-
 .yatzy-form .submit {
-  padding: 0.4em;
-  width: 250px;
-  font-weight: bold;
-  margin-bottom: 1em;
-}
-
-.yatzy-form input.text {
-  padding: 0.4em;
-  width: 250px;
-  font-weight: bold;
-  margin-bottom: 1em;
+  padding: 0.8em;
+  width: 100%;
+  margin-bottom: 0.5em;
 }
 
 .yatzy-dice {
+  width: 100%;
   display: flex;
   flex-direction: row;
   align-content: space-around;
-  margin: 1em 0;
+  margin: 2em 0;
+  padding: 0.8em;
+  background-color: #e7d8c9;
+  box-shadow: 1px 1px 5px #ccc;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #fefefe;
+  border-radius: 0.3rem;
 }
 
 .onedice {
   text-align: center;
-  padding: 0.5em;
+  padding: 0.5em 0.5em 0;
   margin: 0 0.2em;
-  background-color: #e7d8c9;
 }
 
 .onedice input {
@@ -313,16 +343,9 @@ table.highscore th {
 }
 
 .dice-image {
-  width: 50px;
-  height: 50px;
+  width: 80px;
+  height: 80px;
   padding: 0;
-}
-
-.dice-image-small {
-  width: 25px;
-  height: 25px;
-  padding: 0.5em;
-  background-color: #caf0f8;
 }
 
 .scorecard-1::after {

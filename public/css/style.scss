@@ -3,6 +3,10 @@
     src: url('Oswald-VariableFont_wght.ttf') format('truetype');
 }
 
+* {
+    box-sizing: border-box;
+}
+
 html {
     font-family: Arial;
 }
@@ -105,18 +109,46 @@ h5,
 h6 {
     font-family: 'Oswald';
     font-weight: normal;
+
+    span.red {
+        color: #b56576;
+    }
+
+    span.green {
+        color: #a1C181;
+    }
 }
 
-.orderstatus {
-    background-color: #fff;
+.statusbox {
     font-size: 14px;
     padding: 0.8em;
-    border: 2px solid;
-    border-radius: 5px;
-    margin-left: 3em;
+    background-color: #fefefe;
+    box-shadow: 1px 1px 5px #ccc;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #fefefe;
+    border-radius: 0.3rem;
+
+    h2 {
+        margin: 0.5em 0;
+    }
+
+    span.bold {
+        font-weight: bold;
+    }
+
+    p {
+        padding-bottom: 0.8em;
+        margin: 0;
+    }
+
+    p:last-child {
+        padding: 0;
+        padding-bottom: 0;
+    }
 }
 
-.orderinfo-wrapper {
+.infobox-content-wrapper {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -128,12 +160,12 @@ h6 {
     margin-bottom: 2em;
 }
 
-.orderinfo-wrapper .left {
+.infobox-content-wrapper .left {
     margin-left: 1em;
     text-align: right;
 }
 
-.orderinfo-wrapper .right {
+.infobox-content-wrapper .right {
     margin-left: 1em;
     text-align: left;
 }
@@ -235,9 +267,14 @@ table.scorecard {
         width: 80px;
     }
 
-    tr:last-child {
-        background-color: #ddd;
+    tr.bonus,
+    tr.totalpoints {
+        background-color: #eee;
         color: #333;
+    }
+
+    tr.totalpoints {
+        font-weight: bold;
     }
 }
 
@@ -275,49 +312,40 @@ table.highscore {
 .yatzy-status {
      background-color: #eee;
      padding: 1em;
+     width: 100%;
  }
 
 .yatzy-form {
     display: flex;
     flex-direction: column;
-    padding: 1em;
-    border-width: 2px;
-    border-color: #000;
-}
+    width: 100%;
 
-.yatzy-form select {
-    margin: 1em;
-    width: 3em;
-    height: 2em;
-    font-weight: bold;
-}
-
-.yatzy-form .submit {
-    padding: 0.4em;
-    width: 250px;
-    font-weight: bold;
-    margin-bottom: 1em;
-}
-
-.yatzy-form input.text {
-    padding: 0.4em;
-    width: 250px;
-    font-weight: bold;
-    margin-bottom: 1em;
+    .submit {
+        padding: 0.8em;
+        width: 100%;
+        margin-bottom: 0.5em;
+    }
 }
 
 .yatzy-dice {
+    width: 100%;
     display: flex;
     flex-direction: row;
     align-content: space-around;
-    margin: 1em 0;
+    margin: 2em 0;
+    padding: 0.8em;
+    background-color: #e7d8c9;
+    box-shadow: 1px 1px 5px #ccc;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #fefefe;
+    border-radius: 0.3rem;
 }
 
 .onedice {
     text-align: center;
-    padding: 0.5em;
+    padding: 0.5em 0.5em 0;
     margin: 0 0.2em;
-    background-color: #e7d8c9;
 }
 
 .onedice input {
@@ -327,16 +355,9 @@ table.highscore {
 }
 
 .dice-image {
-    width: 50px;
-    height: 50px;
+    width: 80px;
+    height: 80px;
     padding: 0;
-}
-
-.dice-image-small {
-    width: 25px;
-    height: 25px;
-    padding: 0.5em;
-    background-color: #caf0f8;
 }
 
 .scorecard-1::after {

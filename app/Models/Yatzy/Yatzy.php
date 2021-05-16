@@ -60,10 +60,9 @@ class Yatzy
         $data["opponent"] = $this->opponent;
         $data["challengeId"] = $this->challengeId;
 
-        $data["hideOn2RerollsMade"] = "";
-        $data["showOn2RerollsMade"] = "hidden";
-        $data["hideOnGameOver"] = "";
-        $data["showOnGameOver"] = "hidden";
+        $data["twoRerollsMade"] = "false";
+
+        $data["gameOver"] = "false";
 
         return $data;
     }
@@ -124,14 +123,12 @@ class Yatzy
         $data["opponent"] = $this->opponent;
         $data["challengeId"] = $this->challengeId;
 
-        $data["hideOn2RerollsMade"] = "";
-        $data["showOn2RerollsMade"] = "hidden";
-        $data["hideOnGameOver"] = "";
-        $data["showOnGameOver"] = "hidden";
+        $data["twoRerollsMade"] = "false";
+
+        $data["gameOver"] = "false";
 
         if ($data["nrOfRerolls"] >= 2) {
-            $data["hideOn2RerollsMade"] = "hidden";
-            $data["showOn2RerollsMade"] = "";
+            $data["twoRerollsMade"] = "true";
         }
         return $data;
     }
@@ -153,11 +150,8 @@ class Yatzy
         $data["opponent"] = $this->opponent;
         $data["challengeId"] = $this->challengeId;
 
-        $data["hideOn2RerollsMade"] = "hidden";
-        $data["showOn2RerollsMade"] = "";
-
-        $data["hideOnGameOver"] = "hidden";
-        $data["showOnGameOver"] = "";
+        $data["twoRerollsMade"] = "true";
+        $data["gameOver"] = "true";
 
         return $data;
     }

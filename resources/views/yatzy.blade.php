@@ -4,18 +4,56 @@
 
 <div class="game-content-left">
 
-<pre>
-{{ $data['mode'] }}
-{{ $data['bet'] }}
-{{ $data['opponent'] }}
-{{ $data['challengeId'] }}
-</pre>
+<h1>YatzyBonanza @if ($data['gameOver'] == 'false')<span class="green">Live!</span>@else<span class="red">Game Over!</span>@endif</h1>
 
-<h1>Yatzy</h1>
+<div class="statusbox">
+    @if ($data['mode'] == 'challenge')
+        <p><span class="bold">Game mode</span>: New challenge</p>
+    @elseif ($data['mode'] == 'accept')
+        <p><span class="bold">Game mode</span>: Challenge accepted</p>
+    @else
+        <p><span class="bold">Game mode</span>: Single player (reach 250 or more to win)</p>
+    @endif
+        <p><span class="bold">Amount at stake</span>: {{ $data['bet'] }} ¥</p>
+</div>
 
-    @if ($data['hideOnGameOver'] == 'hidden')
-    <div class="yatzy-status">
-        <p>Your final score: {{ $data['totalPoints'] }}</p>
+    <form method="post" class="yatzy-form" action="{{ url('/yatzy') }}">
+        @csrf
+        <div class="yatzy-dice">
+            @foreach ($data['diceArray'] as $key => $value)
+            <div class="onedice">
+                <img src="{{ asset('/img/' . $value . '.png') }}" class="dice-image"><br>
+                @if ($data['twoRerollsMade'] == 'false')
+                <input type="checkbox" name="{{ $key }}" value="selected">
+                @else
+                <input type="checkbox" name="{{ $key }}" value="selected" disabled>
+                @endif
+            </div>
+            @endforeach
+        </div>
+
+        @if ($data['twoRerollsMade'] == 'false')
+        <div class="statusbox">
+            <h2>Rolls made: {{ $data['nrOfRerolls']+1 }} of 3</h2>
+            <p>Select which dice you want to roll again, then click below to roll</p>
+            <input type="submit" name="roll" value="Roll!" class="submit">
+        </div>
+        @elseif ($data['gameOver'] == 'false')
+        <div class="statusbox">
+            <h2>Round nr. {{ $data['nrOfRoundsPlayed'] }} (of 15) is over!</h2>
+            <p>Save the dice in your scorecard to start next round.</p>
+        </div>
+        @endif
+
+    </form>
+
+    @if ($data['gameOver'] == 'true')
+    <div class="statusbox">
+        <h2><span class="red">Game Over!</span> Your final score: {{ $data['totalPoints'] }}</h2>
+
+        @if ($data['mode'] == 'single' && $data['totalPoints'] >= 250)
+        <p>Congratulations! You collected over 250 points and won {{ $data['bet'] }} ¥!</p>
+        @endif
 
         <form method="post" class="yatzy-form" action="{{ url('/highscores') }}">
             @csrf
@@ -32,28 +70,10 @@
             @foreach ($data['frequency'] as $key => $value)
                 <input type="hidden" name="dice_{{ $key }}" value="{{ $value }}">
             @endforeach
-            <input type="submit" name="submit" value="Submit results to database" class="submit">
+            <input type="submit" name="submit" value="Save results" class="submit">
         </form>
     </div>
-    @else
-    <div class="yatzy-status">
-        <p>Your total score so far: {{ $data['totalPoints'] }}</p>
-    </div>
     @endif
-
-    <form method="post" class="yatzy-form" action="{{ url('/yatzy') }}">
-        @csrf
-        <p {{ $data['hideOn2RerollsMade'] }}>Select which dice to roll again (rerolls made: {{ $data['nrOfRerolls'] }})</p>
-        <div class="yatzy-dice">
-            @foreach ($data['diceArray'] as $key => $value)
-            <div class="onedice">
-                <img src="{{ asset('/img/' . $value . '.png') }}" class="dice-image"><br>
-                <input type="checkbox" name="{{ $key }}" value="selected" {{ $data['hideOn2RerollsMade'] }}>
-            </div>
-            @endforeach
-        </div>
-        <input type="submit" name="roll" value="Roll selected dice" class="submit" {{ $data['hideOn2RerollsMade'] }}>
-    </form>
 
 </div>
 
@@ -76,7 +96,7 @@
                     <form method="post" action="{{ url('/yatzy') }}">
                     @csrf
                     <input type="hidden" name="roundOver" value="roundOver">
-                    @if ($data['showOn2RerollsMade'] == '')
+                    @if ($data['twoRerollsMade'] == 'true')
                     <button type="submit" name="selectedRound" value="{{ $key }}" class="submit button green">Save</button>
                     @endif
                     </form>
@@ -87,7 +107,7 @@
 
             @endforeach
             </tr>
-            <tr>
+            <tr class="bonus">
                 <td>
                     Bonus
                 </td>
@@ -95,6 +115,14 @@
                 @if ($data['bonus'] >= 0)
                     {{ $data['bonus'] }}
                 @endif
+                </td>
+            </tr>
+            <tr class="totalpoints">
+                <td>
+                    Total points:
+                </td>
+                <td>
+                {{ $data['totalPoints'] }}
                 </td>
             </tr>
         </table>
