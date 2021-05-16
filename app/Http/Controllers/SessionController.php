@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\MyAccountController;
 use Illuminate\Http\Request;
 
 class SessionController extends Controller
@@ -29,9 +30,9 @@ class SessionController extends Controller
             ]);
         }
 
-        return view('useraccount', [
-            'title' => "My account | YatzyBonanza"
-        ]);
+        $myAccount = new MyAccountController();
+
+        return $myAccount->myAccount();
     }
 
     /**

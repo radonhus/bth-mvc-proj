@@ -4,18 +4,27 @@
 
 <div class="game-content-left">
 
+<pre>
+{{ $data['mode'] }}
+{{ $data['bet'] }}
+{{ $data['opponent'] }}
+{{ $data['challengeId'] }}
+</pre>
+
 <h1>Yatzy</h1>
 
-    <div class="yatzy-status" {{ $data['hideOnGameOver'] }}>
-        <p>Your total score so far: {{ $data['totalPoints'] }}</p>
-    </div>
-
-    <div class="yatzy-status" {{ $data['showOnGameOver'] }}>
+    @if ($data['hideOnGameOver'] == 'hidden')
+    <div class="yatzy-status">
         <p>Your final score: {{ $data['totalPoints'] }}</p>
 
         <form method="post" class="yatzy-form" action="{{ url('/highscores') }}">
             @csrf
             <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+            <input type="hidden" name="mode" value="{{ $data['mode'] }}">
+            <input type="hidden" name="bet" value="{{ $data['bet'] }}">
+            <input type="hidden" name="opponent" value="{{ $data['opponent'] }}">
+            <input type="hidden" name="challengeId" value="{{ $data['challengeId'] }}">
+            <input type="hidden" name="score" value="{{ $data['totalPoints'] }}">
             <input type="hidden" name="bonus" value="{{ $data['bonus'] }}">
             @foreach ($data['pointsPerRound'] as $key => $value)
                 <input type="hidden" name="{{ $key }}" value="{{ $value }}">
@@ -25,8 +34,12 @@
             @endforeach
             <input type="submit" name="submit" value="Submit results to database" class="submit">
         </form>
-
     </div>
+    @else
+    <div class="yatzy-status">
+        <p>Your total score so far: {{ $data['totalPoints'] }}</p>
+    </div>
+    @endif
 
     <form method="post" class="yatzy-form" action="{{ url('/yatzy') }}">
         @csrf
@@ -41,15 +54,6 @@
         </div>
         <input type="submit" name="roll" value="Roll selected dice" class="submit" {{ $data['hideOn2RerollsMade'] }}>
     </form>
-
-@isset($data['frequency'])
-<pre>
-Histogram:
-@foreach ($data['frequency'] as $key => $value)
-    {{ $key }}: {{ $value }}
-@endforeach
-</pre>
-@endisset
 
 </div>
 
@@ -72,7 +76,9 @@ Histogram:
                     <form method="post" action="{{ url('/yatzy') }}">
                     @csrf
                     <input type="hidden" name="roundOver" value="roundOver">
-                    <button type="submit" name="selectedRound" value="{{ $key }}" class="submit button green" {{ $data['showOn2RerollsMade'] }} {{ $data['hideOnGameOver'] }}>Save</button>
+                    @if ($data['showOn2RerollsMade'] == '')
+                    <button type="submit" name="selectedRound" value="{{ $key }}" class="submit button green">Save</button>
+                    @endif
                     </form>
                 @else
                     {{ $value }}
@@ -94,6 +100,5 @@ Histogram:
         </table>
     </div>
 </div>
-
 </div>
 @include('footer')

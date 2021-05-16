@@ -40,32 +40,6 @@ class HistogramTable extends Model
     public $timestamps = false;
 
     /**
-     * Get histogram for one game
-     *
-     * @param string  $result_id
-     * @property object $result
-     * @property array $histogram
-     * @return array $histogram
-     */
-    public function getOneHistogram($result_id): array
-    {
-
-        $result = $this->where('result_id', $result_id)
-                                ->get();
-
-        $histogram = [
-                'dice_1' => $result[0]->dice_1,
-                'dice_2' => $result[0]->dice_2,
-                'dice_3' => $result[0]->dice_3,
-                'dice_4' => $result[0]->dice_4,
-                'dice_5' => $result[0]->dice_5,
-                'dice_6' => $result[0]->dice_6
-            ];
-
-        return $histogram;
-    }
-
-    /**
      * Save histogram from one game in histogram table
      *
      * @param  int  $result_id

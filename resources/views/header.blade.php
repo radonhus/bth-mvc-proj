@@ -9,10 +9,12 @@
     <header>
         <nav>
             <a href="{{ url('/') }}">Home</a>
-            @if( auth()->check() )
-            <a href="{{ url('/yatzy') }}">Play!</a>
-            @endif
             <a href="{{ url('/highscores') }}">Highscores</a>
+            @if( auth()->check() )
+            <a href="{{ url('/gamemode') }}">New Game</a>
+            <a href="{{ url('/myaccount') }}">My Account</a>
+            @endif
+
         </nav>
         <div class="header-right">
             @if( auth()->check() )

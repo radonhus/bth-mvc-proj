@@ -10,24 +10,12 @@ use Illuminate\Http\Request;
 * The following properties are columns in the table that
 * the model represents (to make phpstan happy)
 *
+* @property string $result_id
 * @property string $user_id
+* @property string $name
 * @property string $score
-* @property string  $result_bonus
-* @property string  $result_1
-* @property string  $result_2
-* @property string  $result_3
-* @property string  $result_4
-* @property string  $result_5
-* @property string  $result_6
-* @property string  $result_one_pair
-* @property string  $result_two_pairs
-* @property string  $result_three
-* @property string  $result_four
-* @property string  $result_small_straight
-* @property string  $result_large_straight
-* @property string  $result_full_house
-* @property string  $result_chance
-* @property string  $result_yatzy
+* @property string $bonus
+* @property string $date_played
 */
 class ViewHighscores extends Model
 {
@@ -48,7 +36,7 @@ class ViewHighscores extends Model
     public $timestamps = false;
 
     /**
-     * Get all results from results table in database.
+     * Get all highscores from the v_highscores view
      *
      * @property object $result
      * @property array $topTenArray

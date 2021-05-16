@@ -59,13 +59,82 @@ class User extends Authenticatable
     public $timestamps = false;
 
     /**
+     * Get all users
+     *
+     * @property array  $usersData
+     * @property array  $users
+     * @return array  $users
+     */
+    public function getAllUsers(): array
+    {
+
+        $usersData = $this->get();
+
+        $users = [];
+
+        foreach ($usersData as $user) {
+            array_push($users, [
+                'id' => $user->id,
+                'name' => $user->name,
+                'coins' => $user->coins
+            ]);
+        }
+
+        return $users;
+    }
+
+    /**
+     * Get amount of coins for one user
+     *
+     * @param int $id
+     * @property array $user
+     * @return string $coins
+     */
+    public function getCoins(int $id): string
+    {
+
+        $user = $this->where('id', $id)
+                                ->get();
+
+        $coins = $user[0]->coins;
+
+        return $coins;
+    }
+
+    /**
+     * Update coins for one user
+     *
+     * @param int $id
+     * @param int $amount
+     * @property int $currentBalance
+     * @property int $newBalance
+     * @property string $updatedRows
+     * @property array $user
+     * @return string $updatedRows
+     */
+    public function updateBalance(int $id, int $amount): string
+    {
+        $user = $this->where('id', $id)
+                                ->get();
+
+        $currentBalance = intval($user[0]->coins);
+
+        $newBalance = $currentBalance + $amount;
+
+        $updatedRows = $this->where('id', $id)
+                                ->update(['coins' => $newBalance]);
+
+        return $updatedRows;
+    }
+
+    /**
      * Check if username is already taken
      *
      * @param string  $username
      * @property array  $usernames
      * @return bool
      */
-    public function checkUserNameTaken(string $username)
+    public function checkUserNameTaken(string $username): bool
     {
 
         $usernames = $this->where('name', $username)

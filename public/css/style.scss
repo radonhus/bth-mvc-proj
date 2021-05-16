@@ -172,6 +172,17 @@ footer {
     padding: 1em;
 }
 
+.results-main-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.results-content-right {
+    padding: 1em;
+}
+
 .scorecard-wrapper {
     padding: 1.5em;
     background-color: #fefefe;

@@ -25,13 +25,20 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/yatzy', [YatzyController::class, 'start']);
+Route::get('/gamemode', [YatzyController::class, 'gamemode']);
+
+Route::post('/yatzystart', [YatzyController::class, 'start']);
 Route::post('/yatzy', [YatzyController::class, 'play']);
 
 Route::get('/highscores', [ResultsController::class, 'highScores']);
 Route::post('/highscores', [ResultsController::class, 'submitResult']);
 
-Route::get('/myaccount', [MyAccountController::class, 'start']);
+Route::get('/result/{id}', function ($id) {
+    $ctrl = new ResultsController;
+    return $ctrl->oneresult($id);
+});
+
+Route::get('/myaccount', [MyAccountController::class, 'myAccount']);
 
 Route::get('/register', [RegistrationController::class, 'create']);
 Route::post('/register', [RegistrationController::class, 'store']);

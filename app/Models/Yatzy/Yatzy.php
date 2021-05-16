@@ -10,6 +10,10 @@ use App\Models\Yatzy\Histogram;
 
 class Yatzy
 {
+    private string $mode;
+    private string $bet;
+    private string $opponent;
+    private string $challengeId;
     private int $roundsCounter;
     private string $currentRound;
     private int $totalPoints;
@@ -17,8 +21,14 @@ class Yatzy
     private object $points;
     private object $histogram;
 
-    public function __construct()
+    public function __construct(
+        string $mode, string $bet, string $opponent, string $challengeId
+        )
     {
+        $this->mode = $mode;
+        $this->bet = $bet;
+        $this->opponent = $opponent;
+        $this->challengeId = $challengeId;
         $this->roundsCounter = 0;
         $this->totalPoints = 0;
         $this->points = new Points();
@@ -37,8 +47,6 @@ class Yatzy
 
         $this->histogram->save($diceArray);
 
-        $data["frequency"] = $this->histogram->getDiceFrequency();
-
         $data["nrOfRerolls"] = $rollsAndValues[0];
         $data["diceArray"] = $diceArray;
         $data["nrOfRoundsPlayed"] = $this->roundsCounter;
@@ -46,6 +54,11 @@ class Yatzy
         $data["pointsPerRound"] = $this->points->getPointsArray();
         $data["bonus"] = -1;
         $data["totalPoints"] = $this->totalPoints;
+
+        $data["mode"] = $this->mode;
+        $data["bet"] = $this->bet;
+        $data["opponent"] = $this->opponent;
+        $data["challengeId"] = $this->challengeId;
 
         $data["hideOn2RerollsMade"] = "";
         $data["showOn2RerollsMade"] = "hidden";
@@ -98,8 +111,6 @@ class Yatzy
         }
         $this->histogram->save($newDice);
 
-        $data["frequency"] = $this->histogram->getDiceFrequency();
-
         $data["nrOfRerolls"] = $rollsAndValues[0];
         $data["diceArray"] = $diceArray;
 
@@ -107,6 +118,11 @@ class Yatzy
         $data["pointsPerRound"] = $this->points->getPointsArray();
         $data["bonus"] = -1;
         $data["totalPoints"] = $this->totalPoints;
+
+        $data["mode"] = $this->mode;
+        $data["bet"] = $this->bet;
+        $data["opponent"] = $this->opponent;
+        $data["challengeId"] = $this->challengeId;
 
         $data["hideOn2RerollsMade"] = "";
         $data["showOn2RerollsMade"] = "hidden";
@@ -131,6 +147,11 @@ class Yatzy
         $data["bonus"] = $this->points->calcBonusPoints();
         $data["totalPoints"] = $this->totalPoints;
         $data["frequency"] = $this->histogram->getDiceFrequency();
+
+        $data["mode"] = $this->mode;
+        $data["bet"] = $this->bet;
+        $data["opponent"] = $this->opponent;
+        $data["challengeId"] = $this->challengeId;
 
         $data["hideOn2RerollsMade"] = "hidden";
         $data["showOn2RerollsMade"] = "";

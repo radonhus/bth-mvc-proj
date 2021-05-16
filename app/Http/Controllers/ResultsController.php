@@ -5,11 +5,38 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Yatzy\ResultTable;
 use App\Models\Yatzy\HistogramTable;
+use App\Models\Yatzy\ChallengesTable;
 use App\Models\Yatzy\ViewHighscores;
+use App\Models\Yatzy\ViewPresentResult;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ResultsController extends Controller
 {
+
+    /**
+     * Display results for one game
+     *
+     * @param int $id
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function oneResult($id)
+    {
+        $presentResult = new ViewPresentResult();
+
+        $result = $presentResult->getResult($id);
+        $scorecard = $presentResult->getScorecard($id);
+        $histogram = $presentResult->getHistogram($id);
+
+        return view('oneresult', [
+            'title' => "Results | YatzyBonanza",
+            'id' => $id,
+            'result' => $result,
+            'scorecard' => $scorecard,
+            'histogram' => $histogram
+        ]);
+    }
+
     /**
      * Present top ten results
      *
@@ -19,8 +46,8 @@ class ResultsController extends Controller
      */
     public function highScores()
     {
-        $result = new ViewHighscores();
-        $topTenArray = $result->getHighscores();
+        $highscores = new ViewHighscores();
+        $topTenArray = $highscores->getHighscores();
 
         return view('yatzyhighscores', [
             'title' => "Yatzy | YatzyBonanza",
@@ -29,43 +56,189 @@ class ResultsController extends Controller
     }
 
     /**
-     * Save submitted result in result table and histogram table.
-     * Call highScores() to present highscores
+     * Save submitted result
      *
-     * @param  Request  $request
-     * @property Request  $request
-     * @property object  $result
-     * @property int $result_id
+     * @param Request $request
+     * @property array $post
+     * @property string $resultId
      * @property object  $view
      * @return \Illuminate\Contracts\View\View
      */
     public function submitResult(Request $request)
     {
-        $result = new ResultTable();
-        $histogram = new HistogramTable();
+        $post = $request->all();
 
-        if ($request) {
-            $result->saveResult(
-                request('user_id'), request('bonus'),
-                request('1'), request('2'), request('3'), request('4'),
-                request('5'), request('6'), request('one_pair'), request('two_pairs'),
-                request('three'), request('four'), request('small_straight'),
-                request('large_straight'), request('full_house'), request('chance'),
-                request('yatzy')
-            );
+        $resultId = $this->saveResult($post);
 
-            $result_id = $result->getLatestResult()->id;
+        $mode = $post['mode'];
 
-            $histogram->saveHistogram(
-                $result_id,
-                request('dice_1'), request('dice_2'),
-                request('dice_3'), request('dice_4'),
-                request('dice_5'), request('dice_6')
-            );
+        if ($mode == 'challenge') {
+            $view = $this->newChallenge($post, $resultId);
+            return $view;
+        }
+
+        if ($mode == 'accept') {
+            $view = $this->acceptedChallenge($post, $resultId);
+            return $view;
+        }
+
+        $view = $this->single($post, $resultId);
+        return $view;
+    }
+
+    /**
+     * Create new challenge and update balance
+     *
+     * @param array $post
+     * @param int $resultId
+     * @property object $challenges
+     * @property object $users
+     * @property int $bet
+     * @property string $userId
+     * @property string $opponentId
+     * @property object $view
+     * @return \Illuminate\Contracts\View\View
+     */
+    private function newChallenge(array $post, int $resultId)
+    {
+        $challenges = new ChallengesTable();
+        $users = new User();
+
+        $bet = intval($post['bet']);
+        $userId = $post['user_id'];
+        $opponentId = $post['opponent'];
+
+        $challenges->saveNewChallenge($userId, $resultId, $opponentId, $bet);
+
+        $bet = $bet * -1;
+        $users->updateBalance($userId, $bet);
+
+        $view = $this->highScores();
+
+        return $view;
+    }
+
+
+    /**
+     * Update balance based on result
+     *
+     * @param array $post
+     * @param int $resultId
+     * @property object $users
+     * @property int $bet
+     * @property string $userId
+     * @property object $view
+     * @return \Illuminate\Contracts\View\View
+     */
+    private function single(array $post, int $resultId)
+    {
+        $users = new User();
+
+        $score = intval($post['score']);
+        $bet = intval($post['bet']);
+        $userId = $post['user_id'];
+
+        if ($score < 250 ) { $bet = $bet * -1; }
+        $users->updateBalance($userId, $bet);
+
+        $view = $this->highScores();
+
+        return $view;
+    }
+
+    /**
+     * Mark challenge as accepted, check winner and update balance
+     *
+     * @param array $post
+     * @param int $resultId
+     * @property object $challenges
+     * @property object $users
+     * @property object $results
+     * @property int $score
+     * @property int $bet
+     * @property string $userId
+     * @property string $challengeId
+     * @property string $challengerResultId
+     * @property int $challengerId
+     * @property int $challengerScore
+     * @property int $userBalance
+     * @property int $totalBet
+     * @property object $view
+     * @return \Illuminate\Contracts\View\View
+     */
+    private function acceptedChallenge(array $post, int $resultId)
+    {
+        $challenges = new ChallengesTable();
+        $users = new User();
+        $results = new ViewPresentResult();
+
+        $score = intval($post['score']);
+        $bet = intval($post['bet']);
+        $userId = $post['user_id'];
+
+        // Get challenger details
+        $challengeId = $post['challengeId'];
+        $challengerResultId = $challenges->getChallengerResultId($challengeId);
+        $challengerResult = $results->getResult($challengerResultId);
+        $challengerId = intval($challengerResult['user_id']);
+        $challengerScore = intval($challengerResult['score']);
+
+        //Check balance: if lower than bet, lower bet accordingly
+        $userBalance = intval($users->getCoins($userId));
+        if ($userBalance < $bet ) { $bet = $userBalance; }
+
+        //Save result and total bet sum to challenges table
+        $totalBet = $bet * 2;
+        $challenges->updateChallenge($challengeId, $totalBet, $resultId);
+
+        if ($score > $challengerScore) {
+            $users->updateBalance($userId, $bet);
+        } elseif ($score < $challengerScore) {
+            $bet = $bet * -1;
+            $users->updateBalance($userId, $bet);
+            $users->updateBalance($challengerId, $totalBet);
+        } else {
+            $users->updateBalance($challengerId, $bet);
         }
 
         $view = $this->highScores();
 
         return $view;
+    }
+
+    /**
+     * Save submitted result in result table and histogram table.
+     *
+     * @param array $post
+     * @property object $result
+     * @property object $histogram
+     * @property object $challenges
+     * @property int $resultId
+     * @return int $resultId
+     */
+    private function saveResult(array $post)
+    {
+        $result = new ResultTable();
+        $histogram = new HistogramTable();
+
+        $result->saveResult(
+            $post['user_id'], $post['bonus'],
+            $post['1'], $post['2'], $post['3'], $post['4'],
+            $post['5'], $post['6'], $post['one_pair'], $post['two_pairs'],
+            $post['three'], $post['four'], $post['small_straight'],
+            $post['large_straight'], $post['full_house'], $post['chance'],
+            $post['yatzy']
+        );
+
+        $resultId = $result->getLatestResult()->id;
+
+        $histogram->saveHistogram(
+            $resultId,
+            $post['dice_1'], $post['dice_2'],
+            $post['dice_3'], $post['dice_4'],
+            $post['dice_5'], $post['dice_6']
+        );
+
+        return $resultId;
     }
 }
