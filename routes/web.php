@@ -35,7 +35,12 @@ Route::post('/highscores', [ResultsController::class, 'submitResult']);
 
 Route::get('/result/{id}', function ($id) {
     $ctrl = new ResultsController;
-    return $ctrl->oneresult($id);
+    return $ctrl->oneResult($id);
+});
+
+Route::get('/challenge/{id}', function ($id) {
+    $ctrl = new ResultsController;
+    return $ctrl->oneChallenge($id);
 });
 
 Route::get('/myaccount', [MyAccountController::class, 'myAccount']);

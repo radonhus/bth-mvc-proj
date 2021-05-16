@@ -3,6 +3,11 @@
     src: url('Oswald-VariableFont_wght.ttf') format('truetype');
 }
 
+@font-face {
+    font-family: 'Batfight';
+    src: url('batfight_2.0.ttf') format('truetype');
+}
+
 * {
     box-sizing: border-box;
 }
@@ -109,14 +114,23 @@ h5,
 h6 {
     font-family: 'Oswald';
     font-weight: normal;
+}
 
-    span.red {
-        color: #b56576;
-    }
+.red {
+    color: #b56576;
+}
 
-    span.green {
-        color: #a1C181;
-    }
+.green {
+    color: #a1C181;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.result-icon {
+    font-family: 'Batfight';
+    font-size: 200px;
 }
 
 .statusbox {
@@ -128,13 +142,10 @@ h6 {
     border-width: 1px;
     border-color: #fefefe;
     border-radius: 0.3rem;
+    margin-bottom: 2em;
 
     h2 {
         margin: 0.5em 0;
-    }
-
-    span.bold {
-        font-weight: bold;
     }
 
     p {
@@ -211,8 +222,15 @@ footer {
     justify-content: space-between;
 }
 
+.results-content-left {
+}
+.results-content-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
 .results-content-right {
-    padding: 1em;
 }
 
 .scorecard-wrapper {
@@ -332,7 +350,7 @@ table.highscore {
     display: flex;
     flex-direction: row;
     align-content: space-around;
-    margin: 2em 0;
+    margin: 0 0 2em;
     padding: 0.8em;
     background-color: #e7d8c9;
     box-shadow: 1px 1px 5px #ccc;

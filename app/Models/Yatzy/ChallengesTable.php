@@ -37,33 +37,6 @@ class ChallengesTable extends Model
     public $timestamps = false;
 
     /**
-     * Get all open challenges where user has been challenged
-     *
-     * @param string $id
-     * @property object $result
-     * @property array $openChallenges
-     * @return array $openChallenges
-     */
-    public function getOpenChallenges($id): array
-    {
-        $result = $this->where(['opponent_user_id' => $id, 'opponent_result_id' => null])
-                                ->get();
-
-        $openChallenges = [];
-
-        foreach ($result as $row) {
-            array_push($openChallenges, [
-                'id' => $row->id,
-                'time' => $row->time,
-                'bet' => $row->bet,
-                'challenger_user_id' => $row->challenger_user_id
-            ]);
-        }
-
-        return $openChallenges;
-    }
-
-    /**
      * Get challenger resultId
      *
      * @param int $id

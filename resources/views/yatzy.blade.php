@@ -14,7 +14,7 @@
     @else
         <p><span class="bold">Game mode</span>: Single player (reach 250 or more to win)</p>
     @endif
-        <p><span class="bold">Amount at stake</span>: {{ $data['bet'] }} ¥</p>
+        <p><span class="bold">Coins at stake</span>: {{ $data['bet'] }} ¥</p>
 </div>
 
     <form method="post" class="yatzy-form" action="{{ url('/yatzy') }}">
@@ -35,13 +35,13 @@
         @if ($data['twoRerollsMade'] == 'false')
         <div class="statusbox">
             <h2>Rolls made: {{ $data['nrOfRerolls']+1 }} of 3</h2>
-            <p>Select which dice you want to roll again, then click below to roll</p>
+            <p>Select which dice you want to roll again (if any), then click below to roll</p>
             <input type="submit" name="roll" value="Roll!" class="submit">
         </div>
         @elseif ($data['gameOver'] == 'false')
         <div class="statusbox">
             <h2>Round nr. {{ $data['nrOfRoundsPlayed'] }} (of 15) is over!</h2>
-            <p>Save the dice in your scorecard to start next round.</p>
+            <p>Save the dice in your scorecard to finish the round.</p>
         </div>
         @endif
 

@@ -38,12 +38,20 @@
                 </td>
             @endforeach
             </tr>
-            <tr>
+            <tr class="bonus">
                 <td>
                     Bonus
                 </td>
                 <td>
                     {{ $result['bonus'] }}
+                </td>
+            </tr>
+            <tr class="totalpoints">
+                <td>
+                    Total points:
+                </td>
+                <td>
+                {{ $result['score'] }}
                 </td>
             </tr>
         </table>

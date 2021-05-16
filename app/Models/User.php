@@ -84,6 +84,33 @@ class User extends Authenticatable
     }
 
     /**
+     * Get top 10 richest users
+     *
+     * @property array  $usersData
+     * @property array  $users
+     * @return array  $users
+     */
+    public function getRichestUsers(): array
+    {
+
+        $usersData = $this->orderByDesc('coins')
+                                ->limit(10)
+                                ->get();
+
+        $users = [];
+
+        foreach ($usersData as $user) {
+            array_push($users, [
+                'id' => $user->id,
+                'name' => $user->name,
+                'coins' => $user->coins
+            ]);
+        }
+
+        return $users;
+    }
+
+    /**
      * Get amount of coins for one user
      *
      * @param int $id

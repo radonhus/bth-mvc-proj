@@ -8,6 +8,7 @@ use App\Models\Yatzy\HistogramTable;
 use App\Models\Yatzy\ChallengesTable;
 use App\Models\Yatzy\ViewHighscores;
 use App\Models\Yatzy\ViewPresentResult;
+use App\Models\Yatzy\ViewChallenges;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -49,9 +50,13 @@ class ResultsController extends Controller
         $highscores = new ViewHighscores();
         $topTenArray = $highscores->getHighscores();
 
+        $users = new User();
+        $topTenRichest = $users->getRichestUsers();
+
         return view('yatzyhighscores', [
             'title' => "Yatzy | YatzyBonanza",
-            'highscores' => $topTenArray
+            'highscores' => $topTenArray,
+            'richest' => $topTenRichest
         ]);
     }
 
@@ -83,6 +88,7 @@ class ResultsController extends Controller
         }
 
         $view = $this->single($post, $resultId);
+
         return $view;
     }
 
@@ -117,7 +123,6 @@ class ResultsController extends Controller
 
         return $view;
     }
-
 
     /**
      * Update balance based on result
@@ -201,9 +206,37 @@ class ResultsController extends Controller
             $users->updateBalance($challengerId, $bet);
         }
 
-        $view = $this->highScores();
+        return $this->oneChallenge($challengeId);
+    }
 
-        return $view;
+    /**
+     * Display results for one challenge
+     *
+     * @param string $challengeId
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function oneChallenge(string $challengeId)
+    {
+        $viewChallenges = new ViewChallenges();
+        $viewPresentResult = new ViewPresentResult();
+
+        $challenge = $viewChallenges->getOneChallenge($challengeId);
+        $challengerResultId = $challenge['challenger_result_id'];
+        $opponentResultId = $challenge['opponent_result_id'];
+
+        $resultChallenger = $viewPresentResult->getResult($challengerResultId);
+        $scorecardChallenger = $viewPresentResult->getScorecard($challengerResultId);
+        $resultOpponent = $viewPresentResult->getResult($opponentResultId);
+        $scorecardOpponent = $viewPresentResult->getScorecard($opponentResultId);
+
+        return view('challengeresults', [
+            'title' => "Challenge results | YatzyBonanza",
+            'challenge' => $challenge,
+            'resultChallenger' => $resultChallenger,
+            'scorecardChallenger' => $scorecardChallenger,
+            'resultOpponent' => $resultOpponent,
+            'scorecardOpponent' => $scorecardOpponent
+        ]);
     }
 
     /**
