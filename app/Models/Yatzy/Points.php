@@ -41,7 +41,7 @@ class Points
     public function calcBonusPoints(): int
     {
         $firstSix = 0;
-        for ($i=1; $i < 7 ; $i++) {
+        for ($i = 1; $i < 7; $i++) {
             $firstSix += $this->pointsArray[strval($i)];
         }
 
@@ -59,41 +59,41 @@ class Points
         $pointsThisRound = 0;
 
         switch ($chosenRound) {
-          case "1":
-          case "2":
-          case "3":
-          case "4":
-          case "5":
-          case "6":
-            $pointsThisRound = $this->calc16($diceArray, intval($chosenRound));
-            break;
-          case "one_pair":
-            $pointsThisRound = $this->calcOnePair($diceArray);
-            break;
-          case "two_pairs":
-            $pointsThisRound = $this->calcTwoPairs($diceArray);
-            break;
-          case "three":
-            $pointsThisRound = $this->calcThree($diceArray);
-            break;
-          case "four":
-            $pointsThisRound = $this->calcFour($diceArray);
-            break;
-          case "small_straight":
-            $pointsThisRound = $this->calcSmallStraight($diceArray);
-            break;
-          case "large_straight":
-            $pointsThisRound = $this->calcLargeStraight($diceArray);
-            break;
-          case "full_house":
-            $pointsThisRound = $this->calcFullHouse($diceArray);
-            break;
-          case "chance":
-            $pointsThisRound = $this->calcChance($diceArray);
-            break;
-          case "yatzy":
-            $pointsThisRound = $this->calcYatzy($diceArray);
-            break;
+            case "1":
+            case "2":
+            case "3":
+            case "4":
+            case "5":
+            case "6":
+                $pointsThisRound = $this->calc16($diceArray, intval($chosenRound));
+                break;
+            case "one_pair":
+                $pointsThisRound = $this->calcOnePair($diceArray);
+                break;
+            case "two_pairs":
+                $pointsThisRound = $this->calcTwoPairs($diceArray);
+                break;
+            case "three":
+                $pointsThisRound = $this->calcThree($diceArray);
+                break;
+            case "four":
+                $pointsThisRound = $this->calcFour($diceArray);
+                break;
+            case "small_straight":
+                $pointsThisRound = $this->calcSmallStraight($diceArray);
+                break;
+            case "large_straight":
+                $pointsThisRound = $this->calcLargeStraight($diceArray);
+                break;
+            case "full_house":
+                $pointsThisRound = $this->calcFullHouse($diceArray);
+                break;
+            case "chance":
+                $pointsThisRound = $this->calcChance($diceArray);
+                break;
+            case "yatzy":
+                $pointsThisRound = $this->calcYatzy($diceArray);
+                break;
         }
 
         $this->pointsArray[$chosenRound] = $pointsThisRound;
@@ -103,8 +103,8 @@ class Points
 
     private function calcYatzy($diceArray): int
     {
-        for ($i=0; $i < 4 ; $i++) {
-            if ($diceArray[$i] != $diceArray[$i+1]) {
+        for ($i = 0; $i < 4; $i++) {
+            if ($diceArray[$i] != $diceArray[$i + 1]) {
                 return 0;
             }
         }
@@ -163,7 +163,7 @@ class Points
     private function calcLargeStraight($diceArray): int
     {
         $correctValue = 6;
-        for ($i=0; $i < 5 ; $i++) {
+        for ($i = 0; $i < 5; $i++) {
             if ($diceArray[$i] != $correctValue) {
                 return 0;
             }
@@ -175,7 +175,7 @@ class Points
     private function calcSmallStraight($diceArray): int
     {
         $correctValue = 5;
-        for ($i=0; $i < 5 ; $i++) {
+        for ($i = 0; $i < 5; $i++) {
             if ($diceArray[$i] != $correctValue) {
                 return 0;
             }
@@ -187,8 +187,8 @@ class Points
     private function calcFour($diceArray): int
     {
         $points = 0;
-        for ($i=0; $i < 2 ; $i++) {
-            if (($diceArray[$i] == $diceArray[$i+1]) && ($diceArray[$i] == $diceArray[$i+2]) && ($diceArray[$i] == $diceArray[$i+3])) {
+        for ($i = 0; $i < 2; $i++) {
+            if (($diceArray[$i] == $diceArray[$i + 1]) && ($diceArray[$i] == $diceArray[$i + 2]) && ($diceArray[$i] == $diceArray[$i + 3])) {
                 $points = $diceArray[$i] * 4;
                 break;
             }
@@ -199,8 +199,8 @@ class Points
     private function calcThree($diceArray): int
     {
         $points = 0;
-        for ($i=0; $i < 3 ; $i++) {
-            if (($diceArray[$i] == $diceArray[$i+1]) && ($diceArray[$i] == $diceArray[$i+2])) {
+        for ($i = 0; $i < 3; $i++) {
+            if (($diceArray[$i] == $diceArray[$i + 1]) && ($diceArray[$i] == $diceArray[$i + 2])) {
                 $points = $diceArray[$i] * 3;
                 break;
             }
@@ -212,8 +212,8 @@ class Points
     {
         $points = 0;
         $pairsFound = 0;
-        for ($i=0; $i < 4 ; $i++) {
-            if ($diceArray[$i] == $diceArray[$i+1]) {
+        for ($i = 0; $i < 4; $i++) {
+            if ($diceArray[$i] == $diceArray[$i + 1]) {
                 $points += $diceArray[$i] * 2;
                 $i += 1;
                 $pairsFound += 1;
@@ -233,8 +233,8 @@ class Points
     private function calcOnePair($diceArray): int
     {
         $points = 0;
-        for ($i=0; $i < 4 ; $i++) {
-            if ($diceArray[$i] == $diceArray[$i+1]) {
+        for ($i = 0; $i < 4; $i++) {
+            if ($diceArray[$i] == $diceArray[$i + 1]) {
                 $points = $diceArray[$i] * 2;
                 break;
             }

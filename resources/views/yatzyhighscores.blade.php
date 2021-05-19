@@ -1,41 +1,51 @@
 @include('header')
 
-<h1>Highscores: top 10</h1>
+<h1>Highscores</h1>
 
-<table class="highscore">
+<table class="top10">
     <tr>
         <th>Rank</th>
         <th>Name</th>
-        <th>Score</th>
-        <th>Bonus?</th>
+        <th colspan="2" class="bar-header">Score</th>
+        <th>Bonus</th>
         <th>Date</th>
-        <th>Link</th>
+        <th>Details</th>
     </tr>
 @foreach ($highscores as $highscore)
     <tr>
         <td>{{ $highscore['rank'] }}</td>
         <td>{{ $highscore['name'] }}</td>
-        <td>{{ $highscore['score'] }}</td>
-        <td>{{ $highscore['bonus'] }}</td>
+        <td class="bar-label">{{ $highscore['score'] }}</td>
+        <td class="bar">
+            <div class="percent{{ $highscore['percent'] }}"></div>
+        </td>
+        <td>
+            @if ( $highscore['bonus'] == 50 )
+                Yes
+            @else
+                No
+            @endif
+        </td>
         <td>{{ $highscore['date_played'] }}</td>
-        <td><a href="{{ url('/result') }}/{{ $highscore['result_id'] }}">More info</a></td>
+        <td><a href="{{ url('/result') }}/{{ $highscore['result_id'] }}">Details</a></td>
     </tr>
 @endforeach
 </table>
 
-<h1>Richest players: top 10</h1>
+<h1>Members by prize money</h1>
 
-<table class="highscore">
+<table class="top10">
     <tr>
-        <th>Id</th>
         <th>Name</th>
-        <th>Coins</th>
+        <th colspan="2" class="bar-header">Coins</th>
     </tr>
 @foreach ($richest as $rich)
     <tr>
-        <td>{{ $rich['id'] }}</td>
         <td>{{ $rich['name'] }}</td>
-        <td>{{ $rich['coins'] }}</td>
+        <td class="bar-label">{{ $rich['coins'] }} ¥</td>
+        <td class="bar">
+            <div class="percent{{ $rich['percent'] }}"></div>
+        </td>
     </tr>
 @endforeach
 </table>

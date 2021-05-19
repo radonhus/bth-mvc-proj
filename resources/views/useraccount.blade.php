@@ -1,95 +1,106 @@
 @include('header')
 
-<h1>{{ auth()->user()->name }}'s Account</h1>
+<h1>Hello {{ auth()->user()->name }}!</h1>
 
-<pre>
-Användarinfo:
+<div class="user-account-wrapper">
 
-Id: {{ auth()->user()->id }}
-Coins: {{ $userCoins }} ¥
+    <div class="statusbox left">
+    <h2>Statistics</h2>
+    <p><span class="bold">Coins</span>: {{ $userCoins }} ¥</p>
+    <p><span class="bold">Games played</span>: {{ $stats['countGames'] }}</p>
+    <p><span class="bold">Total score</span>: {{ $stats['sumScore'] }}</p>
+    <p><span class="bold">Max. score</span>: {{ $stats['maxScore'] }}</p>
+    <p><span class="bold">Avg. score</span>: {{ $stats['avgScore'] }}</p>
+    <p><span class="bold">Games over 250</span>: {{ $stats['countOver250'] }} ({{ $stats['quotaOver250'] }} %)</p>
+    <p><span class="bold">Games with bonus</span>: {{ $stats['countBonus'] }} ({{ $stats['quotaBonus'] }} %)</p>
+    </div>
 
-Statistik:
-Sammanlagt histogram
+    <div class="statusbox right">
+    @if(empty($openChallenges) and empty($openChallengesSent))
+    <h2>No open challenges</h2>
+    @else
+    <h2>Open challenges</h2>
+    @endif
 
-Sammanlagd poäng
+    @empty($openChallenges)
+    @else
+    <h3>Challenges sent to you</h3>
+    <table class="highscore">
+        <tr>
+            <th>Date</th>
+            <th>Bet</th>
+            <th>Challenger</th>
+            <th colspan="2"></th>
+        </tr>
+    @foreach ($openChallenges as $openChallenge)
+        <tr>
+            <td>{{ $openChallenge['time'] }}</td>
+            <td>{{ $openChallenge['bet'] }} ¥</td>
+            <td>{{ $openChallenge['challenger_name'] }}</td>
+            <td class="two-buttons-wrapper">
+                @if ($openChallenge['denied'] == "denied")
+                    <span class="red">You denied</span>
+                @else
+                <form method="post" action="{{ url('/yatzystart') }}">
+                    @csrf
+                    <input type="hidden" name="challengeId" value="{{ $openChallenge['challenge_id'] }}">
+                    <input type="hidden" name="opponent" value="{{ $openChallenge['challenger_id'] }}">
+                    <input type="hidden" name="bet" value="{{ $openChallenge['bet'] }}">
+                    <button type="submit" name="mode" value="accept">Play!</button>
+                </form>
+                <form method="post" action="{{ url('/myaccount') }}">
+                    @csrf
+                    <input type="hidden" name="challengeId" value="{{ $openChallenge['challenge_id'] }}">
+                    <input type="hidden" name="challenger" value="{{ $openChallenge['challenger_id'] }}">
+                    <input type="hidden" name="bet" value="{{ $openChallenge['bet'] }}">
+                    <button type="submit" name="deny" value="deny" class="red">Deny</button>
+                </form>
+                <div>
+                @endif
+            </td>
+        </tr>
+    @endforeach
+    </table>
+    @endempty
 
-Medelpoäng per match
+    @empty($openChallengesSent)
+    @else
+    <h3>Challenges sent by you</h3>
+    <table class="highscore">
+        <tr>
+            <th>Date</th>
+            <th>Bet</th>
+            <th colspan="2">Opponent</th>
+        </tr>
+    @foreach ( $openChallengesSent as $openChallengeSent)
+        <tr>
+            <td>{{ $openChallengeSent['time'] }}</td>
+            <td>{{ $openChallengeSent['bet'] }} ¥</td>
+            <td>{{ $openChallengeSent['opponent_name'] }}</td>
+            <td>
+                @if ($openChallengeSent['denied'] == "denied")
+                    <span class="red">Denied by {{ $openChallengeSent['opponent_name'] }}</span>
+                @endif
+            </td>
+        </tr>
+    @endforeach
+    </table>
+    @endempty
 
-Medel-Histogram per match
-
-Listor:
-
-Result list (max 30?)
-
-Finished challenges (med info om wins/losses)
-</pre>
-
-@empty($openChallenges)
-@else
-<h3>You have been challenged! Your open challenges:</h3>
-<table class="highscore">
-    <tr>
-        <th>Open since</th>
-        <th>Bet</th>
-        <th>Challenger</th>
-        <th colspan="2">Respond</th>
-    </tr>
-@foreach ( $openChallenges as $openChallenge)
-    <tr>
-        <td>{{ $openChallenge['time'] }}</td>
-        <td>{{ $openChallenge['bet'] }} ¥</td>
-        <td>{{ $openChallenge['challenger_name'] }}</td>
-        <td>
-            <form method="post" action="{{ url('/yatzystart') }}">
-                @csrf
-                <input type="hidden" name="challengeId" value="{{ $openChallenge['id'] }}">
-                <input type="hidden" name="opponent" value="{{ $openChallenge['challenger_id'] }}">
-                <input type="hidden" name="bet" value="{{ $openChallenge['bet'] }}">
-                <button type="submit" name="mode" value="accept">Accept – Start game!</button>
-            </form>
-        </td>
-        <td>
-            <form method="post" action="{{ url('/deny') }}">
-                @csrf
-                <input type="hidden" name="challengeId" value="{{ $openChallenge['id'] }}">
-                <button type="submit" name="mode" value="challenge">Deny Challenge</button>
-            </form>
-        </td>
-    </tr>
-@endforeach
-</table>
-@endempty
-
-@empty($openChallengesSent)
-@else
-<h3>Challenges opened by you (waiting for opponent to accept):</h3>
-<table class="highscore">
-    <tr>
-        <th>Open since</th>
-        <th>Bet</th>
-        <th>Challenger</th>
-    </tr>
-@foreach ( $openChallengesSent as $openChallengeSent)
-    <tr>
-        <td>{{ $openChallengeSent['time'] }}</td>
-        <td>{{ $openChallengeSent['bet'] }} ¥</td>
-        <td>{{ $openChallengeSent['opponent_name'] }}</td>
-    </tr>
-@endforeach
-</table>
-@endempty
+    </div>
+</div>
 
 @empty($finishedChallenges)
 @else
-<h3>Finished challenges:</h3>
+<h3>Completed challenges</h3>
 <table class="highscore">
     <tr>
-        <th>Challenged opened</th>
+        <th>Date</th>
         <th>Challenger</th>
         <th>Opponent</th>
         <th>Score</th>
         <th>Result</th>
-        <th>Link</th>
+        <th>Details</th>
     </tr>
 @foreach ( $finishedChallenges as $finishedChallenge)
     <tr>
@@ -99,14 +110,41 @@ Finished challenges (med info om wins/losses)
         <td>{{ $finishedChallenge['challenger_score'] }} – {{ $finishedChallenge['opponent_score'] }}</td>
         <td>
             @if ($finishedChallenge['winner'] == auth()->user()->id)
-                <span class="green">Win ({{ $finishedChallenge['bet']/2 }} ¥ won)</span>
+                <span class="green">You won ({{ $finishedChallenge['bet']/2 }} ¥ earned)</span>
             @elseif ($finishedChallenge['winner'] == 0)
                 Tie
             @else
-                <span class="red">Loss ({{ $finishedChallenge['bet']/2 }} ¥ lost)</span>
+                <span class="red">You lost ({{ $finishedChallenge['bet']/2 }} ¥ lost)</span>
             @endif
         </td>
-        <td><a href="{{ url('/challenge') }}/{{ $finishedChallenge['challenge_id'] }}">More info</a></td>
+        <td><a href="{{ url('/challenge') }}/{{ $finishedChallenge['challenge_id'] }}">Details</a></td>
+    </tr>
+@endforeach
+</table>
+@endempty
+
+@empty($allGames)
+@else
+<h3>All games</h3>
+<table class="highscore">
+    <tr>
+        <th>Date</th>
+        <th>Score</th>
+        <th>Bonus</th>
+        <th>Details</th>
+    </tr>
+@foreach ( $allGames as $game)
+    <tr>
+        <td>{{ $game['date_played'] }}</td>
+        <td>{{ $game['score'] }}</td>
+        <td>
+            @if ( $game['bonus'] == 50 )
+                Yes
+            @else
+                No
+            @endif
+        </td>
+        <td><a href="{{ url('/result') }}/{{ $game['result_id'] }}">Details</a></td>
     </tr>
 @endforeach
 </table>

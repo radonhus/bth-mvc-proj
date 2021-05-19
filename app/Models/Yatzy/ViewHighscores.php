@@ -39,6 +39,7 @@ class ViewHighscores extends Model
      * Get all highscores from the v_highscores view
      *
      * @property object $result
+     * @property int $topScore
      * @property array $topTenArray
      * @property int $rank
      * @property array $result
@@ -51,10 +52,13 @@ class ViewHighscores extends Model
                                 ->limit(10)
                                 ->get();
 
+        $topScore = intval($result[0]['score']);
+
         $topTenArray = [];
         $rank = 0;
 
         foreach ($result as $row) {
+            $percent = round((intval($row->score) / $topScore)*100);
             $rank += 1;
             array_push($topTenArray, [
                 'rank' => $rank,
@@ -62,6 +66,7 @@ class ViewHighscores extends Model
                 'user_id' => $row->user_id,
                 'name' => $row->name,
                 'score' => $row->score,
+                'percent' => $percent,
                 'bonus' => $row->bonus,
                 'date_played' => substr($row->date_played, 0, 10)
             ]);

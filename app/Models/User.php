@@ -87,7 +87,9 @@ class User extends Authenticatable
      * Get top 10 richest users
      *
      * @property array  $usersData
+     * @property int  $richest
      * @property array  $users
+     * @property int  $percent
      * @return array  $users
      */
     public function getRichestUsers(): array
@@ -97,13 +99,17 @@ class User extends Authenticatable
                                 ->limit(10)
                                 ->get();
 
+        $richest = intval($usersData[0]['coins']);
+
         $users = [];
 
         foreach ($usersData as $user) {
+            $percent = round((intval($user->coins) / $richest)*100);
             array_push($users, [
                 'id' => $user->id,
                 'name' => $user->name,
-                'coins' => $user->coins
+                'coins' => $user->coins,
+                'percent' => $percent
             ]);
         }
 

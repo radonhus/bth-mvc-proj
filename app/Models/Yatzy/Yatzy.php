@@ -22,9 +22,11 @@ class Yatzy
     private object $histogram;
 
     public function __construct(
-        string $mode, string $bet, string $opponent, string $challengeId
-        )
-    {
+        string $mode,
+        string $bet,
+        string $opponent,
+        string $challengeId
+    ) {
         $this->mode = $mode;
         $this->bet = $bet;
         $this->opponent = $opponent;
@@ -77,7 +79,6 @@ class Yatzy
             $this->points->getRoundPoints($diceArray, $this->currentRound);
 
             if ($this->roundsCounter == 15) {
-
                 $this->points->calcBonusPoints();
                 $this->totalPoints = $this->points->calcTotalPoints();
 
@@ -155,5 +156,4 @@ class Yatzy
 
         return $data;
     }
-
 }

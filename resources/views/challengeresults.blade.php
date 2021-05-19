@@ -7,8 +7,7 @@
 <div class="results-content-left">
 
     <div class="statusbox">
-        <h2>Challenger</h2>
-        <p><span class="bold">Name</span>: {{ $challenge['challenger_name'] }}</p>
+        <h2>{{ $challenge['challenger_name'] }}</h2>
         <p><span class="bold">Score</span>: {{ $challenge['challenger_score'] }}</p>
     </div>
 
@@ -71,8 +70,7 @@
 <div class="results-content-right">
 
     <div class="statusbox">
-        <h2>Opponent</h2>
-        <p><span class="bold">Name</span>: {{ $challenge['opponent_name'] }}</p>
+        <h2>{{ $challenge['opponent_name'] }}</h2>
         <p><span class="bold">Score</span>: {{ $challenge['opponent_score'] }}</p>
     </div>
 

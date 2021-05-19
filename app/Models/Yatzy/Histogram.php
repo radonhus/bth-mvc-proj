@@ -26,5 +26,4 @@ class Histogram
     {
         return array_count_values($this->histogramArray);
     }
-
 }

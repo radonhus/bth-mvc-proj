@@ -1,27 +1,146 @@
- ------ ---------------------------------------------------------------------------------------------------------------------- 
- [32m Line [39m [32m app\Http\Controllers\RegistrationController.php                                                                      [39m 
- ------ ---------------------------------------------------------------------------------------------------------------------- 
-[39;49m  31     Method App\Http\Controllers\RegistrationController::store() should return Illuminate\Contracts\View\View but returns[39;49m[39;49m  [39;49m
-[39;49m         [39;49mIlluminate\Http\RedirectResponse.                                                                                     
-  41     Call to an undefined method App\Models\User::create().                                                                
-  43     Call to an undefined method Illuminate\Contracts\Auth\Factory|Illuminate\Contracts\Auth\Guard::login().               
- ------ ---------------------------------------------------------------------------------------------------------------------- 
+ ------ --------------------------------------------------------------------------------- 
+ [32m Line [39m [32m app\Http\Controllers\MyAccountController.php                                    [39m 
+ ------ --------------------------------------------------------------------------------- 
+  23     Access to an undefined property Illuminate\Contracts\Auth\Authenticatable::$id.  
+ ------ --------------------------------------------------------------------------------- 
+
+ ------ -------------------------------------------------------------------------------------------------------------------------------------------------------- 
+ [32m Line [39m [32m app\Http\Controllers\RegistrationController.php                                                                                                        [39m 
+ ------ -------------------------------------------------------------------------------------------------------------------------------------------------------- 
+  31     Method App\Http\Controllers\RegistrationController::store() should return Illuminate\Contracts\View\View but returns Illuminate\Http\RedirectResponse.  
+  41     Call to an undefined method App\Models\User::create().                                                                                                  
+  43     Call to an undefined method Illuminate\Contracts\Auth\Factory|Illuminate\Contracts\Auth\Guard::login().                                                 
+ ------ -------------------------------------------------------------------------------------------------------------------------------------------------------- 
+
+ ------ --------------------------------------------------------------------------------------------------------------------------- 
+ [32m Line [39m [32m app\Http\Controllers\ResultsController.php                                                                                [39m 
+ ------ --------------------------------------------------------------------------------------------------------------------------- 
+  28     Parameter #1 $result_id of method App\Models\Yatzy\ViewPresentResult::getResult() expects string, int given.               
+  29     Parameter #1 $result_id of method App\Models\Yatzy\ViewPresentResult::getScorecard() expects string, int given.            
+  30     Parameter #1 $result_id of method App\Models\Yatzy\ViewPresentResult::getHistogram() expects string, int given.            
+  117    Parameter #4 $bet of method App\Models\Yatzy\ChallengesTable::saveNewChallenge() expects string, int given.                
+  201    Parameter #3 $opponent_result_id of method App\Models\Yatzy\ChallengesTable::updateChallenge() expects string, int given.  
+  227    Parameter #1 $id of method App\Models\Yatzy\ViewChallenges::getOneChallenge() expects int, string given.                   
+ ------ --------------------------------------------------------------------------------------------------------------------------- 
 
  ------ --------------------------------------------------------------------------------------------------------------------------------------------------- 
  [32m Line [39m [32m app\Http\Controllers\SessionController.php                                                                                                        [39m 
  ------ --------------------------------------------------------------------------------------------------------------------------------------------------- 
-  26     Call to an undefined method Illuminate\Contracts\Auth\Factory|Illuminate\Contracts\Auth\Guard::attempt().                                          
-  27     Method App\Http\Controllers\SessionController::store() should return Illuminate\Contracts\View\View but returns Illuminate\Http\RedirectResponse.  
-  43     Call to an undefined method Illuminate\Contracts\Auth\Factory|Illuminate\Contracts\Auth\Guard::logout().                                           
+  27     Call to an undefined method Illuminate\Contracts\Auth\Factory|Illuminate\Contracts\Auth\Guard::attempt().                                          
+  28     Method App\Http\Controllers\SessionController::store() should return Illuminate\Contracts\View\View but returns Illuminate\Http\RedirectResponse.  
+  44     Call to an undefined method Illuminate\Contracts\Auth\Factory|Illuminate\Contracts\Auth\Guard::logout().                                           
  ------ --------------------------------------------------------------------------------------------------------------------------------------------------- 
 
- ------ ------------------------------------------------------- 
- [32m Line [39m [32m app\Models\User.php                                   [39m 
- ------ ------------------------------------------------------- 
-  71     Call to an undefined method App\Models\User::where().  
- ------ ------------------------------------------------------- 
+ ------ --------------------------------------------------------------------------------- 
+ [32m Line [39m [32m app\Http\Controllers\YatzyController.php                                        [39m 
+ ------ --------------------------------------------------------------------------------- 
+  28     Access to an undefined property Illuminate\Contracts\Auth\Authenticatable::$id.  
+ ------ --------------------------------------------------------------------------------- 
+
+ ------ ------------------------------------------------------------- 
+ [32m Line [39m [32m app\Models\User.php                                         [39m 
+ ------ ------------------------------------------------------------- 
+  71     Call to an undefined method App\Models\User::get().          
+  96     Call to an undefined method App\Models\User::orderByDesc().  
+  123    Call to an undefined method App\Models\User::where().        
+  144    Call to an undefined method App\Models\User::where().        
+  151    Call to an undefined method App\Models\User::where().        
+  167    Call to an undefined method App\Models\User::where().        
+ ------ ------------------------------------------------------------- 
+
+ ------ ------------------------------------------------------------------------------------------------ 
+ [32m Line [39m [32m app\Models\Yatzy\ChallengesTable.php                                                           [39m 
+ ------ ------------------------------------------------------------------------------------------------ 
+  48     Call to an undefined method App\Models\Yatzy\ChallengesTable::where().                          
+  66     Call to an undefined method App\Models\Yatzy\ChallengesTable::where().                          
+  88     Property App\Models\Yatzy\ChallengesTable::$challenger_result_id (string) does not accept int.  
+ ------ ------------------------------------------------------------------------------------------------ 
+
+ ------ ------------------------------------------------------------------------------------ 
+ [32m Line [39m [32m app\Models\Yatzy\HistogramTable.php                                                [39m 
+ ------ ------------------------------------------------------------------------------------ 
+  63     Property App\Models\Yatzy\HistogramTable::$result_id (string) does not accept int.  
+ ------ ------------------------------------------------------------------------------------ 
+
+ ------ ------------------------------------------------------------------ 
+ [32m Line [39m [32m app\Models\Yatzy\Points.php                                      [39m 
+ ------ ------------------------------------------------------------------ 
+  13     Access to an undefined property App\Models\Yatzy\Points::$bonus.  
+  36     Access to an undefined property App\Models\Yatzy\Points::$bonus.  
+  49     Access to an undefined property App\Models\Yatzy\Points::$bonus.  
+  52     Access to an undefined property App\Models\Yatzy\Points::$bonus.  
+ ------ ------------------------------------------------------------------ 
+
+ ------ ----------------------------------------------------------------------- 
+ [32m Line [39m [32m app\Models\Yatzy\ViewChallenges.php                                   [39m 
+ ------ ----------------------------------------------------------------------- 
+  54     Call to an undefined method App\Models\Yatzy\ViewChallenges::where().  
+  82     Call to an undefined method App\Models\Yatzy\ViewChallenges::where().  
+  110    Call to an undefined method App\Models\Yatzy\ViewChallenges::where().  
+  142    Call to an undefined method App\Models\Yatzy\ViewChallenges::where().  
+ ------ ----------------------------------------------------------------------- 
+
+ ------ ----------------------------------------------------------------------------- 
+ [32m Line [39m [32m app\Models\Yatzy\ViewHighscores.php                                         [39m 
+ ------ ----------------------------------------------------------------------------- 
+  50     Call to an undefined method App\Models\Yatzy\ViewHighscores::orderByDesc().  
+ ------ ----------------------------------------------------------------------------- 
+
+ ------ -------------------------------------------------------------------------- 
+ [32m Line [39m [32m app\Models\Yatzy\ViewPresentResult.php                                   [39m 
+ ------ -------------------------------------------------------------------------- 
+  43     Call to an undefined method App\Models\Yatzy\ViewPresentResult::where().  
+  69     Call to an undefined method App\Models\Yatzy\ViewPresentResult::where().  
+  104    Call to an undefined method App\Models\Yatzy\ViewPresentResult::where().  
+ ------ -------------------------------------------------------------------------- 
+
+ ------ --------------------------------------------------------------------------------- 
+ [32m Line [39m [32m tests\Feature\YatzyControllerTest.php                                           [39m 
+ ------ --------------------------------------------------------------------------------- 
+  35     Class App\Models\Yatzy\Yatzy constructor invoked with 0 parameters, 4 required.  
+  74     Call to an undefined method App\Http\Controllers\YatzyController::highScores().  
+[39;49m  104    Instantiated class App\Models\Yatzy\Result not found.[39;49m[39;49m                            [39;49m
+[39;49m         [39;49m💡 Learn more at https://phpstan.org/user-guide/discovering-symbols               
+[39;49m  106    Call to method where() on an unknown class App\Models\Yatzy\Result.[39;49m[39;49m              [39;49m
+[39;49m         [39;49m💡 Learn more at https://phpstan.org/user-guide/discovering-symbols               
+ ------ --------------------------------------------------------------------------------- 
+
+ ------ -------------------------------------------------------------------------------------------------------------------------------------------- 
+ [32m Line [39m [32m tests\Feature\YatzyHighscoreTest.php                                                                                                       [39m 
+ ------ -------------------------------------------------------------------------------------------------------------------------------------------- 
+[39;49m  23     Instantiated class App\Models\Yatzy\Result not found.[39;49m[39;49m                                                                                       [39;49m
+[39;49m         [39;49m💡 Learn more at https://phpstan.org/user-guide/discovering-symbols                                                                          
+  25     Parameter #1 $expected of method PHPUnit\Framework\Assert::assertInstanceOf() expects class-string<App\Models\Yatzy\Result>, string given.  
+[39;49m  33     Instantiated class App\Models\Yatzy\Result not found.[39;49m[39;49m                                                                                       [39;49m
+[39;49m         [39;49m💡 Learn more at https://phpstan.org/user-guide/discovering-symbols                                                                          
+[39;49m  34     Call to method getAllResults() on an unknown class App\Models\Yatzy\Result.[39;49m[39;49m                                                                 [39;49m
+[39;49m         [39;49m💡 Learn more at https://phpstan.org/user-guide/discovering-symbols                                                                          
+[39;49m  44     Instantiated class App\Models\Yatzy\Result not found.[39;49m[39;49m                                                                                       [39;49m
+[39;49m         [39;49m💡 Learn more at https://phpstan.org/user-guide/discovering-symbols                                                                          
+[39;49m  46     Call to method saveResult() on an unknown class App\Models\Yatzy\Result.[39;49m[39;49m                                                                    [39;49m
+[39;49m         [39;49m💡 Learn more at https://phpstan.org/user-guide/discovering-symbols                                                                          
+[39;49m  48     Call to method orderByDesc() on an unknown class App\Models\Yatzy\Result.[39;49m[39;49m                                                                   [39;49m
+[39;49m         [39;49m💡 Learn more at https://phpstan.org/user-guide/discovering-symbols                                                                          
+[39;49m  65     Instantiated class App\Models\Yatzy\Result not found.[39;49m[39;49m                                                                                       [39;49m
+[39;49m         [39;49m💡 Learn more at https://phpstan.org/user-guide/discovering-symbols                                                                          
+[39;49m  67     Call to method where() on an unknown class App\Models\Yatzy\Result.[39;49m[39;49m                                                                         [39;49m
+[39;49m         [39;49m💡 Learn more at https://phpstan.org/user-guide/discovering-symbols                                                                          
+ ------ -------------------------------------------------------------------------------------------------------------------------------------------- 
+
+ ------ --------------------------------------------------------------------------------- 
+ [32m Line [39m [32m tests\Unit\Yatzy\YatzyYatzyTest.php                                             [39m 
+ ------ --------------------------------------------------------------------------------- 
+  23     Class App\Models\Yatzy\Yatzy constructor invoked with 0 parameters, 4 required.  
+  33     Class App\Models\Yatzy\Yatzy constructor invoked with 0 parameters, 4 required.  
+  48     Class App\Models\Yatzy\Yatzy constructor invoked with 0 parameters, 4 required.  
+  65     Class App\Models\Yatzy\Yatzy constructor invoked with 0 parameters, 4 required.  
+  85     Class App\Models\Yatzy\Yatzy constructor invoked with 0 parameters, 4 required.  
+  104    Class App\Models\Yatzy\Yatzy constructor invoked with 0 parameters, 4 required.  
+  129    Class App\Models\Yatzy\Yatzy constructor invoked with 0 parameters, 4 required.  
+  147    Class App\Models\Yatzy\Yatzy constructor invoked with 0 parameters, 4 required.  
+ ------ --------------------------------------------------------------------------------- 
 
 [37;41m                                                                                                                        [39;49m
-[37;41m [ERROR] Found 7 errors                                                                                                 [39;49m
+[37;41m [ERROR] Found 57 errors                                                                                                [39;49m
 [37;41m                                                                                                                        [39;49m
 

@@ -102,8 +102,7 @@ class ResultTable extends Model
         string $result_full_house,
         string $result_chance,
         string $result_yatzy
-        )
-    {
+    ) {
         $this->user_id = $user_id;
         $this->result_bonus = $result_bonus;
         $this->result_1 = $result_1;

@@ -4,7 +4,7 @@
 
 <div class="game-content-left">
 
-<h1>YatzyBonanza @if ($data['gameOver'] == 'false')<span class="green">Live!</span>@else<span class="red">Game Over!</span>@endif</h1>
+<h1>YatzyBonanza @if ($data['gameOver'] == 'false')<span class="green">Live!</span>@else<span class="blue">Game Over!</span>@endif</h1>
 
 <div class="statusbox">
     @if ($data['mode'] == 'challenge')
@@ -36,7 +36,7 @@
         <div class="statusbox">
             <h2>Rolls made: {{ $data['nrOfRerolls']+1 }} of 3</h2>
             <p>Select which dice you want to roll again (if any), then click below to roll</p>
-            <input type="submit" name="roll" value="Roll!" class="submit">
+            <button type="submit" name="roll" value="Roll!">Roll!</button>
         </div>
         @elseif ($data['gameOver'] == 'false')
         <div class="statusbox">
@@ -49,7 +49,7 @@
 
     @if ($data['gameOver'] == 'true')
     <div class="statusbox">
-        <h2><span class="red">Game Over!</span> Your final score: {{ $data['totalPoints'] }}</h2>
+        <h2><span class="blue">Game Over!</span> Your final score: {{ $data['totalPoints'] }}</h2>
 
         @if ($data['mode'] == 'single' && $data['totalPoints'] >= 250)
         <p>Congratulations! You collected over 250 points and won {{ $data['bet'] }} ¥!</p>
@@ -70,7 +70,7 @@
             @foreach ($data['frequency'] as $key => $value)
                 <input type="hidden" name="dice_{{ $key }}" value="{{ $value }}">
             @endforeach
-            <input type="submit" name="submit" value="Save results" class="submit">
+            <button type="submit" name="submit" value="Save results">Save results</button>
         </form>
     </div>
     @endif
@@ -97,7 +97,7 @@
                     @csrf
                     <input type="hidden" name="roundOver" value="roundOver">
                     @if ($data['twoRerollsMade'] == 'true')
-                    <button type="submit" name="selectedRound" value="{{ $key }}" class="submit button green">Save</button>
+                    <button type="submit" name="selectedRound" value="{{ $key }}">Save</button>
                     @endif
                     </form>
                 @else

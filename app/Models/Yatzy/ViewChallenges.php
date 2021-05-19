@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 * @property string $challenge_id
 * @property string $time
 * @property string $bet
+* @property string $denied
 * @property string $challenger_result_id
 * @property string $challenger_id
 * @property string $challenger_name
@@ -58,11 +59,12 @@ class ViewChallenges extends Model
 
         foreach ($result as $row) {
             array_push($openChallengesSent, [
-                'id' => $row->id,
-                'time' => $row->time,
+                'challenge_id' => $row->challenge_id,
+                'time' => substr($row->time, 0, 10),
                 'bet' => $row->bet,
                 'opponent_id' => $row->opponent_id,
-                'opponent_name' => $row->opponent_name
+                'opponent_name' => $row->opponent_name,
+                'denied' => $row->denied
             ]);
         }
 
@@ -86,11 +88,12 @@ class ViewChallenges extends Model
 
         foreach ($result as $row) {
             array_push($openChallenges, [
-                'id' => $row->id,
-                'time' => $row->time,
+                'challenge_id' => $row->challenge_id,
+                'time' => substr($row->time, 0, 10),
                 'bet' => $row->bet,
                 'challenger_id' => $row->challenger_id,
-                'challenger_name' => $row->challenger_name
+                'challenger_name' => $row->challenger_name,
+                'denied' => $row->denied
             ]);
         }
 
@@ -112,7 +115,7 @@ class ViewChallenges extends Model
 
         $challenge = [
             'challenge_id' => $result[0]->challenge_id,
-            'time' => $result[0]->time,
+            'time' => substr($result[0]->time, 0, 10),
             'bet' => $result[0]->bet,
             'challenger_result_id' => $result[0]->challenger_result_id,
             'challenger_id' => $result[0]->challenger_id,
@@ -150,7 +153,7 @@ class ViewChallenges extends Model
         foreach ($result as $row) {
             array_push($finishedChallenges, [
                 'challenge_id' => $row->challenge_id,
-                'time' => $row->time,
+                'time' => substr($row->time, 0, 10),
                 'bet' => $row->bet,
                 'challenger_result_id' => $row->challenger_result_id,
                 'challenger_id' => $row->challenger_id,

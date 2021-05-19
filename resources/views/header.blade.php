@@ -8,21 +8,19 @@
 <div class="header-wrapper">
     <header>
         <nav>
-            <a href="{{ url('/') }}">Home</a>
-            <a href="{{ url('/highscores') }}">Highscores</a>
             @if( auth()->check() )
             <a href="{{ url('/gamemode') }}">New Game</a>
+            <a href="{{ url('/highscores') }}">Highscores</a>
             <a href="{{ url('/myaccount') }}">My Account</a>
+            @else
+            <a href="{{ url('/') }}">Home</a>
+            <a href="{{ url('/highscores') }}">Highscores</a>
             @endif
-
         </nav>
         <div class="header-right">
             @if( auth()->check() )
                 <a href="{{ url('/myaccount') }}">Playing as: {{ auth()->user()->name }}</a> |
                 <a href="{{ url('/logout') }}">Logout</a>
-            @else
-                <a href="{{ url('/register') }}">Register</a> |
-                <a href="{{ url('/login') }}">Login</a>
             @endif
         </div>
     </header>

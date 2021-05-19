@@ -4,8 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\YatzyController;
 use App\Http\Controllers\ResultsController;
-use App\Http\Controllers\MyAccountController;
-use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\SessionController;
 
 /*
@@ -19,11 +18,15 @@ use App\Http\Controllers\SessionController;
 |
 */
 
-Route::get('/', function () {
-    return view('start', [
-        'title' => "Home | YatzyBonanza"
-    ]);
-});
+Route::get('/', [SessionController::class, 'create']);
+Route::get('/login', [SessionController::class, 'create']);
+Route::post('/login', [SessionController::class, 'store']);
+Route::get('/logout', [SessionController::class, 'destroy']);
+
+Route::get('/register', [AccountController::class, 'create']);
+Route::post('/register', [AccountController::class, 'store']);
+Route::get('/myaccount', [AccountController::class, 'myAccount']);
+Route::post('/myaccount', [AccountController::class, 'denyChallenge']);
 
 Route::get('/gamemode', [YatzyController::class, 'gamemode']);
 
@@ -34,20 +37,11 @@ Route::get('/highscores', [ResultsController::class, 'highScores']);
 Route::post('/highscores', [ResultsController::class, 'submitResult']);
 
 Route::get('/result/{id}', function ($id) {
-    $ctrl = new ResultsController;
+    $ctrl = new ResultsController();
     return $ctrl->oneResult($id);
 });
 
 Route::get('/challenge/{id}', function ($id) {
-    $ctrl = new ResultsController;
+    $ctrl = new ResultsController();
     return $ctrl->oneChallenge($id);
 });
-
-Route::get('/myaccount', [MyAccountController::class, 'myAccount']);
-
-Route::get('/register', [RegistrationController::class, 'create']);
-Route::post('/register', [RegistrationController::class, 'store']);
-
-Route::get('/login', [SessionController::class, 'create']);
-Route::post('/login', [SessionController::class, 'store']);
-Route::get('/logout', [SessionController::class, 'destroy']);

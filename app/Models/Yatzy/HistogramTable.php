@@ -53,11 +53,13 @@ class HistogramTable extends Model
      */
     public function saveHistogram(
         int $result_id,
-        string $dice_1, string $dice_2,
-        string $dice_3, string $dice_4,
-        string $dice_5, string $dice_6
-        )
-    {
+        string $dice_1,
+        string $dice_2,
+        string $dice_3,
+        string $dice_4,
+        string $dice_5,
+        string $dice_6
+    ) {
         $this->result_id = $result_id;
         $this->dice_1 = $dice_1;
         $this->dice_2 = $dice_2;

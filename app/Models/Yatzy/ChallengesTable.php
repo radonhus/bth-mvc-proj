@@ -54,18 +54,32 @@ class ChallengesTable extends Model
     }
 
     /**
-     * Update coins for one user
+     * Insert opponent result and total bet in challenge row
      *
-     * @param int $id
-     * @param int $totalBet
-     * @property string $opponent_result_id
-     * @property array $user
+     * @param string $challengeId
+     * @param string $totalBet
+     * @param string $resultId
+     * @property int $updatedRows
+     * @return int
      */
-    public function updateChallenge(int $id, int $totalBet, string $opponent_result_id): string
+    public function updateChallenge(string $challengeId, string $totalBet, string $resultId): string
     {
-        $updatedRows = $this->where('id', $id)
-                                ->update(['bet' => $totalBet,
-                                'opponent_result_id' => $opponent_result_id]);
+        $updatedRows = $this->where('id', $challengeId)
+                                ->update(['bet' => $totalBet, 'opponent_result_id' => $resultId]);
+        return $updatedRows;
+    }
+
+    /**
+     * Mark challenge as denied
+     *
+     * @param string $challengeId
+     * @property int $updatedRows
+     * @return int
+     */
+    public function denyChallenge(string $challengeId): string
+    {
+        $updatedRows = $this->where('id', $challengeId)
+                                ->update(['denied' => 'denied']);
         return $updatedRows;
     }
 
@@ -79,10 +93,11 @@ class ChallengesTable extends Model
      * @return bool
      */
     public function saveNewChallenge(
-        string $challenger_user_id, int $challenger_result_id,
-        string $opponent_user_id, string $bet
-        )
-    {
+        string $challenger_user_id,
+        int $challenger_result_id,
+        string $opponent_user_id,
+        string $bet
+    ) {
         $this->challenger_user_id = $challenger_user_id;
         $this->challenger_result_id = $challenger_result_id;
         $this->opponent_user_id = $opponent_user_id;
@@ -90,5 +105,4 @@ class ChallengesTable extends Model
 
         return $this->save();
     }
-
 }

@@ -56,7 +56,10 @@ class YatzyController extends Controller
         $challengeId = $post['challengeId'];
 
         $yatzyObject = new Yatzy(
-            $mode, $bet, $opponent, $challengeId
+            $mode,
+            $bet,
+            $opponent,
+            $challengeId
         );
 
         $data = $yatzyObject->startNewRound();
@@ -91,5 +94,4 @@ class YatzyController extends Controller
             'data' => $data
         ]);
     }
-
 }

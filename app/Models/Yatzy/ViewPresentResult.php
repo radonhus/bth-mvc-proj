@@ -56,6 +56,89 @@ class ViewPresentResult extends Model
     }
 
     /**
+     * Get stats for one user
+     *
+     * @param string $userId
+     * @property object $result
+     * @property int $countGames
+     * @property int $sumScore
+     * @property int $avgScore
+     * @property int $maxScore
+     * @property int $countBonus
+     * @property int $countOver250
+     * @property int $quotaOver250
+     * @property int $quotaBonus
+     * @return array $allGames
+     */
+    public function getStatsUser($userId): array
+    {
+
+        $result = $this->where('user_id', $userId)
+        ->orderByDesc('score')
+        ->get();
+
+        $sumScore = 0;
+        $countGames = 0;
+        $countBonus = 0;
+        $avgScore = 0;
+        $countOver250 = 0;
+        $maxScore = intval($result[0]->score);
+
+        foreach ($result as $row) {
+            $countGames += 1;
+            $sumScore += intval($row->score);
+            if ($row->bonus == "50") { $countBonus += 1; }
+            if ($row->score >= "250") { $countOver250 += 1; }
+        }
+
+        $avgScore = round($sumScore / $countGames);
+        $quotaOver250 = round(($countOver250 / $countGames)*100);
+        $quotaBonus = round(($countBonus / $countGames)*100);
+
+        $stats = [
+            'countGames' => $countGames,
+            'sumScore' => $sumScore,
+            'avgScore' => $avgScore,
+            'maxScore' => $maxScore,
+            'countBonus' => $countBonus,
+            'countOver250' => $countOver250,
+            'quotaOver250' => $quotaOver250,
+            'quotaBonus' => $quotaBonus
+        ];
+
+        return $stats;
+    }
+
+    /**
+     * Get basics for all games for one user
+     *
+     * @param string $userId
+     * @property object $result
+     * @property array $allGames
+     * @return array $allGames
+     */
+    public function getAllGamesUser($userId): array
+    {
+
+        $result = $this->where('user_id', $userId)
+        ->orderByDesc('score')
+        ->get();
+
+        $allGames = [];
+
+        foreach ($result as $row) {
+            array_push($allGames, [
+                'result_id' => $row->result_id,
+                'bonus' => $row->bonus,
+                'date_played' => substr($row->date_played, 0, 10),
+                'score' => $row->score
+            ]);
+        }
+
+        return $allGames;
+    }
+
+    /**
      * Get scorecard for one game
      *
      * @param string $result_id

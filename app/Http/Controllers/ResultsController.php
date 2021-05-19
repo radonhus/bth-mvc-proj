@@ -41,8 +41,10 @@ class ResultsController extends Controller
     /**
      * Present top ten results
      *
-     * @property object  $result
-     * @property array  $results
+     * @property object  $highscores
+     * @property array  $topTenArray
+     * @property object  $users
+     * @property array  $topTenRichest
      * @return \Illuminate\Contracts\View\View
      */
     public function highScores()
@@ -143,7 +145,9 @@ class ResultsController extends Controller
         $bet = intval($post['bet']);
         $userId = $post['user_id'];
 
-        if ($score < 250 ) { $bet = $bet * -1; }
+        if ($score < 250) {
+            $bet = $bet * -1;
+        }
         $users->updateBalance($userId, $bet);
 
         $view = $this->highScores();
@@ -190,7 +194,9 @@ class ResultsController extends Controller
 
         //Check balance: if lower than bet, lower bet accordingly
         $userBalance = intval($users->getCoins($userId));
-        if ($userBalance < $bet ) { $bet = $userBalance; }
+        if ($userBalance < $bet) {
+            $bet = $userBalance;
+        }
 
         //Save result and total bet sum to challenges table
         $totalBet = $bet * 2;
@@ -255,11 +261,22 @@ class ResultsController extends Controller
         $histogram = new HistogramTable();
 
         $result->saveResult(
-            $post['user_id'], $post['bonus'],
-            $post['1'], $post['2'], $post['3'], $post['4'],
-            $post['5'], $post['6'], $post['one_pair'], $post['two_pairs'],
-            $post['three'], $post['four'], $post['small_straight'],
-            $post['large_straight'], $post['full_house'], $post['chance'],
+            $post['user_id'],
+            $post['bonus'],
+            $post['1'],
+            $post['2'],
+            $post['3'],
+            $post['4'],
+            $post['5'],
+            $post['6'],
+            $post['one_pair'],
+            $post['two_pairs'],
+            $post['three'],
+            $post['four'],
+            $post['small_straight'],
+            $post['large_straight'],
+            $post['full_house'],
+            $post['chance'],
             $post['yatzy']
         );
 
@@ -267,9 +284,12 @@ class ResultsController extends Controller
 
         $histogram->saveHistogram(
             $resultId,
-            $post['dice_1'], $post['dice_2'],
-            $post['dice_3'], $post['dice_4'],
-            $post['dice_5'], $post['dice_6']
+            $post['dice_1'],
+            $post['dice_2'],
+            $post['dice_3'],
+            $post['dice_4'],
+            $post['dice_5'],
+            $post['dice_6']
         );
 
         return $resultId;
