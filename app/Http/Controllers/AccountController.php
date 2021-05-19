@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Yatzy\ChallengesTable;
 use App\Models\Yatzy\ViewChallenges;
-use App\Models\Yatzy\ViewPresentResult;
+use App\Models\Yatzy\ViewResults;
 use Illuminate\Http\Request;
 use App\Models\User;
 
@@ -87,7 +87,7 @@ class AccountController extends Controller
     public function myAccount()
     {
         $viewChallenges = new ViewChallenges();
-        $results = new ViewPresentResult();
+        $results = new ViewResults();
         $users = new User();
 
         $userId = auth()->user()->id;

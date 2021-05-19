@@ -13,6 +13,7 @@ class Yatzy
     private string $mode;
     private string $bet;
     private string $opponent;
+    private string $opponentName;
     private string $challengeId;
     private int $roundsCounter;
     private string $currentRound;
@@ -25,11 +26,13 @@ class Yatzy
         string $mode,
         string $bet,
         string $opponent,
+        string $opponentName,
         string $challengeId
     ) {
         $this->mode = $mode;
         $this->bet = $bet;
         $this->opponent = $opponent;
+        $this->opponentName = $opponentName;
         $this->challengeId = $challengeId;
         $this->roundsCounter = 0;
         $this->totalPoints = 0;
@@ -60,6 +63,7 @@ class Yatzy
         $data["mode"] = $this->mode;
         $data["bet"] = $this->bet;
         $data["opponent"] = $this->opponent;
+        $data["opponentName"] = $this->opponentName;
         $data["challengeId"] = $this->challengeId;
 
         $data["twoRerollsMade"] = "false";
@@ -122,6 +126,7 @@ class Yatzy
         $data["mode"] = $this->mode;
         $data["bet"] = $this->bet;
         $data["opponent"] = $this->opponent;
+        $data["opponentName"] = $this->opponentName;
         $data["challengeId"] = $this->challengeId;
 
         $data["twoRerollsMade"] = "false";
@@ -149,6 +154,7 @@ class Yatzy
         $data["mode"] = $this->mode;
         $data["bet"] = $this->bet;
         $data["opponent"] = $this->opponent;
+        $data["opponentName"] = $this->opponentName;
         $data["challengeId"] = $this->challengeId;
 
         $data["twoRerollsMade"] = "true";

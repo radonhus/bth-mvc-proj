@@ -9,8 +9,10 @@
 <div class="statusbox">
     @if ($data['mode'] == 'challenge')
         <p><span class="bold">Game mode</span>: New challenge</p>
+        <p><span class="bold">Opponent</span>: {{ $data['opponentName'] }}</p>
     @elseif ($data['mode'] == 'accept')
         <p><span class="bold">Game mode</span>: Challenge accepted</p>
+        <p><span class="bold">Opponent</span>: {{ $data['opponentName'] }}</p>
     @else
         <p><span class="bold">Game mode</span>: Single player (reach 250 or more to win)</p>
     @endif

@@ -135,6 +135,24 @@ class User extends Authenticatable
     }
 
     /**
+     * Get name for one user
+     *
+     * @param int $id
+     * @property array $user
+     * @return string $name
+     */
+    public function getName(int $id): string
+    {
+
+        $user = $this->where('id', $id)
+                                ->get();
+
+        $name = $user[0]->name;
+
+        return $name;
+    }
+
+    /**
      * Update coins for one user
      *
      * @param int $id

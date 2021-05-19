@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 * the model represents (to make phpstan happy)
 *
 */
-class ViewPresentResult extends Model
+class ViewResults extends Model
 {
     use HasFactory;
 
@@ -20,7 +20,7 @@ class ViewPresentResult extends Model
      *
      * @var string
      */
-    protected $table = 'v_presentresult';
+    protected $table = 'v_results';
 
     /**
      * Indicates if the model should be timestamped.
@@ -28,6 +28,46 @@ class ViewPresentResult extends Model
      * @var bool
      */
     public $timestamps = false;
+
+    /**
+     * Get the 10 best results
+     *
+     * @property object $result
+     * @property int $topScore
+     * @property array $topTenArray
+     * @property int $rank
+     * @property array $result
+     * @return array $topTenArray
+     */
+    public function getHighscores()
+    {
+
+        $result = $this->orderByDesc('score')
+                                ->limit(10)
+                                ->get();
+
+        $topScore = intval($result[0]['score']);
+
+        $topTenArray = [];
+        $rank = 0;
+
+        foreach ($result as $row) {
+            $percent = round((intval($row->score) / $topScore)*100);
+            $rank += 1;
+            array_push($topTenArray, [
+                'rank' => $rank,
+                'result_id' => $row->result_id,
+                'user_id' => $row->user_id,
+                'name' => $row->name,
+                'score' => $row->score,
+                'percent' => $percent,
+                'bonus' => $row->bonus,
+                'date_played' => substr($row->date_played, 0, 10)
+            ]);
+        }
+
+        return $topTenArray;
+    }
 
     /**
      * Get basics for one game
@@ -82,7 +122,9 @@ class ViewPresentResult extends Model
         $countBonus = 0;
         $avgScore = 0;
         $countOver250 = 0;
-        $maxScore = intval($result[0]->score);
+        $maxScore = 0;
+        $quotaOver250 = 0;
+        $quotaBonus = 0;
 
         foreach ($result as $row) {
             $countGames += 1;
@@ -91,9 +133,12 @@ class ViewPresentResult extends Model
             if ($row->score >= "250") { $countOver250 += 1; }
         }
 
-        $avgScore = round($sumScore / $countGames);
-        $quotaOver250 = round(($countOver250 / $countGames)*100);
-        $quotaBonus = round(($countBonus / $countGames)*100);
+        if (count($result) > 0) {
+            $avgScore = round($sumScore / $countGames);
+            $quotaOver250 = round(($countOver250 / $countGames)*100);
+            $quotaBonus = round(($countBonus / $countGames)*100);
+            $maxScore = intval($result[0]->score);
+        }
 
         $stats = [
             'countGames' => $countGames,

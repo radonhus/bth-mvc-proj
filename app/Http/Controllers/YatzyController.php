@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Yatzy\Yatzy;
 use App\Models\Yatzy\ResultTable;
 use App\Models\Yatzy\HistogramTable;
-use App\Models\Yatzy\ViewHighscores;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -53,12 +52,19 @@ class YatzyController extends Controller
         $mode = $post['mode'];
         $bet = $post['bet'];
         $opponent = $post['opponent'];
+        $opponentName = "";
         $challengeId = $post['challengeId'];
+
+        if ($opponent != "0") {
+            $usersObject = new User();
+            $opponentName = $usersObject->getName($opponent);
+        }
 
         $yatzyObject = new Yatzy(
             $mode,
             $bet,
             $opponent,
+            $opponentName,
             $challengeId
         );
 
