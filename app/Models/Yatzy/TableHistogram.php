@@ -21,7 +21,7 @@ use Illuminate\Http\Request;
 * @method orderByDesc(string $string1)
 * @method where(string $string1, string $string2)
 */
-class HistogramTable extends Model
+class TableHistogram extends Model
 {
     use HasFactory;
 

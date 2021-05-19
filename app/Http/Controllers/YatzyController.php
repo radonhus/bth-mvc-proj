@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Yatzy\Yatzy;
-use App\Models\Yatzy\ResultTable;
-use App\Models\Yatzy\HistogramTable;
 use App\Models\User;
 use Illuminate\Http\Request;
 

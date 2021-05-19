@@ -30,7 +30,7 @@ use Illuminate\Http\Request;
 * @method orderByDesc(string $string1)
 * @method where(string $string1, string $string2)
 */
-class ResultTable extends Model
+class TableResult extends Model
 {
     use HasFactory;
 

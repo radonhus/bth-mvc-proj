@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Yatzy\ChallengesTable;
+use App\Models\Yatzy\TableChallenges;
 use App\Models\Yatzy\ViewChallenges;
 use App\Models\Yatzy\ViewResults;
 use Illuminate\Http\Request;
@@ -62,7 +62,7 @@ class AccountController extends Controller
         $challengerId = $post['challenger'];
         $bet = $post['bet'];
 
-        $challenges = new ChallengesTable();
+        $challenges = new TableChallenges();
         $users = new User();
 
         $challenges->denyChallenge($challengeId);

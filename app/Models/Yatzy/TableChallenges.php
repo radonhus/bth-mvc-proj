@@ -18,7 +18,7 @@ use Illuminate\Http\Request;
 * @property string $opponent_user_id
 * @property string $opponent_result_id
 */
-class ChallengesTable extends Model
+class TableChallenges extends Model
 {
     use HasFactory;
 

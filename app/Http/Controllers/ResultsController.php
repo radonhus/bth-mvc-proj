@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\Yatzy\ResultTable;
-use App\Models\Yatzy\HistogramTable;
-use App\Models\Yatzy\ChallengesTable;
+use App\Models\Yatzy\TableResult;
+use App\Models\Yatzy\TableHistogram;
+use App\Models\Yatzy\TableChallenges;
 use App\Models\Yatzy\ViewResults;
 use App\Models\Yatzy\ViewChallenges;
 use App\Models\User;
@@ -108,7 +108,7 @@ class ResultsController extends Controller
      */
     private function newChallenge(array $post, int $resultId)
     {
-        $challenges = new ChallengesTable();
+        $challenges = new TableChallenges();
         $users = new User();
 
         $bet = intval($post['bet']);
@@ -176,7 +176,7 @@ class ResultsController extends Controller
      */
     private function acceptedChallenge(array $post, int $resultId)
     {
-        $challenges = new ChallengesTable();
+        $challenges = new TableChallenges();
         $users = new User();
         $results = new ViewResults();
 
@@ -232,7 +232,7 @@ class ResultsController extends Controller
         $resultChallenger = $viewResults->getResult($challengerResultId);
         $scorecardChallenger = $viewResults->getScorecard($challengerResultId);
         $resultOpponent = $viewResults->getResult($opponentResultId);
-        $scorecardOpponent = $ViewResults->getScorecard($opponentResultId);
+        $scorecardOpponent = $viewResults->getScorecard($opponentResultId);
 
         return view('challengeresults', [
             'title' => "Challenge results | YatzyBonanza",
@@ -256,8 +256,8 @@ class ResultsController extends Controller
      */
     private function saveResult(array $post)
     {
-        $result = new ResultTable();
-        $histogram = new HistogramTable();
+        $result = new TableResult();
+        $histogram = new TableHistogram();
 
         $result->saveResult(
             $post['user_id'],
