@@ -10,25 +10,27 @@ use Illuminate\Http\Request;
 * The following properties are columns in the table that
 * the model represents (to make phpstan happy)
 *
-* @property string $user_id
-* @property string  $result_bonus
-* @property string  $result_1
-* @property string  $result_2
-* @property string  $result_3
-* @property string  $result_4
-* @property string  $result_5
-* @property string  $result_6
-* @property string  $result_one_pair
-* @property string  $result_two_pairs
-* @property string  $result_three
-* @property string  $result_four
-* @property string  $result_small_straight
-* @property string  $result_large_straight
-* @property string  $result_full_house
-* @property string  $result_chance
-* @property string  $result_yatzy
+* @property int  $id
+* @property int  $user_id
+* @property string  $date_played
+* @property int  $result_1
+* @property int  $result_2
+* @property int  $result_3
+* @property int  $result_4
+* @property int  $result_5
+* @property int  $result_6
+* @property int  $result_one_pair
+* @property int  $result_two_pairs
+* @property int  $result_three
+* @property int  $result_four
+* @property int  $result_small_straight
+* @property int  $result_large_straight
+* @property int  $result_full_house
+* @property int  $result_chance
+* @property int  $result_yatzy
+* @property int  $result_bonus
 * @method orderByDesc(string $string1)
-* @method where(string $string1, string $string2)
+* @method where(mixed $columnOrArray = '', mixed $columnValue = '')
 */
 class TableResult extends Model
 {
@@ -65,43 +67,43 @@ class TableResult extends Model
     /**
      * Save new result in results table
      *
-     * @param  string  $user_id
-     * @param  string  $result_bonus
-     * @param  string  $result_1
-     * @param  string  $result_2
-     * @param  string  $result_3
-     * @param  string  $result_4
-     * @param  string  $result_5
-     * @param  string  $result_6
-     * @param  string  $result_one_pair
-     * @param  string  $result_two_pairs
-     * @param  string  $result_three
-     * @param  string  $result_four
-     * @param  string  $result_small_straight
-     * @param  string  $result_large_straight
-     * @param  string  $result_full_house
-     * @param  string  $result_chance
-     * @param  string  $result_yatzy
+     * @param  int  $user_id
+     * @param  int  $result_bonus
+     * @param  int  $result_1
+     * @param  int  $result_2
+     * @param  int  $result_3
+     * @param  int  $result_4
+     * @param  int  $result_5
+     * @param  int  $result_6
+     * @param  int  $result_one_pair
+     * @param  int  $result_two_pairs
+     * @param  int  $result_three
+     * @param  int  $result_four
+     * @param  int  $result_small_straight
+     * @param  int  $result_large_straight
+     * @param  int  $result_full_house
+     * @param  int  $result_chance
+     * @param  int  $result_yatzy
      * @return bool
      */
     public function saveResult(
-        string $user_id,
-        string $result_bonus,
-        string $result_1,
-        string $result_2,
-        string $result_3,
-        string $result_4,
-        string $result_5,
-        string $result_6,
-        string $result_one_pair,
-        string $result_two_pairs,
-        string $result_three,
-        string $result_four,
-        string $result_small_straight,
-        string $result_large_straight,
-        string $result_full_house,
-        string $result_chance,
-        string $result_yatzy
+        int $user_id,
+        int $result_bonus,
+        int $result_1,
+        int $result_2,
+        int $result_3,
+        int $result_4,
+        int $result_5,
+        int $result_6,
+        int $result_one_pair,
+        int $result_two_pairs,
+        int $result_three,
+        int $result_four,
+        int $result_small_straight,
+        int $result_large_straight,
+        int $result_full_house,
+        int $result_chance,
+        int $result_yatzy
     ) {
         $this->user_id = $user_id;
         $this->result_bonus = $result_bonus;

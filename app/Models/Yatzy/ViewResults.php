@@ -10,6 +10,10 @@ use Illuminate\Http\Request;
 * The following properties are columns in the table that
 * the model represents (to make phpstan happy)
 *
+* @property int  $result_id
+* @property int  $user_id
+* @method orderByDesc(string $columnName)
+* @method where(mixed $columnNameOrArray = '', mixed $columnValue = '')
 */
 class ViewResults extends Model
 {
@@ -72,12 +76,12 @@ class ViewResults extends Model
     /**
      * Get basics for one game
      *
-     * @param string $result_id
+     * @param int $result_id
      * @property object $result
      * @property array $histogram
      * @return array $histogram
      */
-    public function getResult($result_id): array
+    public function getResult(int $result_id): array
     {
 
         $result = $this->where('result_id', $result_id)
@@ -98,7 +102,7 @@ class ViewResults extends Model
     /**
      * Get stats for one user
      *
-     * @param string $userId
+     * @param int $userId
      * @property object $result
      * @property int $countGames
      * @property int $sumScore
@@ -110,7 +114,7 @@ class ViewResults extends Model
      * @property int $quotaBonus
      * @return array $allGames
      */
-    public function getStatsUser($userId): array
+    public function getStatsUser(int $userId): array
     {
 
         $result = $this->where('user_id', $userId)
@@ -157,12 +161,12 @@ class ViewResults extends Model
     /**
      * Get basics for all games for one user
      *
-     * @param string $userId
+     * @param int $userId
      * @property object $result
      * @property array $allGames
      * @return array $allGames
      */
-    public function getAllGamesUser($userId): array
+    public function getAllGamesUser(int $userId): array
     {
 
         $result = $this->where('user_id', $userId)
@@ -186,12 +190,12 @@ class ViewResults extends Model
     /**
      * Get scorecard for one game
      *
-     * @param string $result_id
+     * @param int $result_id
      * @property object $result
      * @property array $scorecard
      * @return array $scorecard
      */
-    public function getScorecard($result_id): array
+    public function getScorecard(int $result_id): array
     {
 
         $result = $this->where('result_id', $result_id)
@@ -221,12 +225,12 @@ class ViewResults extends Model
     /**
      * Get histogram for one game
      *
-     * @param string $result_id
+     * @param int $result_id
      * @property object $result
      * @property array $histogram
      * @return array $histogram
      */
-    public function getHistogram($result_id): array
+    public function getHistogram(int $result_id): array
     {
 
         $result = $this->where('result_id', $result_id)

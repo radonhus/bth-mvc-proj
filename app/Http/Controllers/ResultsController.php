@@ -20,7 +20,7 @@ class ResultsController extends Controller
      * @param int $id
      * @return \Illuminate\Contracts\View\View
      */
-    public function oneResult($id)
+    public function oneResult(int $id)
     {
         $presentResult = new ViewResults();
 
@@ -100,7 +100,7 @@ class ResultsController extends Controller
      * @param int $resultId
      * @property object $challenges
      * @property object $users
-     * @property int $bet
+     * @property string $bet
      * @property string $userId
      * @property string $opponentId
      * @property object $view
@@ -166,7 +166,7 @@ class ResultsController extends Controller
      * @property int $bet
      * @property string $userId
      * @property string $challengeId
-     * @property string $challengerResultId
+     * @property int $challengerResultId
      * @property int $challengerId
      * @property int $challengerScore
      * @property int $userBalance
@@ -186,7 +186,7 @@ class ResultsController extends Controller
 
         // Get challenger details
         $challengeId = $post['challengeId'];
-        $challengerResultId = $challenges->getChallengerResultId($challengeId);
+        $challengerResultId = intval($challenges->getChallengerResultId($challengeId));
         $challengerResult = $results->getResult($challengerResultId);
         $challengerId = intval($challengerResult['user_id']);
         $challengerScore = intval($challengerResult['score']);
@@ -217,10 +217,10 @@ class ResultsController extends Controller
     /**
      * Display results for one challenge
      *
-     * @param string $challengeId
+     * @param int $challengeId
      * @return \Illuminate\Contracts\View\View
      */
-    public function oneChallenge(string $challengeId)
+    public function oneChallenge(int $challengeId)
     {
         $viewChallenges = new ViewChallenges();
         $viewResults = new ViewResults();

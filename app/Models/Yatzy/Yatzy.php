@@ -42,33 +42,14 @@ class Yatzy
 
     public function startNewRound(): array
     {
-        $data = [];
-
         $this->roundsCounter += 1;
         $this->currentHand = new Round();
         $this->totalPoints = $this->points->calcTotalPoints();
         $rollsAndValues = $this->currentHand->getRollsAndValues();
         $diceArray = array_slice($rollsAndValues, -5);
-
         $this->histogram->save($diceArray);
 
-        $data["nrOfRerolls"] = $rollsAndValues[0];
-        $data["diceArray"] = $diceArray;
-        $data["nrOfRoundsPlayed"] = $this->roundsCounter;
-
-        $data["pointsPerRound"] = $this->points->getPointsArray();
-        $data["bonus"] = -1;
-        $data["totalPoints"] = $this->totalPoints;
-
-        $data["mode"] = $this->mode;
-        $data["bet"] = $this->bet;
-        $data["opponent"] = $this->opponent;
-        $data["opponentName"] = $this->opponentName;
-        $data["challengeId"] = $this->challengeId;
-
-        $data["twoRerollsMade"] = "false";
-
-        $data["gameOver"] = "false";
+        $data = $this->createDataArray($rollsAndValues);
 
         return $data;
     }
@@ -76,22 +57,16 @@ class Yatzy
     public function play($post): array
     {
         if (isset($post["roundOver"])) {
-            $this->currentRound = $post["selectedRound"];
-
-            $rollsAndValues = $this->currentHand->getRollsAndValues();
-            $diceArray = array_slice($rollsAndValues, -5);
-            $this->points->getRoundPoints($diceArray, $this->currentRound);
-
-            if ($this->roundsCounter == 15) {
-                $this->points->calcBonusPoints();
-                $this->totalPoints = $this->points->calcTotalPoints();
-
-                return $this->gameOver($rollsAndValues);
-            }
-
-            return $this->startNewRound();
+            return $this->finishOneRound($post["selectedRound"]);
         }
 
+        $diceToReroll = $this->extractSelectedDice($post);
+
+        return $this->reRoll($diceToReroll);
+    }
+
+    private function extractSelectedDice($post): array
+    {
         $diceToReroll = [];
 
         for ($i = 0; $i < 5; $i++) {
@@ -99,13 +74,11 @@ class Yatzy
                 array_push($diceToReroll, $i);
             }
         }
-        return $this->reRoll($diceToReroll);
+        return $diceToReroll;
     }
 
-    public function reRoll($diceToReroll): array
+    private function reRoll($diceToReroll): array
     {
-        $data = [];
-
         $rollsAndValues = $this->currentHand->rollDice($diceToReroll);
         $diceArray = array_slice($rollsAndValues, -5);
 
@@ -115,23 +88,7 @@ class Yatzy
         }
         $this->histogram->save($newDice);
 
-        $data["nrOfRerolls"] = $rollsAndValues[0];
-        $data["diceArray"] = $diceArray;
-
-        $data["nrOfRoundsPlayed"] = $this->roundsCounter;
-        $data["pointsPerRound"] = $this->points->getPointsArray();
-        $data["bonus"] = -1;
-        $data["totalPoints"] = $this->totalPoints;
-
-        $data["mode"] = $this->mode;
-        $data["bet"] = $this->bet;
-        $data["opponent"] = $this->opponent;
-        $data["opponentName"] = $this->opponentName;
-        $data["challengeId"] = $this->challengeId;
-
-        $data["twoRerollsMade"] = "false";
-
-        $data["gameOver"] = "false";
+        $data = $this->createDataArray($rollsAndValues);
 
         if ($data["nrOfRerolls"] >= 2) {
             $data["twoRerollsMade"] = "true";
@@ -139,7 +96,37 @@ class Yatzy
         return $data;
     }
 
+    private function finishOneRound(string $selectedRound): array
+    {
+        $this->currentRound = $selectedRound;
+
+        $rollsAndValues = $this->currentHand->getRollsAndValues();
+        $diceArray = array_slice($rollsAndValues, -5);
+        $this->points->getRoundPoints($diceArray, $this->currentRound);
+
+        if ($this->roundsCounter == 15) {
+            $this->points->calcBonusPoints();
+            $this->totalPoints = $this->points->calcTotalPoints();
+
+            return $this->gameOver($rollsAndValues);
+        }
+
+        return $this->startNewRound();
+    }
+
     private function gameOver($rollsAndValues): array
+    {
+        $data = $this->createDataArray($rollsAndValues);
+
+        $data["twoRerollsMade"] = "true";
+        $data["gameOver"] = "true";
+        $data["frequency"] = $this->histogram->getDiceFrequency();
+        $data["bonus"] = $this->points->calcBonusPoints();
+
+        return $data;
+    }
+
+    private function createDataArray($rollsAndValues): array
     {
         $data = [];
 
@@ -147,18 +134,15 @@ class Yatzy
         $data["diceArray"] = array_slice($rollsAndValues, -5);
         $data["nrOfRoundsPlayed"] = $this->roundsCounter;
         $data["pointsPerRound"] = $this->points->getPointsArray();
-        $data["bonus"] = $this->points->calcBonusPoints();
+        $data["bonus"] = -1;
         $data["totalPoints"] = $this->totalPoints;
-        $data["frequency"] = $this->histogram->getDiceFrequency();
-
         $data["mode"] = $this->mode;
         $data["bet"] = $this->bet;
         $data["opponent"] = $this->opponent;
         $data["opponentName"] = $this->opponentName;
         $data["challengeId"] = $this->challengeId;
-
-        $data["twoRerollsMade"] = "true";
-        $data["gameOver"] = "true";
+        $data["twoRerollsMade"] = "false";
+        $data["gameOver"] = "false";
 
         return $data;
     }

@@ -10,19 +10,7 @@ use Illuminate\Http\Request;
 * The following properties are columns in the table that
 * the model represents (to make phpstan happy)
 *
-* @property string $challenge_id
-* @property string $time
-* @property string $bet
-* @property string $denied
-* @property string $challenger_result_id
-* @property string $challenger_id
-* @property string $challenger_name
-* @property string $challenger_score
-* @property string $opponent_result_id
-* @property string $opponent_id
-* @property string $opponent_name
-* @property string $opponent_score
-* @property string $winner
+* @method where(mixed $columnOrArray = '', mixed $columnValue = '')
 */
 class ViewChallenges extends Model
 {
@@ -45,7 +33,7 @@ class ViewChallenges extends Model
     /**
      * Get all open challenges where user has been challenged
      *
-     * @param string $userId
+     * @param int $userId
      * @property object $result
      * @property array $openChallengesSent
      * @return array $openChallengesSent
@@ -74,7 +62,7 @@ class ViewChallenges extends Model
     /**
      * Get all open challenges where user has been challenged
      *
-     * @param string $userId
+     * @param int $userId
      * @property object $result
      * @property array $openChallenges
      * @return array $openChallenges
@@ -103,14 +91,14 @@ class ViewChallenges extends Model
     /**
      * Get all challenges for one player from the v_challenges view
      *
-     * @param int $id
+     * @param int $challenge_id
      * @property array $result
      * @property array $challenge
      * @return array $challenge
      */
-    public function getOneChallenge($id)
+    public function getOneChallenge($challenge_id)
     {
-        $result = $this->where('challenge_id', $id)
+        $result = $this->where('challenge_id', $challenge_id)
                         ->get();
 
         $challenge = [

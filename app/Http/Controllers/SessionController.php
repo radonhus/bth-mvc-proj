@@ -9,17 +9,25 @@ class SessionController extends Controller
 {
     /**
      * Return view to login user.
+     * @property  object  $myAccount
      * @return \Illuminate\Contracts\View\View
      */
     public function create()
     {
+        $myAccount = new AccountController();
+
+        // If user is logged in, return myAccount view
+        if (auth()->check()) {
+            return $myAccount->myAccount();
+        }
+
         return view('start', [
             'title' => "Home | YatzyBonanza"
         ]);
     }
 
     /**
-     * Verify login details and log user in / return error message.
+     * Verify login details and log user in or return error message.
      * @return \Illuminate\Contracts\View\View
      */
     public function store()

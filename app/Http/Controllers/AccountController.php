@@ -24,7 +24,7 @@ class AccountController extends Controller
 
     /**
      * Authenticate input, save new user to db, redirect.
-     * @return \Illuminate\Contracts\View\View
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store()
     {

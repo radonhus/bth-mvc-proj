@@ -20,7 +20,7 @@ class YatzyYatzyTest extends TestCase
      */
     public function testIsInstanceOfRound()
     {
-        $yatzyObject = new Yatzy();
+        $yatzyObject = new Yatzy("challenge", "100", "1", "", "1");
 
         $this->assertInstanceOf("App\Models\Yatzy\Yatzy", $yatzyObject);
     }
@@ -30,7 +30,7 @@ class YatzyYatzyTest extends TestCase
      */
     public function testStartNewRoundNrOfRoundsPlayed()
     {
-        $yatzyObject = new Yatzy();
+        $yatzyObject = new Yatzy("challenge", "100", "1", "", "1");
         $dataFirstRound = $yatzyObject->startNewRound();
         $dataSecondRound = $yatzyObject->startNewRound();
         $dataThirdRound = $yatzyObject->startNewRound();
@@ -45,7 +45,7 @@ class YatzyYatzyTest extends TestCase
      */
     public function testPlayNrOfReRolls()
     {
-        $yatzyObject = new Yatzy();
+        $yatzyObject = new Yatzy("challenge", "100", "1", "", "1");
         $dataInitialRoll = $yatzyObject->startNewRound();
         $post = [
             "roll" => "Roll selected dice",
@@ -62,7 +62,7 @@ class YatzyYatzyTest extends TestCase
      */
     public function testPlayRoundOver()
     {
-        $yatzyObject = new Yatzy();
+        $yatzyObject = new Yatzy("challenge", "100", "1", "", "1");
         $dataInitialRoll = $yatzyObject->startNewRound();
         $post = [
             "roundOver" => "Save points + start next round",
@@ -75,80 +75,89 @@ class YatzyYatzyTest extends TestCase
     }
 
     /**
-     * Test that 2 rerolls sets hideOn2RerollsMade in data array to "hidden"
+     * Test that extractSelectedDice returns the expected array
      */
-    public function testReRollHidden()
+    public function testExtractSelectedDice()
+    {
+        $publicExtract = new ReflectionMethod('App\Models\Yatzy\Yatzy', 'extractSelectedDice');
+        $publicExtract->setAccessible(true);
+
+        $yatzyObject = new Yatzy("challenge", "100", "1", "", "1");
+
+        $diceArray1 = $publicExtract->invokeArgs($yatzyObject, [["3" => true, "2" => true]]);
+        $diceArray2 = $publicExtract->invokeArgs($yatzyObject, [["4" => true, "1" => true]]);
+        $diceArray3 = $publicExtract->invokeArgs($yatzyObject, [["1" => true, "0" => true]]);
+
+        $this->assertEquals([2, 3], $diceArray1);
+        $this->assertEquals([1, 4], $diceArray2);
+        $this->assertEquals([0, 1], $diceArray3);
+    }
+
+    /**
+     * Test that two rerolls sets twoRerollsMade in data array to "hidden"
+     */
+    public function testTwoReRollsMadeTrue()
     {
         $publicReRoll = new ReflectionMethod('App\Models\Yatzy\Yatzy', 'reRoll');
         $publicReRoll->setAccessible(true);
 
-        $yatzyObject = new Yatzy();
+        $yatzyObject = new Yatzy("challenge", "100", "1", "", "1");
         $dataInitialRoll = $yatzyObject->startNewRound();
 
         $dataAfterFirstRoll = $publicReRoll->invokeArgs($yatzyObject, [[]]);
         $dataAfterSecondRoll = $publicReRoll->invokeArgs($yatzyObject, [[]]);
 
-        $this->assertEquals($dataInitialRoll["hideOn2RerollsMade"], "");
-        $this->assertEquals($dataAfterFirstRoll["hideOn2RerollsMade"], "");
-        $this->assertEquals($dataAfterSecondRoll["hideOn2RerollsMade"], "hidden");
+        $this->assertEquals($dataInitialRoll["twoRerollsMade"], "false");
+        $this->assertEquals($dataAfterFirstRoll["twoRerollsMade"], "false");
+        $this->assertEquals($dataAfterSecondRoll["twoRerollsMade"], "true");
     }
 
     /**
-     * Test that 6 played rounds and 2 rerolls sets hideOnGameOver to hidden
+     * Test that FinishOneRound increases nrOfRoundsPlayed by 1
      */
-    public function testReRollHideOnGameOver()
+    public function testFinishOneRound()
     {
-        $publicReRoll = new ReflectionMethod('App\Models\Yatzy\Yatzy', 'reRoll');
-        $publicReRoll->setAccessible(true);
+        $publicFinish = new ReflectionMethod('App\Models\Yatzy\Yatzy', 'finishOneRound');
+        $publicFinish->setAccessible(true);
 
-        $yatzyObject = new Yatzy();
-        $dataInitialRoll = $yatzyObject->startNewRound();
+        $yatzyObject = new Yatzy("challenge", "100", "1", "", "1");
+        $dataInitialRound = $yatzyObject->startNewRound();
 
-        $yatzyObject->startNewRound();
-        $yatzyObject->startNewRound();
-        $yatzyObject->startNewRound();
-        $yatzyObject->startNewRound();
-        $yatzyObject->startNewRound();
+        $dataSecondRound = $publicFinish->invokeArgs($yatzyObject, ["full_house"]);
 
-        $publicReRoll->invokeArgs($yatzyObject, [[]]);
-
-        $dataAfterSixRounds = $publicReRoll->invokeArgs($yatzyObject, [[]]);
-
-        $this->assertEquals($dataInitialRoll["hideOnGameOver"], "");
-        $this->assertEquals($dataAfterSixRounds["hideOnGameOver"], "hidden");
+        $this->assertEquals("1", $dataInitialRound["nrOfRoundsPlayed"]);
+        $this->assertEquals("2", $dataSecondRound["nrOfRoundsPlayed"]);
     }
 
     /**
-     * Test that expected points is calculated
+     * Test that CreateDataArray returns expected values
      */
-    public function testCalculatePoints()
+    public function testGameOverReturnsCorrectData()
     {
-        $publicCalc = new ReflectionMethod('App\Models\Yatzy\Yatzy', 'calculatePoints');
-        $publicCalc->setAccessible(true);
+        $publicGameOver = new ReflectionMethod('App\Models\Yatzy\Yatzy', 'gameOver');
+        $publicGameOver->setAccessible(true);
 
-        $yatzyObject = new Yatzy();
-        $yatzyObject->startNewRound();
+        $yatzyObject = new Yatzy("challenge", "100", "1", "", "1");
 
-        $pointsFirstRound = $publicCalc->invokeArgs($yatzyObject, [[5, 5, 5, 5, 5], 5, 4]);
-        $pointsSecondRound = $publicCalc->invokeArgs($yatzyObject, [[6, 6, 6, 6, 6], 6, 5]);
+        $data = $publicGameOver->invokeArgs($yatzyObject, [[5, 1, 1, 1, 1, 1]]);
 
-        $this->assertEquals($pointsFirstRound, 25);
-        $this->assertEquals($pointsSecondRound, 55);
+        $this->assertEquals("true", $data["gameOver"]);
+        $this->assertEquals([], $data["frequency"]);
     }
 
     /**
-     * Test that 50 bonus points are awarded
+     * Test that CreateDataArray returns expected values
      */
-    public function testCalculatePointsBonus()
+    public function testCreateDataArrayReturnsCorrectData()
     {
-        $publicCalc = new ReflectionMethod('App\Models\Yatzy\Yatzy', 'calculatePoints');
-        $publicCalc->setAccessible(true);
+        $publicCreateData = new ReflectionMethod('App\Models\Yatzy\Yatzy', 'createDataArray');
+        $publicCreateData->setAccessible(true);
 
-        $yatzyObject = new Yatzy();
-        $yatzyObject->startNewRound();
+        $yatzyObject = new Yatzy("challenge", "100", "1", "", "1");
 
-        $pointsFirstRound = $publicCalc->invokeArgs($yatzyObject, [[100], 100, 6]);
+        $data = $publicCreateData->invokeArgs($yatzyObject, [[5, 1, 1, 1, 1, 1]]);
 
-        $this->assertEquals($pointsFirstRound, 150);
+        $this->assertEquals("false", $data["gameOver"]);
+        $this->assertEquals([1, 1, 1, 1, 1], $data["diceArray"]);
     }
 }

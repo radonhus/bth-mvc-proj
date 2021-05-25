@@ -7,10 +7,29 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+/**
+* The following properties are columns in the table that
+* the model represents (to make phpstan happy)
+*
+* @property int $id
+* @property string $name
+* @property int $coins
+* @method get()
+* @method where(mixed $columnOrArray = '', mixed $columnValue = '')
+* @method orderByDesc(string $column)
+* @method create(Request $request)
+*/
 class User extends Authenticatable
 {
     use HasFactory;
     use Notifiable;
+
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'users';
 
     /**
      * The attributes that are mass assignable.

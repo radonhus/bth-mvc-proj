@@ -10,13 +10,15 @@ use Illuminate\Http\Request;
 * The following properties are columns in the table that
 * the model represents (to make phpstan happy)
 *
-* @property string $id
+* @property int $id
 * @property string $time
-* @property string $bet
-* @property string $challenger_user_id
-* @property string $challenger_result_id
-* @property string $opponent_user_id
-* @property string $opponent_result_id
+* @property int $bet
+* @property int $challenger_user_id
+* @property int $challenger_result_id
+* @property int $opponent_user_id
+* @property int $opponent_result_id
+* @property string $denied
+* @method where(mixed $columnOrArray = '', mixed $columnValue = '')
 */
 class TableChallenges extends Model
 {
@@ -56,13 +58,13 @@ class TableChallenges extends Model
     /**
      * Insert opponent result and total bet in challenge row
      *
-     * @param string $challengeId
-     * @param string $totalBet
-     * @param string $resultId
-     * @property int $updatedRows
-     * @return int
+     * @param int $challengeId
+     * @param int $totalBet
+     * @param int $resultId
+     * @property string $updatedRows
+     * @return string
      */
-    public function updateChallenge(string $challengeId, string $totalBet, string $resultId): string
+    public function updateChallenge(int $challengeId, int $totalBet, int $resultId): string
     {
         $updatedRows = $this->where('id', $challengeId)
                                 ->update(['bet' => $totalBet, 'opponent_result_id' => $resultId]);
@@ -72,11 +74,11 @@ class TableChallenges extends Model
     /**
      * Mark challenge as denied
      *
-     * @param string $challengeId
-     * @property int $updatedRows
-     * @return int
+     * @param int $challengeId
+     * @property string $updatedRows
+     * @return string
      */
-    public function denyChallenge(string $challengeId): string
+    public function denyChallenge(int $challengeId): string
     {
         $updatedRows = $this->where('id', $challengeId)
                                 ->update(['denied' => 'denied']);
@@ -86,17 +88,17 @@ class TableChallenges extends Model
     /**
      * Save new challenge in challenges table
      *
-     * @param string $challenger_user_id
+     * @param int $challenger_user_id
      * @param int $challenger_result_id
-     * @param string $opponent_user_id
-     * @param string $bet
+     * @param int $opponent_user_id
+     * @param int $bet
      * @return bool
      */
     public function saveNewChallenge(
-        string $challenger_user_id,
+        int $challenger_user_id,
         int $challenger_result_id,
-        string $opponent_user_id,
-        string $bet
+        int $opponent_user_id,
+        int $bet
     ) {
         $this->challenger_user_id = $challenger_user_id;
         $this->challenger_result_id = $challenger_result_id;

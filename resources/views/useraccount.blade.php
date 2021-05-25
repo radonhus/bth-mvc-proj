@@ -39,7 +39,7 @@
             <td>{{ $openChallenge['challenger_name'] }}</td>
             <td class="two-buttons-wrapper">
                 @if ($openChallenge['denied'] == "denied")
-                    <span class="red">You denied</span>
+                    <span class="red">You declined</span>
                 @else
                 <form method="post" action="{{ url('/yatzystart') }}">
                     @csrf
@@ -53,7 +53,7 @@
                     <input type="hidden" name="challengeId" value="{{ $openChallenge['challenge_id'] }}">
                     <input type="hidden" name="challenger" value="{{ $openChallenge['challenger_id'] }}">
                     <input type="hidden" name="bet" value="{{ $openChallenge['bet'] }}">
-                    <button type="submit" name="deny" value="deny" class="red">Deny</button>
+                    <button type="submit" name="deny" value="deny" class="red">Decline</button>
                 </form>
                 <div>
                 @endif
@@ -79,7 +79,7 @@
             <td>{{ $openChallengeSent['opponent_name'] }}</td>
             <td>
                 @if ($openChallengeSent['denied'] == "denied")
-                    <span class="red">Denied by {{ $openChallengeSent['opponent_name'] }}</span>
+                    <span class="red">Declined by {{ $openChallengeSent['opponent_name'] }}</span>
                 @endif
             </td>
         </tr>

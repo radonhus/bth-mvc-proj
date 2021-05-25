@@ -10,16 +10,16 @@ use Illuminate\Http\Request;
 * The following properties are columns in the table that
 * the model represents (to make phpstan happy)
 *
-* @property string $id
-* @property string $result_id
-* @property string $dice_1
-* @property string $dice_2
-* @property string $dice_3
-* @property string $dice_4
-* @property string $dice_5
-* @property string $dice_6
+* @property int $id
+* @property int $result_id
+* @property int $dice_1
+* @property int $dice_2
+* @property int $dice_3
+* @property int $dice_4
+* @property int $dice_5
+* @property int $dice_6
 * @method orderByDesc(string $string1)
-* @method where(string $string1, string $string2)
+* @method where(mixed $columnOrArray = '', mixed $columnValue = '')
 */
 class TableHistogram extends Model
 {
@@ -43,22 +43,22 @@ class TableHistogram extends Model
      * Save histogram from one game in histogram table
      *
      * @param  int  $result_id
-     * @param  string  $dice_1
-     * @param  string  $dice_2
-     * @param  string  $dice_3
-     * @param  string  $dice_4
-     * @param  string  $dice_5
-     * @param  string  $dice_6
+     * @param  int  $dice_1
+     * @param  int  $dice_2
+     * @param  int  $dice_3
+     * @param  int  $dice_4
+     * @param  int  $dice_5
+     * @param  int  $dice_6
      * @return bool
      */
     public function saveHistogram(
         int $result_id,
-        string $dice_1,
-        string $dice_2,
-        string $dice_3,
-        string $dice_4,
-        string $dice_5,
-        string $dice_6
+        int $dice_1,
+        int $dice_2,
+        int $dice_3,
+        int $dice_4,
+        int $dice_5,
+        int $dice_6
     ) {
         $this->result_id = $result_id;
         $this->dice_1 = $dice_1;

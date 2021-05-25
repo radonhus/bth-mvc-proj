@@ -7,6 +7,7 @@ namespace App\Models\Yatzy;
 class Points
 {
     private array $pointsArray;
+    private int $bonus;
 
     public function __construct()
     {
