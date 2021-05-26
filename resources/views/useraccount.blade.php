@@ -117,7 +117,7 @@
                 <span class="red">You lost ({{ $finishedChallenge['bet']/2 }} ¥ lost)</span>
             @endif
         </td>
-        <td><a href="{{ url('/challenge') }}/{{ $finishedChallenge['challenge_id'] }}">Details</a></td>
+        <td><a href="{{ url('/challenge') }}/{{ $finishedChallenge['challenge_id'] }}"><button class="blue fixed-width">Details</button></a></td>
     </tr>
 @endforeach
 </table>
@@ -144,7 +144,7 @@
                 No
             @endif
         </td>
-        <td><a href="{{ url('/result') }}/{{ $game['result_id'] }}">Details</a></td>
+        <td><a href="{{ url('/result') }}/{{ $game['result_id'] }}"><button class="blue fixed-width">Details</button></a></td>
     </tr>
 @endforeach
 </table>

@@ -27,7 +27,7 @@
             @endif
         </td>
         <td>{{ $highscore['date_played'] }}</td>
-        <td><a href="{{ url('/result') }}/{{ $highscore['result_id'] }}">Details</a></td>
+        <td><a href="{{ url('/result') }}/{{ $highscore['result_id'] }}"><button class="blue fixed-width">Details</button></a></td>
     </tr>
 @endforeach
 </table>

@@ -43,7 +43,6 @@ class YatzyHistogramTest extends TestCase
         $testDiceValues = $testHistogram->save([6, 1, 5, 3, 4]);
 
         $this->assertEquals([6, 1, 5, 3, 4], $testDiceValues);
-
     }
 
     /**
@@ -66,7 +65,5 @@ class YatzyHistogramTest extends TestCase
         $this->assertEquals(2, $testFrequency["3"]);
         $this->assertEquals(4, $testFrequency["2"]);
         $this->assertEquals(2, $testFrequency["1"]);
-
     }
-
 }

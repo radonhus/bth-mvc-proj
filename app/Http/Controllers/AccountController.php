@@ -24,7 +24,7 @@ class AccountController extends Controller
 
     /**
      * Authenticate input, save new user to db, redirect.
-     * @return \Illuminate\Http\RedirectResponse
+     * @return Object
      */
     public function verifySave()
     {

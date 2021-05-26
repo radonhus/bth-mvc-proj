@@ -28,7 +28,7 @@ class SessionController extends Controller
 
     /**
      * Verify login details and log user in or return error message.
-     * @return \Illuminate\Contracts\View\View
+     * @return Object
      */
     public function verifyCreate()
     {

@@ -17,7 +17,7 @@ use Illuminate\Notifications\Notifiable;
 * @method get()
 * @method where(mixed $columnOrArray = '', mixed $columnValue = '')
 * @method orderByDesc(string $column)
-* @method create(Request $request)
+* @method create(array $request)
 */
 class User extends Authenticatable
 {
@@ -123,7 +123,7 @@ class User extends Authenticatable
         $users = [];
 
         foreach ($usersData as $user) {
-            $percent = round((intval($user->coins) / $richest)*100);
+            $percent = round((intval($user->coins) / $richest) * 100);
             array_push($users, [
                 'id' => $user->id,
                 'name' => $user->name,
@@ -138,14 +138,14 @@ class User extends Authenticatable
     /**
      * Get amount of coins for one user
      *
-     * @param int $id
+     * @param int $userId
      * @property array $user
      * @return string $coins
      */
-    public function getCoins(int $id): string
+    public function getCoins(int $userId): string
     {
 
-        $user = $this->where('id', $id)
+        $user = $this->where('id', $userId)
                                 ->get();
 
         $coins = $user[0]->coins;
@@ -156,14 +156,14 @@ class User extends Authenticatable
     /**
      * Get name for one user
      *
-     * @param int $id
+     * @param int $userId
      * @property array $user
      * @return string $name
      */
-    public function getName(int $id): string
+    public function getName(int $userId): string
     {
 
-        $user = $this->where('id', $id)
+        $user = $this->where('id', $userId)
                                 ->get();
 
         $name = $user[0]->name;
@@ -174,7 +174,7 @@ class User extends Authenticatable
     /**
      * Update coins for one user
      *
-     * @param int $id
+     * @param int $userId
      * @param int $amount
      * @property int $currentBalance
      * @property int $newBalance
@@ -182,16 +182,16 @@ class User extends Authenticatable
      * @property array $user
      * @return string $updatedRows
      */
-    public function updateBalance(int $id, int $amount): string
+    public function updateBalance(int $userId, int $amount): string
     {
-        $user = $this->where('id', $id)
+        $user = $this->where('id', $userId)
                                 ->get();
 
         $currentBalance = intval($user[0]->coins);
 
         $newBalance = $currentBalance + $amount;
 
-        $updatedRows = $this->where('id', $id)
+        $updatedRows = $this->where('id', $userId)
                                 ->update(['coins' => $newBalance]);
 
         return $updatedRows;

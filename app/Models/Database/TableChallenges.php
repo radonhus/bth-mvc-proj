@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 * @property int $opponent_user_id
 * @property int $opponent_result_id
 * @property string $denied
+* @method orderByDesc(mixed $columnOrArray = '', mixed $columnValue = '')
 * @method where(mixed $columnOrArray = '', mixed $columnValue = '')
 */
 class TableChallenges extends Model

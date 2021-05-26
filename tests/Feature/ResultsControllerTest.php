@@ -8,6 +8,7 @@ use App\Http\Controllers\ResultsController;
 use App\Models\Database\TableResult;
 use App\Models\Database\TableHistogram;
 use App\Models\Database\TableChallenges;
+use App\Models\User;
 
 use ReflectionMethod;
 
@@ -314,7 +315,8 @@ class ResultsControllerTest extends TestCase
 
         $publicNewChallenge = new ReflectionMethod(
             'App\Http\Controllers\ResultsController',
-            'newChallenge');
+            'newChallenge'
+        );
         $publicNewChallenge->setAccessible(true);
         $publicNewChallenge->invokeArgs($resultsController, [$post, $latestResultId]);
 
@@ -335,54 +337,29 @@ class ResultsControllerTest extends TestCase
      */
     public function testSaveSingle()
     {
-        $results = new TableResult();
-
-        $results->user_id = 19;
-        $results->result_bonus = 0;
-        $results->result_1 = 0;
-        $results->result_2 = 0;
-        $results->result_3 = 0;
-        $results->result_4 = 0;
-        $results->result_5 = 0;
-        $results->result_6 = 0;
-        $results->result_one_pair = 0;
-        $results->result_two_pairs = 0;
-        $results->result_three = 0;
-        $results->result_four = 0;
-        $results->result_small_straight = 0;
-        $results->result_large_straight = 0;
-        $results->result_full_house = 0;
-        $results->result_chance = 0;
-        $results->result_yatzy = 999;
-        $results->save();
-
-        $latestResult = $results->orderByDesc('id')
-                                ->limit(1)
-                                ->get();
-        $latestResultId = $latestResult[0]->id;
-
+        $users = new User();
         $resultsController = new ResultsController();
 
-        $post = [
-            'bet' => 0,
-            'user_id' => 19,
-            'score' => 0
-        ];
+        $userBefore = $users->where('id', 19)
+                                ->get();
+        $userCoinsBefore = $userBefore[0]->coins;
+
+        $post = ['bet' => 10, 'user_id' => 19, 'score' => 251];
 
         $publicSingle = new ReflectionMethod(
             'App\Http\Controllers\ResultsController',
-            'single');
+            'single'
+        );
         $publicSingle->setAccessible(true);
-        $publicSingle->invokeArgs($resultsController, [$post, $latestResultId]);
+        $publicSingle->invokeArgs($resultsController, [$post]);
 
-        $latestResult = $results->orderByDesc('id')
-                                ->limit(1)
+        $userAfter = $users->where('id', 19)
                                 ->get();
-        $latestResultUserId = $latestResult[0]->user_id;
+        $userCoinsAfter = $userAfter[0]->coins;
 
-        $this->assertEquals('19', $latestResultUserId);
+        $this->assertGreaterThan($userCoinsBefore, $userCoinsAfter);
     }
-
+    
 
     /**
      * Test that calling acceptedChallenge alters the challenge
@@ -465,7 +442,8 @@ class ResultsControllerTest extends TestCase
 
         $publicAcceptedChallenge = new ReflectionMethod(
             'App\Http\Controllers\ResultsController',
-            'acceptedChallenge');
+            'acceptedChallenge'
+        );
         $publicAcceptedChallenge->setAccessible(true);
         $publicAcceptedChallenge->invokeArgs($resultsController, [$post, $opponentResultId]);
 
@@ -601,7 +579,8 @@ class ResultsControllerTest extends TestCase
 
         $publicSaveResult = new ReflectionMethod(
             'App\Http\Controllers\ResultsController',
-            'saveResult');
+            'saveResult'
+        );
         $publicSaveResult->setAccessible(true);
         $publicSaveResult->invokeArgs($resultsController, [$post]);
 

@@ -17,20 +17,20 @@ class ResultsController extends Controller
     /**
      * Display results for one game
      *
-     * @param int $id
+     * @param int $resultId
      * @return \Illuminate\Contracts\View\View
      */
-    public function oneResult(int $id)
+    public function oneResult(int $resultId)
     {
         $presentResult = new ViewResults();
 
-        $result = $presentResult->getResult($id);
-        $scorecard = $presentResult->getScorecard($id);
-        $histogram = $presentResult->getHistogram($id);
+        $result = $presentResult->getResult($resultId);
+        $scorecard = $presentResult->getScorecard($resultId);
+        $histogram = $presentResult->getHistogram($resultId);
 
         return view('oneresult', [
             'title' => "Results | ¥atzyBonanza",
-            'id' => $id,
+            'id' => $resultId,
             'result' => $result,
             'scorecard' => $scorecard,
             'histogram' => $histogram
@@ -88,7 +88,7 @@ class ResultsController extends Controller
             return $view;
         }
 
-        $view = $this->single($post, $resultId);
+        $view = $this->single($post);
 
         return $view;
     }
@@ -129,14 +129,13 @@ class ResultsController extends Controller
      * Update balance based on result
      *
      * @param array $post
-     * @param int $resultId
      * @property object $users
      * @property int $bet
      * @property string $userId
      * @property object $view
      * @return \Illuminate\Contracts\View\View
      */
-    private function single(array $post, int $resultId)
+    private function single(array $post)
     {
         $users = new User();
 
@@ -203,13 +202,17 @@ class ResultsController extends Controller
 
         if ($score > $challengerScore) {
             $users->updateBalance($userId, $bet);
-        } elseif ($score < $challengerScore) {
+            return $this->oneChallenge($challengeId);
+        }
+
+        if ($score < $challengerScore) {
             $bet = $bet * -1;
             $users->updateBalance($userId, $bet);
             $users->updateBalance($challengerId, $totalBet);
-        } else {
-            $users->updateBalance($challengerId, $bet);
+            return $this->oneChallenge($challengeId);
         }
+
+        $users->updateBalance($challengerId, $bet);
 
         return $this->oneChallenge($challengeId);
     }

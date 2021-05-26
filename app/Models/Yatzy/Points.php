@@ -28,7 +28,7 @@ class Points
     public function calcTotalPoints(): int
     {
         $total = 0;
-        foreach ($this->pointsArray as $key => $points) {
+        foreach ($this->pointsArray as $points) {
             if ($points >= 0) {
                 $total += $points;
             }
@@ -124,45 +124,26 @@ class Points
 
     private function calcFullHouse($diceArray): int
     {
-        $points = 0;
-        $pairFound = false;
-        $threeFound = false;
-
-        //Check if first two dice are the same
-        if ($diceArray[0] == $diceArray[1]) {
-            //Check if third dice is also the same = three found
-            if ($diceArray[1] == $diceArray[2]) {
-                $points += $diceArray[0] * 3;
-                $threeFound = true;
-            } else {
-                $points += $diceArray[0] * 2;
-                $pairFound = true;
-            }
-        } else {
-            //First two dice are not the same = full house not possible
+        if ($diceArray[0] != $diceArray[1]) {
             return 0;
         }
 
-        if ($pairFound) {
-            if (($diceArray[2] == $diceArray[3]) && ($diceArray[3] == $diceArray[4])) {
-                $points += $diceArray[2] * 3;
-            } else {
-                return 0;
+        if ($diceArray[1] == $diceArray[2]) {
+            if ($diceArray[3] == $diceArray[4]) {
+                return array_sum($diceArray);
             }
         }
 
-        if ($threeFound) {
-            if ($diceArray[3] == $diceArray[4]) {
-                $points += $diceArray[3] * 2;
-            } else {
-                return 0;
-            }
+        if (($diceArray[2] == $diceArray[3]) && ($diceArray[3] == $diceArray[4])) {
+            return array_sum($diceArray);
         }
-        return $points;
+        return 0;
     }
+
 
     private function calcLargeStraight($diceArray): int
     {
+
         $correctValue = 6;
         for ($i = 0; $i < 5; $i++) {
             if ($diceArray[$i] != $correctValue) {
@@ -211,6 +192,7 @@ class Points
 
     private function calcTwoPairs($diceArray): int
     {
+
         $points = 0;
         $pairsFound = 0;
         for ($i = 0; $i < 4; $i++) {
