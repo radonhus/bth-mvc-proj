@@ -18,18 +18,17 @@ use App\Http\Controllers\SessionController;
 |
 */
 
-Route::get('/', [SessionController::class, 'create']);
-Route::get('/login', [SessionController::class, 'create']);
-Route::post('/login', [SessionController::class, 'store']);
-Route::get('/logout', [SessionController::class, 'destroy']);
+Route::get('/', [SessionController::class, 'start']);
+Route::get('/login', [SessionController::class, 'start']);
+Route::post('/login', [SessionController::class, 'verifyCreate']);
+Route::get('/logout', [SessionController::class, 'logoutDestroy']);
 
-Route::get('/register', [AccountController::class, 'create']);
-Route::post('/register', [AccountController::class, 'store']);
+Route::get('/register', [AccountController::class, 'start']);
+Route::post('/register', [AccountController::class, 'verifySave']);
 Route::get('/myaccount', [AccountController::class, 'myAccount']);
 Route::post('/myaccount', [AccountController::class, 'denyChallenge']);
 
 Route::get('/gamemode', [YatzyController::class, 'gamemode']);
-
 Route::post('/yatzystart', [YatzyController::class, 'start']);
 Route::post('/yatzy', [YatzyController::class, 'play']);
 

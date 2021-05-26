@@ -123,10 +123,28 @@ class YatzyYatzyTest extends TestCase
         $yatzyObject = new Yatzy("challenge", "100", "1", "", "1");
         $dataInitialRound = $yatzyObject->startNewRound();
 
-        $dataSecondRound = $publicFinish->invokeArgs($yatzyObject, ["full_house"]);
+        $dataSecondRound = $publicFinish->invokeArgs($yatzyObject, ["full_house", 1]);
 
         $this->assertEquals("1", $dataInitialRound["nrOfRoundsPlayed"]);
         $this->assertEquals("2", $dataSecondRound["nrOfRoundsPlayed"]);
+        $this->assertEquals("false", $dataSecondRound["gameOver"]);
+    }
+
+    /**
+     * Test that calling FinishOneRound after 15 rounds results in gameOver == true
+     */
+    public function testFinishLastRound()
+    {
+        $publicFinish = new ReflectionMethod('App\Models\Yatzy\Yatzy', 'finishOneRound');
+        $publicFinish->setAccessible(true);
+
+        $yatzyObject = new Yatzy("challenge", "100", "1", "", "1");
+        $dataInitialRound = $yatzyObject->startNewRound();
+
+        $dataSecondRound = $publicFinish->invokeArgs($yatzyObject, ["full_house", 15]);
+
+        $this->assertEquals("false", $dataInitialRound["gameOver"]);
+        $this->assertEquals("true", $dataSecondRound["gameOver"]);
     }
 
     /**

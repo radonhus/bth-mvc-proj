@@ -11,7 +11,7 @@ use App\Models\Yatzy\Result;
 class YatzyControllerTest extends TestCase
 {
     /**
-     * Test that the post-route /yatzy renders an OK HTTP response (200),
+     * Test that the get-route /yatzy renders an OK HTTP response (200),
      * and that the response contains a string from the page title
      *
      * @return void

@@ -62,9 +62,9 @@ class YatzyPointsTest extends TestCase
     }
 
     /**
-     * Test that calcBonusPoints returns expected points
+     * Test that calcBonusPoints returns zero points
      */
-    public function testCalcBonusPointsReturnsSum()
+    public function testCalcBonusPointsReturnsZero()
     {
         $testPoints = new Points();
         $testPointsBonus = $testPoints->calcBonusPoints();
@@ -74,25 +74,103 @@ class YatzyPointsTest extends TestCase
     }
 
     /**
+     * Test that calcBonusPoints returns 50 points
+     */
+    public function testCalcBonusPointsReturnsFifty()
+    {
+        $testPoints = new Points();
+
+        $testPoints->getRoundPoints([1, 1, 1, 1, 1], "1");
+        $testPoints->getRoundPoints([2, 2, 2, 2, 2], "2");
+        $testPoints->getRoundPoints([3, 3, 3, 3, 3], "3");
+        $testPoints->getRoundPoints([4, 4, 4, 4, 4], "4");
+        $testPoints->getRoundPoints([5, 5, 5, 5, 5], "5");
+        $testPoints->getRoundPoints([6, 6, 6, 6, 6], "6");
+
+        $testPointsBonus = $testPoints->calcBonusPoints();
+
+        $this->assertIsInt($testPointsBonus);
+        $this->assertEquals(50, $testPointsBonus);
+    }
+
+    /**
      * Test that getRoundPoints returns expected points
      */
     public function testGetRoundPointsReturnsSum()
     {
         $testPoints = new Points();
 
+        $onePair = $testPoints->getRoundPoints([6, 6, 6, 1, 1], "one_pair");
+        $noOnePair = $testPoints->getRoundPoints([6, 5, 4, 3, 2], "one_pair");
+
+        $twoPairs = $testPoints->getRoundPoints([6, 6, 5, 1, 1], "two_pairs");
+        $noTwoPairs = $testPoints->getRoundPoints([1, 5, 4, 3, 2], "two_pairs");
+
+        $three = $testPoints->getRoundPoints([6, 5, 6, 5, 5], "three");
+        $noThree = $testPoints->getRoundPoints([1, 1, 4, 3, 3], "three");
+
+        $four = $testPoints->getRoundPoints([2, 6, 2, 2, 2], "four");
+        $noFour = $testPoints->getRoundPoints([1, 5, 1, 6, 6], "four");
+
+        $smallStraight = $testPoints->getRoundPoints([5, 3, 1, 2, 4], "small_straight");
+        $noSmallStraight = $testPoints->getRoundPoints([2, 3, 4, 5, 6], "small_straight");
+
+        $largeStraight = $testPoints->getRoundPoints([6, 5, 2, 3, 4], "large_straight");
+        $noLargeStraight = $testPoints->getRoundPoints([1, 2, 3, 4, 2], "large_straight");
+
         $fullHouse = $testPoints->getRoundPoints([6, 6, 6, 1, 1], "full_house");
         $noFullHouse = $testPoints->getRoundPoints([6, 6, 3, 1, 1], "full_house");
 
-        $onePair = $testPoints->getRoundPoints([6, 6, 6, 1, 1], "one_pair");
-        $onePairReverse = $testPoints->getRoundPoints([1, 1, 6, 6, 6], "one_pair");
-        $noOnePair = $testPoints->getRoundPoints([6, 5, 4, 3, 2], "one_pair");
+        $chance = $testPoints->getRoundPoints([5, 6, 5, 5, 4], "chance");
+        $chanceReverse = $testPoints->getRoundPoints([5, 5, 4, 6, 5], "chance");
+
+        $yatzy = $testPoints->getRoundPoints([1, 1, 1, 1, 1], "yatzy");
+        $noYatzy = $testPoints->getRoundPoints([6, 5, 4, 3, 2], "yatzy");
 
         $this->assertIsInt($onePair);
         $this->assertEquals(12, $onePair);
-        $this->assertIsInt($onePairReverse);
-        $this->assertEquals(12, $onePairReverse);
         $this->assertIsInt($noOnePair);
         $this->assertEquals(0, $noOnePair);
+
+        $this->assertIsInt($twoPairs);
+        $this->assertEquals(14, $twoPairs);
+        $this->assertIsInt($noTwoPairs);
+        $this->assertEquals(0, $noTwoPairs);
+
+        $this->assertIsInt($three);
+        $this->assertEquals(15, $three);
+        $this->assertIsInt($noThree);
+        $this->assertEquals(0, $noThree);
+
+        $this->assertIsInt($four);
+        $this->assertEquals(8, $four);
+        $this->assertIsInt($noFour);
+        $this->assertEquals(0, $noFour);
+
+        $this->assertIsInt($smallStraight);
+        $this->assertEquals(15, $smallStraight);
+        $this->assertIsInt($noSmallStraight);
+        $this->assertEquals(0, $noSmallStraight);
+
+        $this->assertIsInt($largeStraight);
+        $this->assertEquals(20, $largeStraight);
+        $this->assertIsInt($noLargeStraight);
+        $this->assertEquals(0, $noLargeStraight);
+
+        $this->assertIsInt($fullHouse);
+        $this->assertEquals(20, $fullHouse);
+        $this->assertIsInt($noFullHouse);
+        $this->assertEquals(0, $noFullHouse);
+
+        $this->assertIsInt($chance);
+        $this->assertEquals(25, $chance);
+        $this->assertIsInt($chanceReverse);
+        $this->assertEquals(25, $chanceReverse);
+
+        $this->assertIsInt($yatzy);
+        $this->assertEquals(50, $yatzy);
+        $this->assertIsInt($noYatzy);
+        $this->assertEquals(0, $noYatzy);
     }
 
     /**

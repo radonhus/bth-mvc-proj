@@ -15,7 +15,7 @@ class AccountController extends Controller
      * Return view to create new user.
      * @return \Illuminate\Contracts\View\View
      */
-    public function create()
+    public function start()
     {
         return view('userregister', [
             'title' => "Register | YatzyBonanza"
@@ -26,7 +26,7 @@ class AccountController extends Controller
      * Authenticate input, save new user to db, redirect.
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store()
+    public function verifySave()
     {
         $userObject = new User();
 

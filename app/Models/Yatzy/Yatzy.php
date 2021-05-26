@@ -57,7 +57,10 @@ class Yatzy
     public function play($post): array
     {
         if (isset($post["roundOver"])) {
-            return $this->finishOneRound($post["selectedRound"]);
+            $selectedRound = $post["selectedRound"];
+            $roundsCounter = $this->roundsCounter;
+
+            return $this->finishOneRound($selectedRound, $roundsCounter);
         }
 
         $diceToReroll = $this->extractSelectedDice($post);
@@ -96,7 +99,7 @@ class Yatzy
         return $data;
     }
 
-    private function finishOneRound(string $selectedRound): array
+    private function finishOneRound(string $selectedRound, int $roundsCounter): array
     {
         $this->currentRound = $selectedRound;
 
@@ -104,7 +107,7 @@ class Yatzy
         $diceArray = array_slice($rollsAndValues, -5);
         $this->points->getRoundPoints($diceArray, $this->currentRound);
 
-        if ($this->roundsCounter == 15) {
+        if ($roundsCounter == 15) {
             $this->points->calcBonusPoints();
             $this->totalPoints = $this->points->calcTotalPoints();
 

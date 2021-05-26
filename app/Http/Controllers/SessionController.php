@@ -12,7 +12,7 @@ class SessionController extends Controller
      * @property  object  $myAccount
      * @return \Illuminate\Contracts\View\View
      */
-    public function create()
+    public function start()
     {
         $myAccount = new AccountController();
 
@@ -30,7 +30,7 @@ class SessionController extends Controller
      * Verify login details and log user in or return error message.
      * @return \Illuminate\Contracts\View\View
      */
-    public function store()
+    public function verifyCreate()
     {
         if (auth()->attempt(request(['name', 'password'])) == false) {
             return back()->withErrors([
@@ -47,7 +47,7 @@ class SessionController extends Controller
      * Logout user and return start view
      * @return \Illuminate\Contracts\View\View
      */
-    public function destroy()
+    public function logoutDestroy()
     {
         auth()->logout();
 

@@ -4,9 +4,9 @@
     <include>
         <directory suffix=".php">app/Http/Controllers</directory>
         <directory suffix=".php">app/Models/Yatzy</directory>
-        <file>routes/web.php</file>
     </include>
     <exclude>
+        <file>routes/web.php</file>
         <file>./app/Http/Controllers/Controller.php</file>
     </exclude>
     <report>
