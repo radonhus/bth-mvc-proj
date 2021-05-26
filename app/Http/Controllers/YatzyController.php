@@ -25,7 +25,7 @@ class YatzyController extends Controller
         $coins = $usersObject->getCoins(auth()->user()->id);
 
         return view('gamemode', [
-            'title' => "Choose mode | YatzyBonanza",
+            'title' => "Choose mode | ¥atzyBonanza",
             'users' => $users,
             'coinsCurrentUser' => $coins
         ]);
@@ -70,7 +70,7 @@ class YatzyController extends Controller
         session()->put('yatzy', $yatzyObject);
 
         return view('yatzy', [
-            'title' => "Yatzy | YatzyBonanza",
+            'title' => "Yatzy | ¥atzyBonanza",
             'data' => $data
         ]);
     }
@@ -94,7 +94,7 @@ class YatzyController extends Controller
         session()->put('yatzy', $yatzyObject);
 
         return view('yatzy', [
-            'title' => "Yatzy | YatzyBonanza",
+            'title' => "Yatzy | ¥atzyBonanza",
             'data' => $data
         ]);
     }

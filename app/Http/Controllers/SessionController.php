@@ -22,7 +22,7 @@ class SessionController extends Controller
         }
 
         return view('start', [
-            'title' => "Home | YatzyBonanza"
+            'title' => "Home | ¥atzyBonanza"
         ]);
     }
 
@@ -52,7 +52,7 @@ class SessionController extends Controller
         auth()->logout();
 
         return view('start', [
-            'title' => "Home | YatzyBonanza"
+            'title' => "Home | ¥atzyBonanza"
         ]);
     }
 }

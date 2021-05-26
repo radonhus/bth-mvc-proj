@@ -18,7 +18,7 @@ class AccountController extends Controller
     public function start()
     {
         return view('userregister', [
-            'title' => "Register | YatzyBonanza"
+            'title' => "Register | ¥atzyBonanza"
         ]);
     }
 
@@ -100,7 +100,7 @@ class AccountController extends Controller
         $userCoins = $users->getCoins($userId);
 
         return view('useraccount', [
-            'title' => "My Account | YatzyBonanza",
+            'title' => "My Account | ¥atzyBonanza",
             'finishedChallenges' => $finishedChallenges,
             'openChallenges' => $openChallenges,
             'openChallengesSent' => $openChallengesSent,

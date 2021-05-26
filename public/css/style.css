@@ -24,13 +24,13 @@ body {
 
 .header-wrapper {
   background-color: #333;
-  background-image: url("../img/dice-unsplash.jpg");
+  background-image: url("../img/dice2-unsplash.jpg");
   background-repeat: no-repeat;
   background-position: center top;
 }
 
 header {
-  height: 10em;
+  height: 14em;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

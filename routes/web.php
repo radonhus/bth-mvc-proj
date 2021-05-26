@@ -25,8 +25,9 @@ Route::get('/logout', [SessionController::class, 'logoutDestroy']);
 
 Route::get('/register', [AccountController::class, 'start']);
 Route::post('/register', [AccountController::class, 'verifySave']);
-Route::get('/myaccount', [AccountController::class, 'myAccount']);
 Route::post('/myaccount', [AccountController::class, 'denyChallenge']);
+Route::get('/myaccount', [AccountController::class, 'myAccount']);
+
 
 Route::get('/gamemode', [YatzyController::class, 'gamemode']);
 Route::post('/yatzystart', [YatzyController::class, 'start']);

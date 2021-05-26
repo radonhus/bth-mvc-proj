@@ -12,7 +12,7 @@
     be able to see and accept your challenge once they log in to their account.
     </p>
 
-    <p>You can bet any amount, from 0 to {{ $coinsCurrentUser }} (your current balance).
+    <p>You can bet any amount, from 0 to {{ $coinsCurrentUser }} ¥ (your current balance).
     If your opponent does not have enough money in their account, the bet will
     be lowered accordingly. The winner of the challenge wins the whole pot.</p>
 
@@ -44,7 +44,7 @@
 
     <p>
     Can you reach 250 points or more? If you do, you win twice your bet from the
-    bank. You can bet any amount, from 0 to {{ $coinsCurrentUser }} (your current balance).
+    bank. You can bet any amount, from 0 to {{ $coinsCurrentUser }} ¥ (your current balance).
     </p>
 
     <form method="post" action="{{ url('/yatzystart') }}">

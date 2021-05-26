@@ -6,7 +6,6 @@
         <directory suffix=".php">app/Models/Yatzy</directory>
     </include>
     <exclude>
-        <file>routes/web.php</file>
         <file>./app/Http/Controllers/Controller.php</file>
     </exclude>
     <report>

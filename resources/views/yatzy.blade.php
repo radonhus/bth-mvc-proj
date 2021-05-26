@@ -4,7 +4,7 @@
 
 <div class="game-content-left">
 
-<h1>YatzyBonanza @if ($data['gameOver'] == 'false')<span class="green">Live!</span>@else<span class="blue">Game Over!</span>@endif</h1>
+<h1>¥atzyBonanza @if ($data['gameOver'] == 'false')<span class="green">Live!</span>@else<span class="blue">Game Over!</span>@endif</h1>
 
 <div class="statusbox">
     @if ($data['mode'] == 'challenge')

@@ -1,6 +1,6 @@
 @include('header')
 
-<h1>YatzyBonanza!</h1>
+<h1>¥atzyBonanza!</h1>
 
 <div class="form-box">
 

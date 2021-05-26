@@ -29,7 +29,7 @@ class ResultsController extends Controller
         $histogram = $presentResult->getHistogram($id);
 
         return view('oneresult', [
-            'title' => "Results | YatzyBonanza",
+            'title' => "Results | ¥atzyBonanza",
             'id' => $id,
             'result' => $result,
             'scorecard' => $scorecard,
@@ -55,7 +55,7 @@ class ResultsController extends Controller
         $topTenRichest = $users->getRichestUsers();
 
         return view('yatzyhighscores', [
-            'title' => "Yatzy | YatzyBonanza",
+            'title' => "Yatzy | ¥atzyBonanza",
             'highscores' => $topTenArray,
             'richest' => $topTenRichest
         ]);
@@ -235,7 +235,7 @@ class ResultsController extends Controller
         $scorecardOpponent = $viewResults->getScorecard($opponentResultId);
 
         return view('challengeresults', [
-            'title' => "Challenge results | YatzyBonanza",
+            'title' => "Challenge results | ¥atzyBonanza",
             'challenge' => $challenge,
             'resultChallenger' => $resultChallenger,
             'scorecardChallenger' => $scorecardChallenger,
