@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Yatzy\TableChallenges;
-use App\Models\Yatzy\ViewChallenges;
-use App\Models\Yatzy\ViewResults;
+use App\Models\Database\TableChallenges;
+use App\Models\Database\ViewChallenges;
+use App\Models\Database\ViewResults;
 use Illuminate\Http\Request;
 use App\Models\User;
 

@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\Yatzy\TableResult;
-use App\Models\Yatzy\TableHistogram;
-use App\Models\Yatzy\TableChallenges;
-use App\Models\Yatzy\ViewResults;
-use App\Models\Yatzy\ViewChallenges;
+use App\Models\Database\TableResult;
+use App\Models\Database\TableHistogram;
+use App\Models\Database\TableChallenges;
+use App\Models\Database\ViewResults;
+use App\Models\Database\ViewChallenges;
 use App\Models\User;
 use Illuminate\Http\Request;
 
