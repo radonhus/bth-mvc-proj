@@ -1,4 +1,4 @@
-[![Build Status](https://scrutinizer-ci.com/g/radonhus/bth-mvc-proj/badges/build.png?b=master)](https://scrutinizer-ci.com/g/radonhus/bth-mvc-proj/build-status/master) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/radonhus/bth-mvc-proj/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/radonhus/bth-mvc-proj/?branch=master) [![Code Coverage](https://scrutinizer-ci.com/g/radonhus/bth-mvc-proj/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/radonhus/bth-mvc-proj/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/radonhus/bth-mvc-proj/badges/build.png?b=main)](https://scrutinizer-ci.com/g/radonhus/bth-mvc-proj/build-status/main) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/radonhus/bth-mvc-proj/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/radonhus/bth-mvc-proj/?branch=main) [![Code Coverage](https://scrutinizer-ci.com/g/radonhus/bth-mvc-proj/badges/coverage.png?b=main)](https://scrutinizer-ci.com/g/radonhus/bth-mvc-proj/?branch=main)
 
 # YatzyBonanza
 
