@@ -50,7 +50,11 @@ class ViewResults extends Model
                                 ->limit(10)
                                 ->get();
 
-        $topScore = intval($result[0]['score']);
+        $topScore = 0;
+
+        if (count($result) >=1) {
+            $topScore = intval($result[0]['score']);
+        }
 
         $topTenArray = [];
         $rank = 0;
@@ -171,6 +175,8 @@ class ViewResults extends Model
         $result = $this->where('user_id', $userId)
         ->orderByDesc('score')
         ->get();
+
+        $topScore = 0;
 
         if (count($result) >=1) {
             $topScore = intval($result[0]->score);
