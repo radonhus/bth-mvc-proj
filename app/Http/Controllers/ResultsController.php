@@ -18,7 +18,7 @@ class ResultsController extends Controller
      * Display results for one game
      *
      * @param int $resultId
-     * @return \Illuminate\Contracts\View\View
+     * @return Object
      */
     public function oneResult(int $resultId)
     {
