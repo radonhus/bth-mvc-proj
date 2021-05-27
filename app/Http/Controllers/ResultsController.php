@@ -44,7 +44,7 @@ class ResultsController extends Controller
      * @property array  $topTenArray
      * @property object  $users
      * @property array  $topTenRichest
-     * @return \Illuminate\Contracts\View\View
+     * @return Object
      */
     public function highScores()
     {
@@ -221,7 +221,7 @@ class ResultsController extends Controller
      * Display results for one challenge
      *
      * @param int $challengeId
-     * @return \Illuminate\Contracts\View\View
+     * @return Object
      */
     public function oneChallenge(int $challengeId)
     {

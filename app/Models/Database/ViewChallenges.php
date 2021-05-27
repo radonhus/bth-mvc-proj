@@ -31,7 +31,7 @@ class ViewChallenges extends Model
     public $timestamps = false;
 
     /**
-     * Get all open challenges where user has been challenged
+     * Get all open challenges where user has challenged another user
      *
      * @param int $userId
      * @property object $result

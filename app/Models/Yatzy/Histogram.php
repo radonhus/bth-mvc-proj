@@ -7,12 +7,10 @@ namespace App\Models\Yatzy;
 class Histogram
 {
     private array $histogramArray;
-    // private array $diceFrequency;
 
     public function __construct()
     {
         $this->histogramArray = [];
-        // $this->diceFrequency = [];
     }
 
     public function save(array $diceValues)

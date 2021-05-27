@@ -53,7 +53,7 @@ class AccountController extends Controller
      * @param Request $request
      * @property array $post
      * @property string $challengeId
-     * @return \Illuminate\Contracts\View\View
+     * @return Object
      */
     public function denyChallenge(Request $request)
     {
