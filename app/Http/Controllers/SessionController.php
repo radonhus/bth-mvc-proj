@@ -10,7 +10,7 @@ class SessionController extends Controller
     /**
      * Return view to login user.
      * @property  object  $myAccount
-     * @return \Illuminate\Contracts\View\View
+     * @return Object
      */
     public function start()
     {
@@ -45,7 +45,7 @@ class SessionController extends Controller
 
     /**
      * Logout user and return start view
-     * @return \Illuminate\Contracts\View\View
+     * @return Object
      */
     public function logoutDestroy()
     {

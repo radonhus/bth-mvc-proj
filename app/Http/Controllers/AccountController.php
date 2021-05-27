@@ -13,7 +13,7 @@ class AccountController extends Controller
 
     /**
      * Return view to create new user.
-     * @return \Illuminate\Contracts\View\View
+     * @return Object
      */
     public function start()
     {
@@ -82,7 +82,7 @@ class AccountController extends Controller
      * @property array $openChallengesSent
      * @property array $allGames
      * @property string $userCoins
-     * @return \Illuminate\Contracts\View\View
+     * @return Object
      */
     public function myAccount()
     {

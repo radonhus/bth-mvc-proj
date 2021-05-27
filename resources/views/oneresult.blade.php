@@ -8,7 +8,7 @@
     <h2>Game results</h2>
     <p><span class="bold">Player</span>: {{ $result['name'] }}</p>
     <p><span class="bold">Date played</span>: {{ $result['date_played'] }}</p>
-    <p><span class="bold">Score</span>: {{ $result['score'] }} ¥</p>
+    <p><span class="bold">Score</span>: {{ $result['score'] }}</p>
     <p><span class="bold">Bonus</span>: {{ $result['bonus'] }}</p>
     </div>
 
