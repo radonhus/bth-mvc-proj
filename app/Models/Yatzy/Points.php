@@ -219,7 +219,5 @@ class Points
             return $freq[$chosenRound] * $chosenRound;
         }
         return 0;
-
-        $points = 0;
     }
 }

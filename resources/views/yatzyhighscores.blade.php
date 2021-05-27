@@ -50,8 +50,4 @@
 @endforeach
 </table>
 
-<div class="statusbox">
-    
-</div>
-
 @include('footer')

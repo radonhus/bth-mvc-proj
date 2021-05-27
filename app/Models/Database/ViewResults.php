@@ -172,7 +172,9 @@ class ViewResults extends Model
         ->orderByDesc('score')
         ->get();
 
-        $topScore = intval($result[0]->score);
+        if (count($result) >=1) {
+            $topScore = intval($result[0]->score);
+        }
 
         $allGames = [];
 
