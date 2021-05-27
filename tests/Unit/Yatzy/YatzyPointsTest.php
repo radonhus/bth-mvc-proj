@@ -342,7 +342,7 @@ class YatzyPointsTest extends TestCase
         $diceTwoPairs3 = $calcTwoPairs->invokeArgs($testPoints, [[6, 6, 1, 1, 1]]);
 
         $this->assertIsInt($diceTwoPairs1);
-        $this->assertEquals(16, $diceTwoPairs1);
+        $this->assertEquals(0, $diceTwoPairs1);
         $this->assertIsInt($diceTwoPairs2);
         $this->assertEquals(0, $diceTwoPairs2);
         $this->assertIsInt($diceTwoPairs3);

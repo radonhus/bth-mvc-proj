@@ -104,46 +104,35 @@ class Points
 
     private function calcYatzy($diceArray): int
     {
-        for ($i = 0; $i < 4; $i++) {
-            if ($diceArray[$i] != $diceArray[$i + 1]) {
-                return 0;
-            }
+        if (count(array_count_values($diceArray)) == 1) {
+            return 50;
         }
-        return 50;
+        return 0;
     }
 
     private function calcChance($diceArray): int
     {
-        $points = 0;
-
-        foreach ($diceArray as $value) {
-            $points += $value;
-        }
-        return $points;
+        return array_sum($diceArray);
     }
 
     private function calcFullHouse($diceArray): int
     {
-        if ($diceArray[0] != $diceArray[1]) {
-            return 0;
-        }
 
-        if ($diceArray[1] == $diceArray[2]) {
-            if ($diceArray[3] == $diceArray[4]) {
-                return array_sum($diceArray);
-            }
-        }
+        $freq = array_count_values($diceArray);
+        arsort($freq);
 
-        if (($diceArray[2] == $diceArray[3]) && ($diceArray[3] == $diceArray[4])) {
+        $highestFreq = reset($freq);
+        $secondHighestFreq = next($freq);
+        reset($freq);
+
+        if (($highestFreq >= 3) && ($secondHighestFreq >= 2)) {
             return array_sum($diceArray);
         }
         return 0;
     }
 
-
     private function calcLargeStraight($diceArray): int
     {
-
         $correctValue = 6;
         for ($i = 0; $i < 5; $i++) {
             if ($diceArray[$i] != $correctValue) {
@@ -168,49 +157,46 @@ class Points
 
     private function calcFour($diceArray): int
     {
-        $points = 0;
-        for ($i = 0; $i < 2; $i++) {
-            if (($diceArray[$i] == $diceArray[$i + 1]) && ($diceArray[$i] == $diceArray[$i + 2]) && ($diceArray[$i] == $diceArray[$i + 3])) {
-                $points = $diceArray[$i] * 4;
-                break;
-            }
+        $freq = array_count_values($diceArray);
+        arsort($freq);
+
+        $highestFreq = reset($freq);
+
+        if ($highestFreq >= 4) {
+            return key($freq) * 4;
         }
-        return $points;
+        return 0;
     }
 
     private function calcThree($diceArray): int
     {
-        $points = 0;
-        for ($i = 0; $i < 3; $i++) {
-            if (($diceArray[$i] == $diceArray[$i + 1]) && ($diceArray[$i] == $diceArray[$i + 2])) {
-                $points = $diceArray[$i] * 3;
-                break;
-            }
+        $freq = array_count_values($diceArray);
+        arsort($freq);
+
+        $highestFreq = reset($freq);
+
+        if ($highestFreq >= 3) {
+            return key($freq) * 3;
         }
-        return $points;
+        return 0;
     }
 
     private function calcTwoPairs($diceArray): int
     {
+        $freq = array_count_values($diceArray);
+        arsort($freq);
 
-        $points = 0;
-        $pairsFound = 0;
-        for ($i = 0; $i < 4; $i++) {
-            if ($diceArray[$i] == $diceArray[$i + 1]) {
-                $points += $diceArray[$i] * 2;
-                $i += 1;
-                $pairsFound += 1;
-                if ($pairsFound == 2) {
-                    break;
-                }
-            }
+        $highestFreq = reset($freq);
+        $secondHighestFreq = next($freq);
+        reset($freq);
+
+        if (($highestFreq >= 2) && ($secondHighestFreq >= 2)) {
+            $result = key($freq) * 2;
+            next($freq);
+            $result += key($freq) * 2;
+            return $result;
         }
-
-        if ($pairsFound < 2) {
-            return 0;
-        }
-
-        return $points;
+        return 0;
     }
 
     private function calcOnePair($diceArray): int
@@ -227,13 +213,13 @@ class Points
 
     private function calc16($diceArray, $chosenRound): int
     {
-        $points = 0;
+        $freq = array_count_values($diceArray);
 
-        foreach ($diceArray as $value) {
-            if ($value == $chosenRound) {
-                $points += $value;
-            }
+        if (array_key_exists($chosenRound, $freq)) {
+            return $freq[$chosenRound] * $chosenRound;
         }
-        return $points;
+        return 0;
+
+        $points = 0;
     }
 }
