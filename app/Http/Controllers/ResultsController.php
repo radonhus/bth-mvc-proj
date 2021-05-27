@@ -68,7 +68,7 @@ class ResultsController extends Controller
      * @property array $post
      * @property string $resultId
      * @property object  $view
-     * @return \Illuminate\Contracts\View\View
+     * @return Object
      */
     public function submitResult(Request $request)
     {
@@ -104,7 +104,7 @@ class ResultsController extends Controller
      * @property string $userId
      * @property string $opponentId
      * @property object $view
-     * @return \Illuminate\Contracts\View\View
+     * @return Object
      */
     private function newChallenge(array $post, int $resultId)
     {
@@ -133,7 +133,7 @@ class ResultsController extends Controller
      * @property int $bet
      * @property string $userId
      * @property object $view
-     * @return \Illuminate\Contracts\View\View
+     * @return Object
      */
     private function single(array $post)
     {
@@ -171,7 +171,7 @@ class ResultsController extends Controller
      * @property int $userBalance
      * @property int $totalBet
      * @property object $view
-     * @return \Illuminate\Contracts\View\View
+     * @return Object
      */
     private function acceptedChallenge(array $post, int $resultId)
     {

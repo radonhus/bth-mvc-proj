@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1622142355">
-  <project timestamp="1622142355">
+<coverage generated="1622147070">
+  <project timestamp="1622147070">
     <file name="C:\Users\Richard\Documents\dbwebb\mvc\me\proj\app\Http\Controllers\AccountController.php">
       <class name="App\Http\Controllers\AccountController" namespace="global">
         <metrics complexity="5" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="38" coveredstatements="38" elements="42" coveredelements="42"/>
@@ -288,16 +288,16 @@
       <class name="App\Models\Yatzy\Histogram" namespace="global">
         <metrics complexity="4" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="9" coveredelements="9"/>
       </class>
-      <line num="12" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="17"/>
+      <line num="11" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="17"/>
+      <line num="13" type="stmt" count="17"/>
       <line num="14" type="stmt" count="17"/>
-      <line num="16" type="stmt" count="17"/>
-      <line num="18" type="method" name="save" visibility="public" complexity="2" crap="2" count="11"/>
-      <line num="20" type="stmt" count="11"/>
-      <line num="21" type="stmt" count="11"/>
-      <line num="24" type="stmt" count="11"/>
-      <line num="27" type="method" name="getDiceFrequency" visibility="public" complexity="1" crap="1" count="3"/>
-      <line num="29" type="stmt" count="3"/>
-      <metrics loc="31" ncloc="29" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="9" coveredelements="9"/>
+      <line num="16" type="method" name="save" visibility="public" complexity="2" crap="2" count="11"/>
+      <line num="18" type="stmt" count="11"/>
+      <line num="19" type="stmt" count="11"/>
+      <line num="22" type="stmt" count="11"/>
+      <line num="25" type="method" name="getDiceFrequency" visibility="public" complexity="1" crap="1" count="3"/>
+      <line num="27" type="stmt" count="3"/>
+      <metrics loc="29" ncloc="29" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="9" coveredelements="9"/>
     </file>
     <file name="C:\Users\Richard\Documents\dbwebb\mvc\me\proj\app\Models\Yatzy\Points.php">
       <class name="App\Models\Yatzy\Points" namespace="global">
@@ -533,6 +533,6 @@
       <line num="150" type="stmt" count="11"/>
       <metrics loc="152" ncloc="152" classes="1" methods="8" coveredmethods="8" conditionals="0" coveredconditionals="0" statements="69" coveredstatements="69" elements="77" coveredelements="77"/>
     </file>
-    <metrics files="10" loc="1080" ncloc="924" classes="10" methods="53" coveredmethods="52" conditionals="0" coveredconditionals="0" statements="419" coveredstatements="414" elements="472" coveredelements="466"/>
+    <metrics files="10" loc="1078" ncloc="924" classes="10" methods="53" coveredmethods="52" conditionals="0" coveredconditionals="0" statements="419" coveredstatements="414" elements="472" coveredelements="466"/>
   </project>
 </coverage>
