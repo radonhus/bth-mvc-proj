@@ -125,7 +125,7 @@ h6 {
 }
 
 .blue {
-    color: #98C1D9;
+    color: #4694c4;
 }
 
 .bold {
@@ -328,6 +328,10 @@ footer {
 }
 
 .results-content-left {
+}
+
+.one-result-content-left {
+    width: 650px;
 }
 
 .results-content-center {
@@ -672,6 +676,58 @@ table.scorecard {
     width: 80px;
     height: 80px;
     padding: 0;
+}
+
+.histogram-wrapper {
+    padding: 2em;
+}
+
+.histogram {
+    box-sizing: border-box;
+    color:#000;
+    display:table;
+    table-layout: fixed;
+    padding: 0;
+
+    width: 100%;
+    height: 200px;
+    margin: 0 auto;
+
+    li  {
+        position: relative;
+        display: table-cell;
+        vertical-align: bottom;
+        height: 400px;
+        margin-bottom: 2em;
+    }
+
+    span {
+        margin: 0 1em;
+        display: block;
+        background: #4694c4;
+    }
+
+    p.dice {
+        font-family: Arial;
+        font-size: 14px;
+        margin: .25em;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    p.stats {
+        font-family: Arial;
+        font-size: 14px;
+        margin: .25em;
+        text-align: center;
+    }
+
+}
+
+@for $percent from 1 through 100 {
+    .percent-height#{$percent} {
+        height: round(3 * percentage($percent/100));
+    }
 }
 
 .scorecard-1::after {

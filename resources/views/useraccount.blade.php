@@ -129,14 +129,17 @@
 <table class="highscore">
     <tr>
         <th>Date</th>
-        <th>Score</th>
+        <th colspan="2" class="bar-header">Score</th>
         <th>Bonus</th>
         <th>Details</th>
     </tr>
 @foreach ( $allGames as $game)
     <tr>
         <td>{{ $game['date_played'] }}</td>
-        <td>{{ $game['score'] }}</td>
+        <td class="bar-label">{{ $game['score'] }}</td>
+        <td class="bar">
+            <div class="percent{{ $game['percent'] }}"></div>
+        </td>
         <td>
             @if ( $game['bonus'] == 50 )
                 Yes

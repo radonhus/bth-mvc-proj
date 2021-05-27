@@ -28,7 +28,6 @@ Route::post('/register', [AccountController::class, 'verifySave']);
 Route::post('/myaccount', [AccountController::class, 'denyChallenge']);
 Route::get('/myaccount', [AccountController::class, 'myAccount']);
 
-
 Route::get('/gamemode', [YatzyController::class, 'gamemode']);
 Route::post('/yatzystart', [YatzyController::class, 'start']);
 Route::post('/yatzy', [YatzyController::class, 'play']);

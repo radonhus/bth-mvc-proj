@@ -123,7 +123,7 @@ h6 {
 }
 
 .blue {
-  color: #98C1D9;
+  color: #4694c4;
 }
 
 .bold {
@@ -306,6 +306,10 @@ footer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.one-result-content-left {
+  width: 650px;
 }
 
 .results-content-center {
@@ -1591,6 +1595,446 @@ table.scorecard button:hover {
   width: 80px;
   height: 80px;
   padding: 0;
+}
+
+.histogram-wrapper {
+  padding: 2em;
+}
+
+.histogram {
+  box-sizing: border-box;
+  color: #000;
+  display: table;
+  table-layout: fixed;
+  padding: 0;
+  width: 100%;
+  height: 200px;
+  margin: 0 auto;
+}
+.histogram li {
+  position: relative;
+  display: table-cell;
+  vertical-align: bottom;
+  height: 400px;
+  margin-bottom: 2em;
+}
+.histogram span {
+  margin: 0 1em;
+  display: block;
+  background: #4694c4;
+}
+.histogram p.dice {
+  font-family: Arial;
+  font-size: 14px;
+  margin: 0.25em;
+  text-align: center;
+  font-weight: bold;
+}
+.histogram p.stats {
+  font-family: Arial;
+  font-size: 14px;
+  margin: 0.25em;
+  text-align: center;
+}
+
+.percent-height1 {
+  height: 3%;
+}
+
+.percent-height2 {
+  height: 6%;
+}
+
+.percent-height3 {
+  height: 9%;
+}
+
+.percent-height4 {
+  height: 12%;
+}
+
+.percent-height5 {
+  height: 15%;
+}
+
+.percent-height6 {
+  height: 18%;
+}
+
+.percent-height7 {
+  height: 21%;
+}
+
+.percent-height8 {
+  height: 24%;
+}
+
+.percent-height9 {
+  height: 27%;
+}
+
+.percent-height10 {
+  height: 30%;
+}
+
+.percent-height11 {
+  height: 33%;
+}
+
+.percent-height12 {
+  height: 36%;
+}
+
+.percent-height13 {
+  height: 39%;
+}
+
+.percent-height14 {
+  height: 42%;
+}
+
+.percent-height15 {
+  height: 45%;
+}
+
+.percent-height16 {
+  height: 48%;
+}
+
+.percent-height17 {
+  height: 51%;
+}
+
+.percent-height18 {
+  height: 54%;
+}
+
+.percent-height19 {
+  height: 57%;
+}
+
+.percent-height20 {
+  height: 60%;
+}
+
+.percent-height21 {
+  height: 63%;
+}
+
+.percent-height22 {
+  height: 66%;
+}
+
+.percent-height23 {
+  height: 69%;
+}
+
+.percent-height24 {
+  height: 72%;
+}
+
+.percent-height25 {
+  height: 75%;
+}
+
+.percent-height26 {
+  height: 78%;
+}
+
+.percent-height27 {
+  height: 81%;
+}
+
+.percent-height28 {
+  height: 84%;
+}
+
+.percent-height29 {
+  height: 87%;
+}
+
+.percent-height30 {
+  height: 90%;
+}
+
+.percent-height31 {
+  height: 93%;
+}
+
+.percent-height32 {
+  height: 96%;
+}
+
+.percent-height33 {
+  height: 99%;
+}
+
+.percent-height34 {
+  height: 102%;
+}
+
+.percent-height35 {
+  height: 105%;
+}
+
+.percent-height36 {
+  height: 108%;
+}
+
+.percent-height37 {
+  height: 111%;
+}
+
+.percent-height38 {
+  height: 114%;
+}
+
+.percent-height39 {
+  height: 117%;
+}
+
+.percent-height40 {
+  height: 120%;
+}
+
+.percent-height41 {
+  height: 123%;
+}
+
+.percent-height42 {
+  height: 126%;
+}
+
+.percent-height43 {
+  height: 129%;
+}
+
+.percent-height44 {
+  height: 132%;
+}
+
+.percent-height45 {
+  height: 135%;
+}
+
+.percent-height46 {
+  height: 138%;
+}
+
+.percent-height47 {
+  height: 141%;
+}
+
+.percent-height48 {
+  height: 144%;
+}
+
+.percent-height49 {
+  height: 147%;
+}
+
+.percent-height50 {
+  height: 150%;
+}
+
+.percent-height51 {
+  height: 153%;
+}
+
+.percent-height52 {
+  height: 156%;
+}
+
+.percent-height53 {
+  height: 159%;
+}
+
+.percent-height54 {
+  height: 162%;
+}
+
+.percent-height55 {
+  height: 165%;
+}
+
+.percent-height56 {
+  height: 168%;
+}
+
+.percent-height57 {
+  height: 171%;
+}
+
+.percent-height58 {
+  height: 174%;
+}
+
+.percent-height59 {
+  height: 177%;
+}
+
+.percent-height60 {
+  height: 180%;
+}
+
+.percent-height61 {
+  height: 183%;
+}
+
+.percent-height62 {
+  height: 186%;
+}
+
+.percent-height63 {
+  height: 189%;
+}
+
+.percent-height64 {
+  height: 192%;
+}
+
+.percent-height65 {
+  height: 195%;
+}
+
+.percent-height66 {
+  height: 198%;
+}
+
+.percent-height67 {
+  height: 201%;
+}
+
+.percent-height68 {
+  height: 204%;
+}
+
+.percent-height69 {
+  height: 207%;
+}
+
+.percent-height70 {
+  height: 210%;
+}
+
+.percent-height71 {
+  height: 213%;
+}
+
+.percent-height72 {
+  height: 216%;
+}
+
+.percent-height73 {
+  height: 219%;
+}
+
+.percent-height74 {
+  height: 222%;
+}
+
+.percent-height75 {
+  height: 225%;
+}
+
+.percent-height76 {
+  height: 228%;
+}
+
+.percent-height77 {
+  height: 231%;
+}
+
+.percent-height78 {
+  height: 234%;
+}
+
+.percent-height79 {
+  height: 237%;
+}
+
+.percent-height80 {
+  height: 240%;
+}
+
+.percent-height81 {
+  height: 243%;
+}
+
+.percent-height82 {
+  height: 246%;
+}
+
+.percent-height83 {
+  height: 249%;
+}
+
+.percent-height84 {
+  height: 252%;
+}
+
+.percent-height85 {
+  height: 255%;
+}
+
+.percent-height86 {
+  height: 258%;
+}
+
+.percent-height87 {
+  height: 261%;
+}
+
+.percent-height88 {
+  height: 264%;
+}
+
+.percent-height89 {
+  height: 267%;
+}
+
+.percent-height90 {
+  height: 270%;
+}
+
+.percent-height91 {
+  height: 273%;
+}
+
+.percent-height92 {
+  height: 276%;
+}
+
+.percent-height93 {
+  height: 279%;
+}
+
+.percent-height94 {
+  height: 282%;
+}
+
+.percent-height95 {
+  height: 285%;
+}
+
+.percent-height96 {
+  height: 288%;
+}
+
+.percent-height97 {
+  height: 291%;
+}
+
+.percent-height98 {
+  height: 294%;
+}
+
+.percent-height99 {
+  height: 297%;
+}
+
+.percent-height100 {
+  height: 300%;
 }
 
 .scorecard-1::after {

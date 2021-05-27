@@ -2,19 +2,53 @@
 
 <div class="results-main-wrapper">
 
-<div class="results-content-left">
+<div class="one-result-content-left">
 
-    <h1>Game results</h1>
+    <div class="statusbox left">
+    <h2>Game results</h2>
+    <p><span class="bold">Player</span>: {{ $result['name'] }}</p>
+    <p><span class="bold">Date played</span>: {{ $result['date_played'] }}</p>
+    <p><span class="bold">Score</span>: {{ $result['score'] }} ¥</p>
+    <p><span class="bold">Bonus</span>: {{ $result['bonus'] }}</p>
+    </div>
 
-    <pre>
-    @foreach ($result as $key => $value)
-        {{ $key }}: {{ $value }}
-    @endforeach
+    <div class="statusbox left histogram-wrapper">
+        <h2>Histogram</h2>
+        <p>Distribution of the {{ $histogram['sum'] }} dice thrown in this game</p>
+        <ul class="histogram">
+        <li>
+        <span class="percent-height{{ $histogram['percent_1'] }}"></span>
+        <p class="dice">Ones</p>
+        <p class="stats">{{ $histogram['1'] }} ({{ $histogram['percent_1'] }} %)</p>
+        </li>
+        <li>
+        <span class="percent-height{{ $histogram['percent_2'] }}"></span>
+        <p class="dice">Twos</p>
+        <p class="stats">{{ $histogram['2'] }} ({{ $histogram['percent_2'] }} %)</p>
+        </li>
+        <li>
+        <span class="percent-height{{ $histogram['percent_3'] }}"></span>
+        <p class="dice">Threes</p>
+        <p class="stats">{{ $histogram['3'] }} ({{ $histogram['percent_3'] }} %)</p>
+        </li>
+        <li>
+        <span class="percent-height{{ $histogram['percent_4'] }}"></span>
+        <p class="dice">Fours</p>
+        <p class="stats">{{ $histogram['4'] }} ({{ $histogram['percent_4'] }} %)</p>
+        </li>
+        <li>
+        <span class="percent-height{{ $histogram['percent_5'] }}"></span>
+        <p class="dice">Fives</p>
+        <p class="stats">{{ $histogram['5'] }} ({{ $histogram['percent_5'] }} %)</p>
+        </li>
+        <li>
+        <span class="percent-height{{ $histogram['percent_6'] }}"></span>
+        <p class="dice">Sixes</p>
+        <p class="stats">{{ $histogram['6'] }} ({{ $histogram['percent_6'] }} %)</p>
+        </li>
+        </ul>
+    </div>
 
-    @foreach ($histogram as $key => $value)
-        {{ $key }}: {{ $value }}
-    @endforeach
-    </pre>
 
 </div>
 

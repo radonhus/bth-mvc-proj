@@ -168,19 +168,22 @@ class ViewResults extends Model
      */
     public function getAllGamesUser(int $userId): array
     {
-
         $result = $this->where('user_id', $userId)
         ->orderByDesc('score')
         ->get();
 
+        $topScore = intval($result[0]->score);
+
         $allGames = [];
 
         foreach ($result as $row) {
+            $percent = round((intval($row->score) / $topScore)*100);
             array_push($allGames, [
                 'result_id' => $row->result_id,
                 'bonus' => $row->bonus,
                 'date_played' => substr($row->date_played, 0, 10),
-                'score' => $row->score
+                'score' => $row->score,
+                'percent' => $percent
             ]);
         }
 
@@ -236,13 +239,34 @@ class ViewResults extends Model
         $result = $this->where('result_id', $result_id)
                                 ->get();
 
+        $sum = $result[0]->histogram_1 +
+        $result[0]->histogram_2 +
+        $result[0]->histogram_3 +
+        $result[0]->histogram_4 +
+        $result[0]->histogram_5 +
+        $result[0]->histogram_6;
+
+        $percent_1 = round(100 * $result[0]->histogram_1 / $sum);
+        $percent_2 = round(100 * $result[0]->histogram_2 / $sum);
+        $percent_3 = round(100 * $result[0]->histogram_3 / $sum);
+        $percent_4 = round(100 * $result[0]->histogram_4 / $sum);
+        $percent_5 = round(100 * $result[0]->histogram_5 / $sum);
+        $percent_6 = round(100 * $result[0]->histogram_6 / $sum);
+
         $histogram = [
+                'sum' => $sum,
                 '1' => $result[0]->histogram_1,
+                'percent_1' => $percent_1,
                 '2' => $result[0]->histogram_2,
+                'percent_2' => $percent_2,
                 '3' => $result[0]->histogram_3,
+                'percent_3' => $percent_3,
                 '4' => $result[0]->histogram_4,
+                'percent_4' => $percent_4,
                 '5' => $result[0]->histogram_5,
-                '6' => $result[0]->histogram_6
+                'percent_5' => $percent_5,
+                '6' => $result[0]->histogram_6,
+                'percent_6' => $percent_6
             ];
 
         return $histogram;
