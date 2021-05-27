@@ -359,7 +359,7 @@ class ResultsControllerTest extends TestCase
 
         $this->assertGreaterThan($userCoinsBefore, $userCoinsAfter);
     }
-    
+
 
     /**
      * Test that calling acceptedChallenge alters the challenge

@@ -15,7 +15,7 @@ class YatzyController extends Controller
      *
      * @property object  $usersObject
      * @property array  $users
-     * @return \Illuminate\Contracts\View\View
+     * @return Object
      */
     public function gamemode()
     {
@@ -42,7 +42,7 @@ class YatzyController extends Controller
      * @property string $challengeId
      * @property object $yatzyObject
      * @property array $data
-     * @return \Illuminate\Contracts\View\View
+     * @return Object
      */
     public function start(Request $request)
     {
@@ -83,7 +83,7 @@ class YatzyController extends Controller
      * @property  array  $request
      * @property  object  $yatzyObject
      * @property  array  $data
-     * @return \Illuminate\Contracts\View\View
+     * @return Object
      */
     public function play(Request $request)
     {

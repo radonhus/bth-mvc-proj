@@ -9,6 +9,8 @@ or challenge another member. Written in PHP using the Laravel framework.
 
 ![Yatzy](https://github.com/radonhus/bth-mvc-proj/blob/main/doc/design/yatzy_screenshot.png?raw=true)
 
+## Features
+
 ¥atzyBonanza lets you play this addictive classic in either challenge or single
 player mode. Both modes let you bet and win/lose coins. When you register, you
 get a 100 ¥ start balance.
@@ -33,3 +35,5 @@ Game stats are stored and displayed both on your individual account page and in
 the public highscore list (if you are good enough!), and bar charts help visualise
 the numbers. Among other things, there is also a list keeping track of the
 richest (and most successful) players.
+
+## Installation instructions

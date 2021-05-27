@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1622114338">
-  <project timestamp="1622114338">
+<coverage generated="1622140551">
+  <project timestamp="1622140551">
     <file name="C:\Users\Richard\Documents\dbwebb\mvc\me\proj\app\Http\Controllers\AccountController.php">
       <class name="App\Http\Controllers\AccountController" namespace="global">
         <metrics complexity="5" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="38" coveredstatements="38" elements="42" coveredelements="42"/>
