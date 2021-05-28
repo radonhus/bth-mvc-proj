@@ -59,15 +59,13 @@ class Points
 
         $pointsThisRound = 0;
 
+        if (in_array($chosenRound, ["1","2","3","4","5","6"])) {
+            $pointsThisRound = $this->calc16($diceArray, intval($chosenRound));
+            $this->pointsArray[$chosenRound] = $pointsThisRound;
+            return $pointsThisRound;
+        }
+
         switch ($chosenRound) {
-            case "1":
-            case "2":
-            case "3":
-            case "4":
-            case "5":
-            case "6":
-                $pointsThisRound = $this->calc16($diceArray, intval($chosenRound));
-                break;
             case "one_pair":
                 $pointsThisRound = $this->calcOnePair($diceArray);
                 break;

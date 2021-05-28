@@ -39,7 +39,6 @@ class YatzyControllerTest extends TestCase
      */
     public function testGamemode()
     {
-        $controller = new YatzyController();
         $usersObject = new User();
 
         auth()->attempt(['name' => 'admin', 'password' => 'admin']);
@@ -54,6 +53,48 @@ class YatzyControllerTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertSee('Choose mode');
+    }
+
+    /**
+     * Test that yatzyview route renders an OK HTTP response (200),
+     * and that the response contains a string from the page title
+     *
+     * @return void
+     */
+    public function testYatzyview()
+    {
+        $controller = new YatzyController();
+        $usersObject = new User();
+
+        auth()->attempt(['name' => 'admin', 'password' => 'admin']);
+
+        $data = [];
+
+        $data['pointsPerRound'] = [
+            "1" => -1, "2" => -1, "3" => -1, "4" => -1, "5" => -1, "6" => -1,
+            "one_pair" => -1, "two_pairs" => -1, "three" => -1,
+            "four" => -1, "small_straight" => -1, "large_straight" => -1,
+            "full_house" => -1, "chance" => -1, "yatzy" => -1
+        ];
+        $data["nrOfRerolls"] = "1";
+        $data["diceArray"] = ["2","1","1","1","1"];
+        $data["nrOfRoundsPlayed"] = "5";
+        $data["bonus"] = -1;
+        $data["totalPoints"] = "5";
+        $data["mode"] = "single";
+        $data["bet"] = "0";
+        $data["opponent"] = "2";
+        $data["opponentName"] = "name";
+        $data["challengeId"] = "1";
+        $data["twoRerollsMade"] = "false";
+        $data["gameOver"] = "false";
+
+        session()->put('data', $data);
+
+        $response = $this->get('/yatzyview');
+
+        $response->assertStatus(200);
+        $response->assertSee('Live');
     }
 
     /**

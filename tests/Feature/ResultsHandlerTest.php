@@ -218,9 +218,9 @@ class ResultsHandlerTest extends TestCase
         $latestChallenge = $challenges->orderByDesc('id')
                                 ->limit(1)
                                 ->get();
-        $latestChallengeOppResultId = $latestChallenge[0]->opponent_result_id;
+        $oppResultId = $latestChallenge[0]->opponent_result_id;
 
-        $resultId = intval($latestChallengeOppResultId);
+        $resultId = intval($oppResultId);
 
         $this->assertGreaterThan(0, $resultId);
     }
@@ -278,9 +278,9 @@ class ResultsHandlerTest extends TestCase
         $latestChallenge = $challenges->orderByDesc('id')
                                 ->limit(1)
                                 ->get();
-        $latestChallengeChallengerId = $latestChallenge[0]->challenger_user_id;
+        $challId = $latestChallenge[0]->challenger_user_id;
 
-        $this->assertEquals('19', $latestChallengeChallengerId);
+        $this->assertEquals('19', $challId);
     }
 
     /**
@@ -393,21 +393,21 @@ class ResultsHandlerTest extends TestCase
             'challengeId' => $latestChallengeId
         ];
 
-        $publicAcceptedChallenge = new ReflectionMethod(
+        $publicAccChallenge = new ReflectionMethod(
             'App\Models\ResultsHandler',
             'acceptedChallenge'
         );
-        $publicAcceptedChallenge->setAccessible(true);
-        $publicAcceptedChallenge->invokeArgs($resultsHandler, [$post, $opponentResultId]);
+        $publicAccChallenge->setAccessible(true);
+        $publicAccChallenge->invokeArgs($resultsHandler, [$post, $opponentResultId]);
 
         $challenges = new TableChallenges();
 
         $latestChallenge = $challenges->orderByDesc('id')
                                 ->limit(1)
                                 ->get();
-        $latestChallengeOppResultId = $latestChallenge[0]->opponent_result_id;
+        $oppResultId = $latestChallenge[0]->opponent_result_id;
 
-        $resultId = intval($latestChallengeOppResultId);
+        $resultId = intval($oppResultId);
 
         $this->assertGreaterThan(0, $resultId);
     }

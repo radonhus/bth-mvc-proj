@@ -67,13 +67,33 @@ class AccountControllerTest extends TestCase
     }
 
     /**
+     * Test that the post route /register works = trying to register
+     * a user that exists returns a redirect
+     *
+     * @return void
+     */
+    public function testVerifySaveRegisterError()
+    {
+        $response = $this->withHeaders([
+            'X-Header' => 'Value',
+        ])->post('/register', [
+            'name' => 'admin',
+            'password' => 'password',
+            'password_confirmation' => 'password'
+        ]);
+
+        $response->assertSessionHasErrors();
+        $response->assertStatus(302);
+        $response->assertSee('Redirect');
+    }
+
+    /**
      * Test that the denying challenge results in "denied" entry in database
      *
      * @return void
      */
     public function testDenyChallenge()
     {
-        $users = new User();
         $results = new TableResult();
         $challenges = new TableChallenges();
 

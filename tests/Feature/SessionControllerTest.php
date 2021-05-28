@@ -92,6 +92,27 @@ class SessionControllerTest extends TestCase
         $response->assertSee('Redirect');
     }
 
+
+    /**
+     * Test that the post route returns expected HTTP response (302) with error
+     * when attempting to login with wrong credentials
+     *
+     * @return void
+     */
+    public function testVerifyCreateError()
+    {
+        $response = $this->withHeaders([
+            'X-Header' => 'Value',
+        ])->post('/login', [
+            'name' => 'admin',
+            'password' => 'wrong'
+        ]);
+
+        $response->assertSessionHasErrors();
+        $response->assertStatus(302);
+        $response->assertSee('Redirect');
+    }
+
     /**
      * Test that logout logs out the user
      *
