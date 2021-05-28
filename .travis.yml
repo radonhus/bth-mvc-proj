@@ -4,6 +4,12 @@ php:
     - "7.4"
     #- "8.0"
 
+branches:
+  only:
+  - app/Http/Controllers
+  - app/Models/Yatzy
+  - app/Models/ResultsHandler.php
+
 before_script:
     #- make install check
     - make install
