@@ -28,10 +28,10 @@
  ------ ----------------------------------------------------------------------------------------------------------- 
  [32m Line [39m [32m tests\Feature\YatzyControllerTest.php                                                                     [39m 
  ------ ----------------------------------------------------------------------------------------------------------- 
-  45     Call to an undefined method Illuminate\Contracts\Auth\Factory|Illuminate\Contracts\Auth\Guard::attempt().  
-  48     Access to an undefined property Illuminate\Contracts\Auth\Authenticatable::$id.                            
-  70     Call to an undefined method Illuminate\Contracts\Auth\Factory|Illuminate\Contracts\Auth\Guard::attempt().  
-  149    Call to an undefined method Illuminate\Contracts\Auth\Factory|Illuminate\Contracts\Auth\Guard::attempt().  
+  44     Call to an undefined method Illuminate\Contracts\Auth\Factory|Illuminate\Contracts\Auth\Guard::attempt().  
+  47     Access to an undefined property Illuminate\Contracts\Auth\Authenticatable::$id.                            
+  66     Call to an undefined method Illuminate\Contracts\Auth\Factory|Illuminate\Contracts\Auth\Guard::attempt().  
+  145    Call to an undefined method Illuminate\Contracts\Auth\Factory|Illuminate\Contracts\Auth\Guard::attempt().  
  ------ ----------------------------------------------------------------------------------------------------------- 
 
 [37;41m                                                                                                                        [39;49m

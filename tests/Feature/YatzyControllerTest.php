@@ -63,9 +63,6 @@ class YatzyControllerTest extends TestCase
      */
     public function testYatzyview()
     {
-        $controller = new YatzyController();
-        $usersObject = new User();
-
         auth()->attempt(['name' => 'admin', 'password' => 'admin']);
 
         $data = [];

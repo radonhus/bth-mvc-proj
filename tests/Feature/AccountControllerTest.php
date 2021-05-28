@@ -135,7 +135,7 @@ class AccountControllerTest extends TestCase
 
         $challengeId = $latestChallenge[0]->id;
 
-        $response = $this->withHeaders([
+        $this->withHeaders([
             'X-Header' => 'Value',
         ])->post('/myaccount', [
             'challengeId' => $challengeId,
