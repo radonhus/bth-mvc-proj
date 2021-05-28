@@ -45,7 +45,7 @@ class AccountController extends Controller
 
         auth()->login($user);
 
-        return $this->myAccount();
+        return redirect()->route('myaccount');
     }
 
     /**
@@ -68,7 +68,7 @@ class AccountController extends Controller
         $challenges->denyChallenge($challengeId);
         $users->updateBalance($challengerId, $bet);
 
-        return $this->myAccount();
+        return redirect()->route('myaccount');
     }
 
     /**

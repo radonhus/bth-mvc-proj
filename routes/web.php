@@ -26,14 +26,15 @@ Route::get('/logout', [SessionController::class, 'logoutDestroy']);
 Route::get('/register', [AccountController::class, 'start']);
 Route::post('/register', [AccountController::class, 'verifySave']);
 Route::post('/myaccount', [AccountController::class, 'denyChallenge']);
-Route::get('/myaccount', [AccountController::class, 'myAccount']);
+Route::get('/myaccount', [AccountController::class, 'myAccount'])->name('myaccount');
 
 Route::get('/gamemode', [YatzyController::class, 'gamemode']);
-Route::post('/yatzystart', [YatzyController::class, 'start']);
-Route::post('/yatzy', [YatzyController::class, 'play']);
+Route::post('/yatzysetup', [YatzyController::class, 'setup']);
+Route::post('/yatzyplay', [YatzyController::class, 'play']);
+Route::get('/yatzyview', [YatzyController::class, 'yatzyview'])->name('yatzyview');
 
-Route::get('/highscores', [ResultsController::class, 'highScores']);
 Route::post('/highscores', [ResultsController::class, 'submitResult']);
+Route::get('/highscores', [ResultsController::class, 'highScores'])->name('highscores');
 
 Route::get('/result/{id}', function ($id) {
     $ctrl = new ResultsController();
@@ -43,4 +44,4 @@ Route::get('/result/{id}', function ($id) {
 Route::get('/challenge/{id}', function ($id) {
     $ctrl = new ResultsController();
     return $ctrl->oneChallenge($id);
-});
+})->name('challenge');

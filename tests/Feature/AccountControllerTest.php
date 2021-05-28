@@ -47,28 +47,8 @@ class AccountControllerTest extends TestCase
     }
 
     /**
-     * Test that the post route /register works = trying to register an
-     * already registered user attempts to redirect to the previous page
-     *
-     * @return void
-     */
-    public function testVerifySaveRegisterError()
-    {
-        $response = $this->withHeaders([
-            'X-Header' => 'Value',
-        ])->post('/register', [
-            'name' => 'admin',
-            'password' => 'admin',
-            'password_confirmation' => 'admin'
-        ]);
-
-        $response->assertStatus(302);
-        $response->assertSee('Redirect');
-    }
-
-    /**
      * Test that the post route /register works = trying to register
-     * a new user returns the myAccount view
+     * a user returns a redirect
      *
      * @return void
      */
@@ -82,13 +62,12 @@ class AccountControllerTest extends TestCase
             'password_confirmation' => 'test'
         ]);
 
-        $response->assertStatus(200);
-        $response->assertSee('testperson');
+        $response->assertStatus(302);
+        $response->assertSee('Redirect');
     }
 
     /**
-     * Test that the denying challenge renders a
-     * view containing the expected string "Live"
+     * Test that the denying challenge results in "denied" entry in database
      *
      * @return void
      */

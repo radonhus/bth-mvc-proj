@@ -57,8 +57,8 @@ class YatzyControllerTest extends TestCase
     }
 
     /**
-     * Test that the post route /yatzystart in single game mode renders a
-     * view containing the expected string "Live"
+     * Test that the post route /yatzysetup in single game mode returns the
+     * expected HTTP response for redirect (302)
      *
      * @return void
      */
@@ -66,20 +66,19 @@ class YatzyControllerTest extends TestCase
     {
         $response = $this->withHeaders([
             'X-Header' => 'Value',
-        ])->post('/yatzystart', [
+        ])->post('/yatzysetup', [
             'mode' => 'single',
             'bet' => '0',
             'opponent' => '0',
             'challengeId' => '0'
         ]);
 
-        $response->assertStatus(200);
-        $response->assertSee('Live');
+        $response->assertStatus(302);
     }
 
     /**
-     * Test that the post route /yatzystart in challenge mode renders a
-     * view containing the expected string "Live"
+     * Test that the post route /yatzysetup in challenge mode returns the
+     * expected HTTP response for redirect (302)
      *
      * @return void
      */
@@ -87,20 +86,19 @@ class YatzyControllerTest extends TestCase
     {
         $response = $this->withHeaders([
             'X-Header' => 'Value',
-        ])->post('/yatzystart', [
+        ])->post('/yatzysetup', [
             'mode' => 'challenge',
             'bet' => '0',
             'opponent' => '9',
             'challengeId' => '0'
         ]);
 
-        $response->assertStatus(200);
-        $response->assertSee('Live');
+        $response->assertStatus(302);
     }
 
     /**
-     * Test that the post route /yatzy renders a view containing the
-     * expected string "Live"
+     * Test that the post route /yatzyplay returns the expected HTTP response
+     * for redirect (302)
      *
      * @return void
      */
@@ -114,12 +112,11 @@ class YatzyControllerTest extends TestCase
 
         $response = $this->withHeaders([
             'X-Header' => 'Value',
-        ])->post('/yatzy', [
+        ])->post('/yatzyplay', [
             '1' => 'selected',
             'roll' => 'Roll!'
         ]);
 
-        $response->assertStatus(200);
-        $response->assertSee('Live');
+        $response->assertStatus(302);
     }
 }

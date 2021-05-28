@@ -38,9 +38,7 @@ class SessionController extends Controller
             ]);
         }
 
-        $myAccount = new AccountController();
-
-        return $myAccount->myAccount();
+        return redirect()->route('myaccount');
     }
 
     /**

@@ -41,7 +41,7 @@
                 @if ($openChallenge['denied'] == "denied")
                     <span class="red">You declined</span>
                 @else
-                <form method="post" action="{{ url('/yatzystart') }}">
+                <form method="post" action="{{ url('/yatzysetup') }}">
                     @csrf
                     <input type="hidden" name="challengeId" value="{{ $openChallenge['challenge_id'] }}">
                     <input type="hidden" name="opponent" value="{{ $openChallenge['challenger_id'] }}">

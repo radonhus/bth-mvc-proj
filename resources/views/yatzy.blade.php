@@ -10,16 +10,23 @@
     @if ($data['mode'] == 'challenge')
         <p><span class="bold">Game mode</span>: New challenge</p>
         <p><span class="bold">Opponent</span>: {{ $data['opponentName'] }}</p>
+        <p><span class="bold">Coins at stake</span>: {{ $data['bet'] }} ¥</p>
     @elseif ($data['mode'] == 'accept')
         <p><span class="bold">Game mode</span>: Challenge accepted</p>
         <p><span class="bold">Opponent</span>: {{ $data['opponentName'] }}</p>
+        @if (auth()->user()->coins >= $data['bet'] )
+            <p><span class="bold">Coins at stake</span>: {{ $data['bet'] }} ¥</p>
+        @else
+            <p><span class="bold">Coins at stake</span>: {{ auth()->user()->coins }} ¥ (originally {{ $data['bet'] }} ¥)</p>
+        @endif
     @else
         <p><span class="bold">Game mode</span>: Single player (reach 250 or more to win)</p>
-    @endif
         <p><span class="bold">Coins at stake</span>: {{ $data['bet'] }} ¥</p>
+    @endif
+        <p><span class="bold">Your balance</span>: {{ auth()->user()->coins }} ¥</p>
 </div>
 
-    <form method="post" class="yatzy-form" action="{{ url('/yatzy') }}">
+    <form method="post" class="yatzy-form" action="{{ url('/yatzyplay') }}">
         @csrf
         <div class="yatzy-dice">
             @foreach ($data['diceArray'] as $key => $value)
@@ -95,7 +102,7 @@
                 </td>
                 <td>
                 @if ($value < 0)
-                    <form method="post" action="{{ url('/yatzy') }}">
+                    <form method="post" action="{{ url('/yatzyplay') }}">
                     @csrf
                     <input type="hidden" name="roundOver" value="roundOver">
                     @if ($data['twoRerollsMade'] == 'true')

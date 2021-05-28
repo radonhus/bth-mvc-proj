@@ -32,7 +32,7 @@ class YatzyController extends Controller
     }
 
     /**
-     * Start a new Yatzy session.
+     * Handle post data, create new Yatzy session, redirect to view
      *
      * @param Request $request
      * @property array $post
@@ -44,7 +44,7 @@ class YatzyController extends Controller
      * @property array $data
      * @return Object
      */
-    public function start(Request $request)
+    public function setup(Request $request)
     {
         $post = $request->all();
         $mode = $post['mode'];
@@ -68,6 +68,20 @@ class YatzyController extends Controller
 
         $data = $yatzyObject->startNewRound();
         session()->put('yatzy', $yatzyObject);
+        session()->put('data', $data);
+
+        return redirect()->route('yatzyview');
+    }
+
+    /**
+     * Yatzy game view.
+     *
+     * @property array $data
+     * @return Object
+     */
+    public function yatzyview()
+    {
+        $data = session('data');
 
         return view('yatzy', [
             'title' => "Yatzy | ¥atzyBonanza",
@@ -92,10 +106,8 @@ class YatzyController extends Controller
         $yatzyObject = session()->get('yatzy');
         $data = $yatzyObject->play($post);
         session()->put('yatzy', $yatzyObject);
+        session()->put('data', $data);
 
-        return view('yatzy', [
-            'title' => "Yatzy | ¥atzyBonanza",
-            'data' => $data
-        ]);
+        return redirect()->route('yatzyview');
     }
 }

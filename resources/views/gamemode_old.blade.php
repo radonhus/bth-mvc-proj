@@ -16,7 +16,7 @@
     If your opponent does not have enough money in their account, the bet will
     be lowered accordingly. The winner of the challenge wins the whole pot.</p>
 
-    <form method="post" action="{{ url('/yatzysetup') }}">
+    <form method="post" action="{{ url('/yatzystart') }}">
         @csrf
         <input type="hidden" name="challengeId" value="0">
         <label for="opponent">Choose opponent: </label>
@@ -27,7 +27,7 @@
             @endif
             @endforeach
         </select>
-        <label for="bet">Your bet (max {{ $coinsCurrentUser }} ¥): </label>
+        <label for="bet">Your bet: </label>
         <input type="number" name="bet" value="0" min="0" max="{{ $coinsCurrentUser }}" required>
         <button type="submit" name="mode" value="challenge">Start challenge</button>
     </form>
@@ -47,11 +47,11 @@
     bank. You can bet any amount, from 0 to {{ $coinsCurrentUser }} ¥ (your current balance).
     </p>
 
-    <form method="post" action="{{ url('/yatzysetup') }}">
+    <form method="post" action="{{ url('/yatzystart') }}">
         @csrf
         <input type="hidden" name="opponent" value="0">
         <input type="hidden" name="challengeId" value="0">
-        <label for="bet">Your bet (max {{ $coinsCurrentUser }} ¥): </label>
+        <label for="bet">Your bet: </label>
         <input type="number" name="bet" value="0" min="0" max="{{ $coinsCurrentUser }}" required>
         <button type="submit" name="mode" value="single">Start single player game</button>
     </form>
