@@ -67,61 +67,61 @@ class TableResult extends Model
     /**
      * Save new result in results table
      *
-     * @param  int  $user_id
-     * @param  int  $result_bonus
-     * @param  int  $result_1
-     * @param  int  $result_2
-     * @param  int  $result_3
-     * @param  int  $result_4
-     * @param  int  $result_5
-     * @param  int  $result_6
-     * @param  int  $result_one_pair
-     * @param  int  $result_two_pairs
-     * @param  int  $result_three
-     * @param  int  $result_four
-     * @param  int  $result_small_straight
-     * @param  int  $result_large_straight
-     * @param  int  $result_full_house
-     * @param  int  $result_chance
-     * @param  int  $result_yatzy
+     * @param  int  $userId
+     * @param  int  $resultBonus
+     * @param  int  $result1
+     * @param  int  $result2
+     * @param  int  $result3
+     * @param  int  $result4
+     * @param  int  $result5
+     * @param  int  $result6
+     * @param  int  $resultOnePair
+     * @param  int  $resultTwoPairs
+     * @param  int  $resultThree
+     * @param  int  $resultFour
+     * @param  int  $resultSmallStraight
+     * @param  int  $resultLargeStraight
+     * @param  int  $resultFullHouse
+     * @param  int  $resultChance
+     * @param  int  $resultYatzy
      * @return bool
      */
     public function saveResult(
-        int $user_id,
-        int $result_bonus,
-        int $result_1,
-        int $result_2,
-        int $result_3,
-        int $result_4,
-        int $result_5,
-        int $result_6,
-        int $result_one_pair,
-        int $result_two_pairs,
-        int $result_three,
-        int $result_four,
-        int $result_small_straight,
-        int $result_large_straight,
-        int $result_full_house,
-        int $result_chance,
-        int $result_yatzy
+        int $userId,
+        int $resultBonus,
+        int $result1,
+        int $result2,
+        int $result3,
+        int $result4,
+        int $result5,
+        int $result6,
+        int $resultOnePair,
+        int $resultTwoPairs,
+        int $resultThree,
+        int $resultFour,
+        int $resultSmallStraight,
+        int $resultLargeStraight,
+        int $resultFullHouse,
+        int $resultChance,
+        int $resultYatzy
     ) {
-        $this->user_id = $user_id;
-        $this->result_bonus = $result_bonus;
-        $this->result_1 = $result_1;
-        $this->result_2 = $result_2;
-        $this->result_3 = $result_3;
-        $this->result_4 = $result_4;
-        $this->result_5 = $result_5;
-        $this->result_6 = $result_6;
-        $this->result_one_pair = $result_one_pair;
-        $this->result_two_pairs = $result_two_pairs;
-        $this->result_three = $result_three;
-        $this->result_four = $result_four;
-        $this->result_small_straight = $result_small_straight;
-        $this->result_large_straight = $result_large_straight;
-        $this->result_full_house = $result_full_house;
-        $this->result_chance = $result_chance;
-        $this->result_yatzy = $result_yatzy;
+        $this->user_id = $userId;
+        $this->result_bonus = $resultBonus;
+        $this->result_1 = $result1;
+        $this->result_2 = $result2;
+        $this->result_3 = $result3;
+        $this->result_4 = $result4;
+        $this->result_5 = $result5;
+        $this->result_6 = $result6;
+        $this->result_one_pair = $resultOnePair;
+        $this->result_two_pairs = $resultTwoPairs;
+        $this->result_three = $resultThree;
+        $this->result_four = $resultFour;
+        $this->result_small_straight = $resultSmallStraight;
+        $this->result_large_straight = $resultLargeStraight;
+        $this->result_full_house = $resultFullHouse;
+        $this->result_chance = $resultChance;
+        $this->result_yatzy = $resultYatzy;
 
         return $this->save();
     }

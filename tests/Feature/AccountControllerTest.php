@@ -132,7 +132,6 @@ class AccountControllerTest extends TestCase
         $latestChallenge = $challenges->orderByDesc('id')
                                 ->limit(1)
                                 ->get();
-
         $challengeId = $latestChallenge[0]->id;
 
         $this->withHeaders([
@@ -146,7 +145,6 @@ class AccountControllerTest extends TestCase
         $latestChallenge = $challenges->orderByDesc('id')
                                 ->limit(1)
                                 ->get();
-
         $checkDenied = $latestChallenge[0]->denied;
 
         $this->assertEquals('denied', $checkDenied);
@@ -157,14 +155,14 @@ class AccountControllerTest extends TestCase
      *
      * @return void
      */
-    protected function tearDown(): void
-    {
-        $usersObject = new User();
-        $resultObject = new TableResult();
-        $challengesObject = new TableChallenges();
-
-        $usersObject->where('name', 'testperson')->delete();
-        $challengesObject->where('challenger_user_id', 19)->delete();
-        $resultObject->where('user_id', 19)->delete();
-    }
+    // protected function tearDown(): void
+    // {
+    //     $usersObject = new User();
+    //     $resultObject = new TableResult();
+    //     $challengesObject = new TableChallenges();
+    //
+    //     $usersObject->where('name', 'testperson')->delete();
+    //     $challengesObject->where('challenger_user_id', 19)->delete();
+    //     $resultObject->where('user_id', 19)->delete();
+    // }
 }

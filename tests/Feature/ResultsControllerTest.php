@@ -209,10 +209,13 @@ class ResultsControllerTest extends TestCase
         $challengesObject = new TableChallenges();
 
         $challengesObject->where('challenger_user_id', 19)->delete();
+
         $histogramObject->where('dice_6', 999)->delete();
+
         $userObject->where('user_id', 19)->update(['coins' => 100]);
-        $resultObject->where('user_id', 19)->delete();
         $userObject->where('user_id', 22)->update(['coins' => 100]);
+
         $resultObject->where('user_id', 22)->delete();
+        $resultObject->where('user_id', 19)->delete();
     }
 }

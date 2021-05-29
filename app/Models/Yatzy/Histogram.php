@@ -13,7 +13,7 @@ class Histogram
         $this->histogramArray = [];
     }
 
-    public function save(array $diceValues)
+    public function save(array $diceValues): array
     {
         foreach ($diceValues as $value) {
             array_push($this->histogramArray, $value);

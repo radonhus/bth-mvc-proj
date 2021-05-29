@@ -1,2 +1,0 @@
-C:\Users\Richard\Documents\dbwebb\mvc\me\proj\app\Models\Yatzy\Points.php:56	The method getRoundPoints() has a Cyclomatic Complexity of 11. The configured cyclomatic complexity threshold is 10.
-C:\Users\Richard\Documents\dbwebb\mvc\me\proj\tests\Unit\Yatzy\YatzyPointsTest.php:15	The class YatzyPointsTest has 17 public methods. Consider refactoring YatzyPointsTest to keep number of public methods under 10.

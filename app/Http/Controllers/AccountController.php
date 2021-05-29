@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Models\Database\TableChallenges;
@@ -58,9 +60,9 @@ class AccountController extends Controller
     public function denyChallenge(Request $request)
     {
         $post = $request->all();
-        $challengeId = $post['challengeId'];
-        $challengerId = $post['challenger'];
-        $bet = $post['bet'];
+        $challengeId = intval($post['challengeId']);
+        $challengerId = intval($post['challenger']);
+        $bet = intval($post['bet']);
 
         $challenges = new TableChallenges();
         $users = new User();
@@ -95,7 +97,7 @@ class AccountController extends Controller
         $finishedChallenges = $viewChallenges->getFinishedChallenges($userId);
         $openChallenges = $viewChallenges->getOpenChallenges($userId);
         $openChallengesSent = $viewChallenges->getOpenChallengesSent($userId);
-        $allGames = $results->getAllGamesUser($userId);
+        $allGames = $results->getAllGamesUser(intval($userId));
         $stats = $results->getStatsUser($userId);
         $userCoins = $users->getCoins($userId);
 

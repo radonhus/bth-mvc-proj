@@ -1,21 +1,21 @@
  ------ --------------------------------------------------------------------------------------------------------- 
  [32m Line [39m [32m app\Http\Controllers\AccountController.php                                                              [39m 
  ------ --------------------------------------------------------------------------------------------------------- 
-  46     Call to an undefined method Illuminate\Contracts\Auth\Factory|Illuminate\Contracts\Auth\Guard::login().  
-  93     Access to an undefined property Illuminate\Contracts\Auth\Authenticatable::$id.                          
+  48     Call to an undefined method Illuminate\Contracts\Auth\Factory|Illuminate\Contracts\Auth\Guard::login().  
+  95     Access to an undefined property Illuminate\Contracts\Auth\Authenticatable::$id.                          
  ------ --------------------------------------------------------------------------------------------------------- 
 
  ------ ----------------------------------------------------------------------------------------------------------- 
  [32m Line [39m [32m app\Http\Controllers\SessionController.php                                                                [39m 
  ------ ----------------------------------------------------------------------------------------------------------- 
-  35     Call to an undefined method Illuminate\Contracts\Auth\Factory|Illuminate\Contracts\Auth\Guard::attempt().  
-  50     Call to an undefined method Illuminate\Contracts\Auth\Factory|Illuminate\Contracts\Auth\Guard::logout().   
+  37     Call to an undefined method Illuminate\Contracts\Auth\Factory|Illuminate\Contracts\Auth\Guard::attempt().  
+  52     Call to an undefined method Illuminate\Contracts\Auth\Factory|Illuminate\Contracts\Auth\Guard::logout().   
  ------ ----------------------------------------------------------------------------------------------------------- 
 
  ------ --------------------------------------------------------------------------------- 
  [32m Line [39m [32m app\Http\Controllers\YatzyController.php                                        [39m 
  ------ --------------------------------------------------------------------------------- 
-  25     Access to an undefined property Illuminate\Contracts\Auth\Authenticatable::$id.  
+  27     Access to an undefined property Illuminate\Contracts\Auth\Authenticatable::$id.  
  ------ --------------------------------------------------------------------------------- 
 
  ------ ----------------------------------------------------------------------------------------------------------- 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
@@ -78,6 +80,8 @@ class ResultsController extends Controller
 
         $resultsHandler->submitResult($post);
 
+        session()->put('data', []);
+
         if ($post['mode'] == 'accept') {
             return redirect()->route('challenge', ['id' => $post['challengeId']]);
         }
@@ -96,14 +100,14 @@ class ResultsController extends Controller
         $viewChallenges = new ViewChallenges();
         $viewResults = new ViewResults();
 
-        $challenge = $viewChallenges->getOneChallenge($challengeId);
+        $challenge = $viewChallenges->getOneChallenge(intval($challengeId));
         $challengerResultId = $challenge['challenger_result_id'];
         $opponentResultId = $challenge['opponent_result_id'];
 
-        $resultChallenger = $viewResults->getResult($challengerResultId);
-        $scorecardChallenger = $viewResults->getScorecard($challengerResultId);
-        $resultOpponent = $viewResults->getResult($opponentResultId);
-        $scorecardOpponent = $viewResults->getScorecard($opponentResultId);
+        $resultChallenger = $viewResults->getResult(intval($challengerResultId));
+        $scorecardChallenger = $viewResults->getScorecard(intval($challengerResultId));
+        $resultOpponent = $viewResults->getResult(intval($opponentResultId));
+        $scorecardOpponent = $viewResults->getScorecard(intval($opponentResultId));
 
         return view('challengeresults', [
             'title' => "Challenge results | ¥atzyBonanza",

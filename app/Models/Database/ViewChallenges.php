@@ -33,7 +33,7 @@ class ViewChallenges extends Model
     /**
      * Get all open challenges where user has challenged another user
      *
-     * @param int $userId
+     * @param string $userId
      * @property object $result
      * @property array $openChallengesSent
      * @return array $openChallengesSent
@@ -62,7 +62,7 @@ class ViewChallenges extends Model
     /**
      * Get all open challenges where user has been challenged
      *
-     * @param int $userId
+     * @param string $userId
      * @property object $result
      * @property array $openChallenges
      * @return array $openChallenges
@@ -91,14 +91,14 @@ class ViewChallenges extends Model
     /**
      * Get all challenges for one player from the v_challenges view
      *
-     * @param int $challenge_id
+     * @param int $challengeId
      * @property array $result
      * @property array $challenge
      * @return array $challenge
      */
-    public function getOneChallenge($challenge_id)
+    public function getOneChallenge(int $challengeId)
     {
-        $result = $this->where('challenge_id', $challenge_id)
+        $result = $this->where('challenge_id', $challengeId)
                         ->get();
 
         $challenge = [
@@ -122,7 +122,7 @@ class ViewChallenges extends Model
     /**
      * Get all challenges for one player from the v_challenges view
      *
-     * @param int $userId
+     * @param string $userId
      * @property array $result
      * @property array $finishedChallenges
      * @property array $row

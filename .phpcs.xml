@@ -8,7 +8,10 @@
     <file>routes</file>
     <file>tests</file>
 
-    <exclude-pattern>*/database/*</exclude-pattern>
+    <exclude-pattern>*/database/db*</exclude-pattern>
+    <exclude-pattern>*/database/factories*</exclude-pattern>
+    <exclude-pattern>*/database/migrations*</exclude-pattern>
+    <exclude-pattern>*/database/seeders*</exclude-pattern>
     <exclude-pattern>*/cache/*</exclude-pattern>
     <exclude-pattern>*/lang/*</exclude-pattern>
     <exclude-pattern>*/*.js</exclude-pattern>

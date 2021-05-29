@@ -127,7 +127,7 @@ class YatzyControllerTest extends TestCase
         ])->post('/yatzysetup', [
             'mode' => 'challenge',
             'bet' => '0',
-            'opponent' => '9',
+            'opponent' => '19',
             'challengeId' => '0'
         ]);
 

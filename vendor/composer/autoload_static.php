@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit4bd04f1100b4f83dd3c4b8798ba7f934
+class ComposerStaticInitfaaa273dcef70c4b4a6fd1b1d50b0da4
 {
     public static $files = array (
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
@@ -530,6 +530,7 @@ class ComposerStaticInit4bd04f1100b4f83dd3c4b8798ba7f934
         'App\\Models\\Database\\TableResult' => __DIR__ . '/../..' . '/app/Models/Database/TableResult.php',
         'App\\Models\\Database\\ViewChallenges' => __DIR__ . '/../..' . '/app/Models/Database/ViewChallenges.php',
         'App\\Models\\Database\\ViewResults' => __DIR__ . '/../..' . '/app/Models/Database/ViewResults.php',
+        'App\\Models\\ResultsHandler' => __DIR__ . '/../..' . '/app/Models/ResultsHandler.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Models\\Yatzy\\Dice' => __DIR__ . '/../..' . '/app/Models/Yatzy/Dice.php',
         'App\\Models\\Yatzy\\Hand' => __DIR__ . '/../..' . '/app/Models/Yatzy/Hand.php',
@@ -5182,6 +5183,7 @@ class ComposerStaticInit4bd04f1100b4f83dd3c4b8798ba7f934
         'Tests\\CreatesApplication' => __DIR__ . '/../..' . '/tests/CreatesApplication.php',
         'Tests\\Feature\\AccountControllerTest' => __DIR__ . '/../..' . '/tests/Feature/AccountControllerTest.php',
         'Tests\\Feature\\ResultsControllerTest' => __DIR__ . '/../..' . '/tests/Feature/ResultsControllerTest.php',
+        'Tests\\Feature\\ResultsHandlerTest' => __DIR__ . '/../..' . '/tests/Feature/ResultsHandlerTest.php',
         'Tests\\Feature\\SessionControllerTest' => __DIR__ . '/../..' . '/tests/Feature/SessionControllerTest.php',
         'Tests\\Feature\\YatzyControllerTest' => __DIR__ . '/../..' . '/tests/Feature/YatzyControllerTest.php',
         'Tests\\TestCase' => __DIR__ . '/../..' . '/tests/TestCase.php',
@@ -5309,10 +5311,10 @@ class ComposerStaticInit4bd04f1100b4f83dd3c4b8798ba7f934
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit4bd04f1100b4f83dd3c4b8798ba7f934::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit4bd04f1100b4f83dd3c4b8798ba7f934::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit4bd04f1100b4f83dd3c4b8798ba7f934::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit4bd04f1100b4f83dd3c4b8798ba7f934::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitfaaa273dcef70c4b4a6fd1b1d50b0da4::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitfaaa273dcef70c4b4a6fd1b1d50b0da4::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitfaaa273dcef70c4b4a6fd1b1d50b0da4::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitfaaa273dcef70c4b4a6fd1b1d50b0da4::$classMap;
 
         }, null, ClassLoader::class);
     }

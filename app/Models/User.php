@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -180,9 +182,9 @@ class User extends Authenticatable
      * @property int $newBalance
      * @property string $updatedRows
      * @property array $user
-     * @return string $updatedRows
+     * @return int $updatedRows
      */
-    public function updateBalance(int $userId, int $amount): string
+    public function updateBalance(int $userId, int $amount): int
     {
         $user = $this->where('id', $userId)
                                 ->get();

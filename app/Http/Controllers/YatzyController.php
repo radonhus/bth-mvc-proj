@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
@@ -53,9 +55,9 @@ class YatzyController extends Controller
         $opponentName = "";
         $challengeId = $post['challengeId'];
 
-        if ($opponent != "0") {
+        if ($opponent != 0) {
             $usersObject = new User();
-            $opponentName = $usersObject->getName($opponent);
+            $opponentName = $usersObject->getName(intval($opponent));
         }
 
         $yatzyObject = new Yatzy(

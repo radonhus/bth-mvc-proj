@@ -42,31 +42,31 @@ class TableHistogram extends Model
     /**
      * Save histogram from one game in histogram table
      *
-     * @param  int  $result_id
-     * @param  int  $dice_1
-     * @param  int  $dice_2
-     * @param  int  $dice_3
-     * @param  int  $dice_4
-     * @param  int  $dice_5
-     * @param  int  $dice_6
+     * @param  int  $resultId
+     * @param  int  $dice1
+     * @param  int  $dice2
+     * @param  int  $dice3
+     * @param  int  $dice4
+     * @param  int  $dice5
+     * @param  int  $dice6
      * @return bool
      */
     public function saveHistogram(
-        int $result_id,
-        int $dice_1,
-        int $dice_2,
-        int $dice_3,
-        int $dice_4,
-        int $dice_5,
-        int $dice_6
+        int $resultId,
+        int $dice1,
+        int $dice2,
+        int $dice3,
+        int $dice4,
+        int $dice5,
+        int $dice6
     ) {
-        $this->result_id = $result_id;
-        $this->dice_1 = $dice_1;
-        $this->dice_2 = $dice_2;
-        $this->dice_3 = $dice_3;
-        $this->dice_4 = $dice_4;
-        $this->dice_5 = $dice_5;
-        $this->dice_6 = $dice_6;
+        $this->result_id = $resultId;
+        $this->dice_1 = $dice1;
+        $this->dice_2 = $dice2;
+        $this->dice_3 = $dice3;
+        $this->dice_4 = $dice4;
+        $this->dice_5 = $dice5;
+        $this->dice_6 = $dice6;
 
         return $this->save();
     }

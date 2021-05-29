@@ -10,8 +10,8 @@ use Illuminate\Http\Request;
 * The following properties are columns in the table that
 * the model represents (to make phpstan happy)
 *
-* @property int  $result_id
-* @property int  $user_id
+* @property string  $resultId
+* @property string  $user_id
 * @method orderByDesc(string $columnName)
 * @method where(mixed $columnNameOrArray = '', mixed $columnValue = '')
 */
@@ -52,7 +52,7 @@ class ViewResults extends Model
 
         $topScore = 0;
 
-        if (count($result) >=1) {
+        if (count($result) >= 1) {
             $topScore = intval($result[0]['score']);
         }
 
@@ -60,7 +60,7 @@ class ViewResults extends Model
         $rank = 0;
 
         foreach ($result as $row) {
-            $percent = round((intval($row->score) / $topScore)*100);
+            $percent = round((intval($row->score) / $topScore) * 100);
             $rank += 1;
             array_push($topTenArray, [
                 'rank' => $rank,
@@ -80,15 +80,15 @@ class ViewResults extends Model
     /**
      * Get basics for one game
      *
-     * @param int $result_id
+     * @param int $resultId
      * @property object $result
      * @property array $histogram
      * @return array $histogram
      */
-    public function getResult(int $result_id): array
+    public function getResult(int $resultId): array
     {
 
-        $result = $this->where('result_id', $result_id)
+        $result = $this->where('result_id', $resultId)
                                 ->get();
 
         $resultBasics = [
@@ -137,14 +137,18 @@ class ViewResults extends Model
         foreach ($result as $row) {
             $countGames += 1;
             $sumScore += intval($row->score);
-            if ($row->bonus == "50") { $countBonus += 1; }
-            if ($row->score >= "250") { $countOver250 += 1; }
+            if ($row->bonus == "50") {
+                $countBonus += 1;
+            }
+            if ($row->score >= "250") {
+                $countOver250 += 1;
+            }
         }
 
         if (count($result) > 0) {
             $avgScore = round($sumScore / $countGames);
-            $quotaOver250 = round(($countOver250 / $countGames)*100);
-            $quotaBonus = round(($countBonus / $countGames)*100);
+            $quotaOver250 = round(($countOver250 / $countGames) * 100);
+            $quotaBonus = round(($countBonus / $countGames) * 100);
             $maxScore = intval($result[0]->score);
         }
 
@@ -178,14 +182,14 @@ class ViewResults extends Model
 
         $topScore = 0;
 
-        if (count($result) >=1) {
+        if (count($result) >= 1) {
             $topScore = intval($result[0]->score);
         }
 
         $allGames = [];
 
         foreach ($result as $row) {
-            $percent = round((intval($row->score) / $topScore)*100);
+            $percent = round((intval($row->score) / $topScore) * 100);
             array_push($allGames, [
                 'result_id' => $row->result_id,
                 'bonus' => $row->bonus,
@@ -201,15 +205,15 @@ class ViewResults extends Model
     /**
      * Get scorecard for one game
      *
-     * @param int $result_id
+     * @param int $resultId
      * @property object $result
      * @property array $scorecard
      * @return array $scorecard
      */
-    public function getScorecard(int $result_id): array
+    public function getScorecard(int $resultId): array
     {
 
-        $result = $this->where('result_id', $result_id)
+        $result = $this->where('result_id', $resultId)
                                 ->get();
 
         $scorecard = [
@@ -236,15 +240,15 @@ class ViewResults extends Model
     /**
      * Get histogram for one game
      *
-     * @param int $result_id
+     * @param int $resultId
      * @property object $result
      * @property array $histogram
      * @return array $histogram
      */
-    public function getHistogram(int $result_id): array
+    public function getHistogram(int $resultId): array
     {
 
-        $result = $this->where('result_id', $result_id)
+        $result = $this->where('result_id', $resultId)
                                 ->get();
 
         $sum = $result[0]->histogram_1 +
@@ -254,27 +258,27 @@ class ViewResults extends Model
         $result[0]->histogram_5 +
         $result[0]->histogram_6;
 
-        $percent_1 = round(100 * $result[0]->histogram_1 / $sum);
-        $percent_2 = round(100 * $result[0]->histogram_2 / $sum);
-        $percent_3 = round(100 * $result[0]->histogram_3 / $sum);
-        $percent_4 = round(100 * $result[0]->histogram_4 / $sum);
-        $percent_5 = round(100 * $result[0]->histogram_5 / $sum);
-        $percent_6 = round(100 * $result[0]->histogram_6 / $sum);
+        $percent1 = round(100 * $result[0]->histogram_1 / $sum);
+        $percent2 = round(100 * $result[0]->histogram_2 / $sum);
+        $percent3 = round(100 * $result[0]->histogram_3 / $sum);
+        $percent4 = round(100 * $result[0]->histogram_4 / $sum);
+        $percent5 = round(100 * $result[0]->histogram_5 / $sum);
+        $percent6 = round(100 * $result[0]->histogram_6 / $sum);
 
         $histogram = [
                 'sum' => $sum,
                 '1' => $result[0]->histogram_1,
-                'percent_1' => $percent_1,
+                'percent_1' => $percent1,
                 '2' => $result[0]->histogram_2,
-                'percent_2' => $percent_2,
+                'percent_2' => $percent2,
                 '3' => $result[0]->histogram_3,
-                'percent_3' => $percent_3,
+                'percent_3' => $percent3,
                 '4' => $result[0]->histogram_4,
-                'percent_4' => $percent_4,
+                'percent_4' => $percent4,
                 '5' => $result[0]->histogram_5,
-                'percent_5' => $percent_5,
+                'percent_5' => $percent5,
                 '6' => $result[0]->histogram_6,
-                'percent_6' => $percent_6
+                'percent_6' => $percent6
             ];
 
         return $histogram;

@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 * The following properties are columns in the table that
 * the model represents (to make phpstan happy)
 *
-* @property int $id
+* @property int $challenge_id
 * @property string $time
 * @property int $bet
 * @property int $challenger_user_id
@@ -42,13 +42,13 @@ class TableChallenges extends Model
     /**
      * Get challenger resultId
      *
-     * @param int $id
+     * @param int $challengeId
      * @property array $challenge
      * @return string $resultId
      */
-    public function getChallengerResultId(int $id): string
+    public function getChallengerResultId(int $challengeId): string
     {
-        $challenge = $this->where('id', $id)
+        $challenge = $this->where('id', $challengeId)
                                 ->get();
 
         $resultId = $challenge[0]->challenger_result_id;
@@ -62,10 +62,10 @@ class TableChallenges extends Model
      * @param int $challengeId
      * @param int $totalBet
      * @param int $resultId
-     * @property string $updatedRows
-     * @return string
+     * @property int $updatedRows
+     * @return int
      */
-    public function updateChallenge(int $challengeId, int $totalBet, int $resultId): string
+    public function updateChallenge(int $challengeId, int $totalBet, int $resultId): int
     {
         $updatedRows = $this->where('id', $challengeId)
                                 ->update(['bet' => $totalBet, 'opponent_result_id' => $resultId]);
@@ -76,34 +76,35 @@ class TableChallenges extends Model
      * Mark challenge as denied
      *
      * @param int $challengeId
-     * @property string $updatedRows
-     * @return string
+     * @property int $updatedRows
+     * @return int
      */
-    public function denyChallenge(int $challengeId): string
+    public function denyChallenge(int $challengeId): int
     {
         $updatedRows = $this->where('id', $challengeId)
                                 ->update(['denied' => 'denied']);
+
         return $updatedRows;
     }
 
     /**
      * Save new challenge in challenges table
      *
-     * @param int $challenger_user_id
-     * @param int $challenger_result_id
-     * @param int $opponent_user_id
+     * @param int $challengerUserId
+     * @param int $challengerResultId
+     * @param int $opponentUserId
      * @param int $bet
      * @return bool
      */
     public function saveNewChallenge(
-        int $challenger_user_id,
-        int $challenger_result_id,
-        int $opponent_user_id,
+        int $challengerUserId,
+        int $challengerResultId,
+        int $opponentUserId,
         int $bet
     ) {
-        $this->challenger_user_id = $challenger_user_id;
-        $this->challenger_result_id = $challenger_result_id;
-        $this->opponent_user_id = $opponent_user_id;
+        $this->challenger_user_id = $challengerUserId;
+        $this->challenger_result_id = $challengerResultId;
+        $this->opponent_user_id = $opponentUserId;
         $this->bet = $bet;
 
         return $this->save();

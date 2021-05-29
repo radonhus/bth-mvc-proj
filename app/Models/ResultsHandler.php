@@ -1,7 +1,6 @@
 <?php
 
-//
-// declare(strict_types=1);
+declare(strict_types=1);
 
 namespace App\Models;
 
@@ -22,7 +21,7 @@ class ResultsHandler
      * @property string $resultId
      * @return Object
      */
-    public function submitResult(array $post)
+    public function submitResult(array $post): object
     {
         $resultId = $this->saveResult($post);
 
@@ -30,6 +29,7 @@ class ResultsHandler
 
         if ($mode == 'challenge') {
             $this->newChallenge($post, $resultId);
+            return redirect()->route('highscores');
         }
 
         if ($mode == 'accept') {
@@ -52,23 +52,20 @@ class ResultsHandler
      * @property string $bet
      * @property string $userId
      * @property string $opponentId
-     * @return int $bet
      */
-    private function newChallenge(array $post, int $resultId)
+    private function newChallenge(array $post, int $resultId): void
     {
         $challenges = new TableChallenges();
         $users = new User();
 
         $bet = intval($post['bet']);
-        $userId = $post['user_id'];
-        $opponentId = $post['opponent'];
+        $userId = intval($post['user_id']);
+        $opponentId = intval($post['opponent']);
 
         $challenges->saveNewChallenge($userId, $resultId, $opponentId, $bet);
 
         $bet = $bet * -1;
         $users->updateBalance($userId, $bet);
-
-        return $bet;
     }
 
     /**
@@ -77,23 +74,20 @@ class ResultsHandler
      * @param array $post
      * @property object $users
      * @property int $bet
-     * @property string $userId
-     * @return int $bet
+     * @property int $userId
      */
-    private function single(array $post)
+    private function single(array $post): void
     {
         $users = new User();
 
         $score = intval($post['score']);
         $bet = intval($post['bet']);
-        $userId = $post['user_id'];
+        $userId = intval($post['user_id']);
 
         if ($score < 250) {
             $bet = $bet * -1;
         }
         $users->updateBalance($userId, $bet);
-
-        return $bet;
     }
 
     /**
@@ -113,9 +107,8 @@ class ResultsHandler
      * @property int $challengerScore
      * @property int $userBalance
      * @property int $totalBet
-     * @return int $bet
      */
-    private function acceptedChallenge(array $post, int $resultId)
+    private function acceptedChallenge(array $post, int $resultId): void
     {
         $challenges = new TableChallenges();
         $users = new User();
@@ -123,10 +116,10 @@ class ResultsHandler
 
         $score = intval($post['score']);
         $bet = intval($post['bet']);
-        $userId = $post['user_id'];
+        $userId = intval($post['user_id']);
 
         // Get challenger details
-        $challengeId = $post['challengeId'];
+        $challengeId = intval($post['challengeId']);
         $challengerResultId = intval($challenges->getChallengerResultId($challengeId));
         $challengerResult = $results->getResult($challengerResultId);
         $challengerId = intval($challengerResult['user_id']);
@@ -135,6 +128,8 @@ class ResultsHandler
         //Check balance: if lower than bet, lower bet accordingly
         $userBalance = intval($users->getCoins($userId));
         if ($userBalance < $bet) {
+            $difference = $bet - $userBalance;
+            $users->updateBalance($challengerId, $difference);
             $bet = $userBalance;
         }
 
@@ -144,19 +139,19 @@ class ResultsHandler
 
         if ($score > $challengerScore) {
             $users->updateBalance($userId, $bet);
-            return $bet;
+            return;
         }
 
         if ($score < $challengerScore) {
             $bet = $bet * -1;
             $users->updateBalance($userId, $bet);
             $users->updateBalance($challengerId, $totalBet);
-            return $bet;
+            return;
         }
 
         $users->updateBalance($challengerId, $bet);
 
-        return $bet;
+        return;
     }
 
     /**
@@ -169,10 +164,14 @@ class ResultsHandler
      * @property int $resultId
      * @return int $resultId
      */
-    private function saveResult(array $post)
+    private function saveResult(array $post): int
     {
         $result = new TableResult();
         $histogram = new TableHistogram();
+
+        foreach ($post as $key => $value) {
+            $post[$key] = intval($value);
+        };
 
         $result->saveResult(
             $post['user_id'],
