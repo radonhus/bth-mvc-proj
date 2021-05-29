@@ -35,3 +35,5 @@ Game stats are stored and displayed both on your individual account page and in
 the public highscore list (if you are good enough!), and bar charts help visualise
 the numbers. Among other things, there is also a list keeping track of the
 richest (and most successful) players.
+
+## Installation instructions
