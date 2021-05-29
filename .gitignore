@@ -1,5 +1,4 @@
 /.tmp.drivedownload
-/database/db/live.db
 /node_modules
 /public/hot
 /public/storage

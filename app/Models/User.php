@@ -120,7 +120,9 @@ class User extends Authenticatable
                                 ->limit(10)
                                 ->get();
 
-        $richest = intval($usersData[0]['coins']);
+        if (count($usersData) >= 1) {
+            $richest = intval($usersData[0]['coins']);
+        }
 
         $users = [];
 
