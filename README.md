@@ -4,8 +4,11 @@ Travis CI: [![Build Status](https://travis-ci.com/radonhus/bth-mvc-proj.svg?bran
 
 # ¥atzyBonanza
 
-A webbased Yatzy clone with a mini community where members can either play alone
-or challenge another member. Written in PHP using the Laravel framework.
+¥atzyBonanza is a student project made as part of the course "Object-oriented
+web technologies" (mvc) at Blekinge Technical University. It is a web-based
+Yatzy clone with a micro-community where members can either play alone
+or challenge another member. The application is written in PHP, and uses the
+Laravel framework.
 
 ![Yatzy](https://github.com/radonhus/bth-mvc-proj/blob/main/doc/design/yatzy_screenshot.png?raw=true)
 
@@ -22,7 +25,7 @@ is lost.
 Challenge mode lets you challenge any other player also registered. You decide
 how much you want to bet (your account balance is the limit), and when you have
 played your round, your bet is deducted from balance. When your friend logs in
-to YatzyBonanza, they will be able to see your challenge, and can either accept
+to ¥atzyBonanza, they will be able to see your challenge, and can either accept
 or decline. If the person you have challenged does not have enough coins to
 match your bet, both yours and your friend's bet will be lowered to the sum that
 they can afford. If the person who was challenged declines the challenge, your
@@ -33,7 +36,24 @@ calculated, and the winner wins the whole bet.
 
 Game stats are stored and displayed both on your individual account page and in
 the public highscore list (if you are good enough!), and bar charts help visualise
-the numbers. Among other things, there is also a list keeping track of the
-richest (and most successful) players.
+the statistics.
 
 ## Installation instructions
+
+The application is written in PHP and uses the Laravel framework. Results are
+stored in an SQLite database (an example database with example results and
+members is included in the repo).
+
+In addition to the actual application code and resources for the website, the
+repo also includes test suites for unit testing using phpunit.
+
+To make the application run on your local server, follow these steps:
+
+1. Download the complete repository.
+2. In a terminal, run `npm install` to install the dependencies listed in `package.json` (including SASS)
+3. Duplicate `.env.example` and name it `.env`
+4. Set the `APP_KEY` variable of the `.env`-file by running the command `php artisan key:generate`
+5. Start a local php server with the command `php S localhost:1234 -t public` in the root folder of the project
+
+If you prefer so set up your Laravel installation on your own, follow these steps
+instead:
