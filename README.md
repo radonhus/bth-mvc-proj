@@ -51,8 +51,13 @@ files in the root-folder of the repo. Run `make test` to run all tests.
 
 To make the application run on your local server, follow these steps:
 
-1. Download the repository.
-2. In a terminal, run `npm install` to install the dependencies listed in `package.json` (including SASS).
+1. Run `git clone https://github.com/radonhus/bth-mvc-proj` to clone the repository.
+2. Run `npm install` to install the dependencies listed in `package.json`.
 3. Duplicate `.env.example` and name it `.env`.
-4. Set the `APP_KEY` variable of the `.env`-file by running the command `php artisan key:generate`.
-5. Start a local php server with the command `php S localhost:1234 -t public` in the root folder of the project.
+4. Run `php artisan key:generate` to set the `APP_KEY` variable of the `.env`-file.
+5. Run `php -S localhost:1234 -t public` to start a local php server running at port 1234.
+6. Navigate to `http://localhost:1234/`to access the application.
+
+The result and user database is filled with example users and results. If you prefer
+an empty database, run the SQL file `database/db/clear_database.sql` to clear all
+results and users.
