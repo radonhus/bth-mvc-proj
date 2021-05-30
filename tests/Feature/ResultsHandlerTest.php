@@ -135,12 +135,13 @@ class ResultsHandlerTest extends TestCase
     }
 
     /**
-     * Test that calling submitResult as single player mode renders an opponent
-     * result in the corresponding challenges table row
+     * Test that calling submitResult in 'accept challenge' mode with equal
+     * score renders an opponent result in the corresponding challenges table
+     * row.
      *
      * @return void
      */
-    public function testSubmitResultAddsRowInDatabaseAccept()
+    public function testSubmitResultAddsRowInDatabaseAcceptEqualScore()
     {
         $results = new TableResult();
         $challenges = new TableChallenges();
@@ -169,7 +170,7 @@ class ResultsHandlerTest extends TestCase
                                 ->get();
         $latestResultId = $latestResult[0]->id;
 
-        $challenges->bet = 0;
+        $challenges->bet = 200;
         $challenges->challenger_user_id = 19;
         $challenges->challenger_result_id = $latestResultId;
         $challenges->opponent_user_id = 22;
@@ -184,8 +185,101 @@ class ResultsHandlerTest extends TestCase
 
         $post = [
             'mode' => 'accept',
-            'score' => 0,
-            'bet' => 0,
+            'score' => 999,
+            'bet' => 200,
+            'user_id' => 22,
+            'opponent' => 19,
+            'challengeId' => $latestChallengeId,
+            'bonus' => 0,
+            '1' => 0,
+            '2' => 0,
+            '3' => 0,
+            '4' => 0,
+            '5' => 0,
+            '6' => 0,
+            'one_pair' => 0,
+            'two_pairs' => 0,
+            'three' => 0,
+            'four' => 0,
+            'small_straight' => 0,
+            'large_straight' => 0,
+            'full_house' => 0,
+            'chance' => 0,
+            'yatzy' => 999,
+            'dice_1' => 0,
+            'dice_2' => 0,
+            'dice_3' => 0,
+            'dice_4' => 0,
+            'dice_5' => 0,
+            'dice_6' => 999
+        ];
+
+        $resultsHandler->submitResult($post);
+
+        $latestChallenge = $challenges->orderByDesc('id')
+                                ->limit(1)
+                                ->get();
+        $oppResultId = $latestChallenge[0]->opponent_result_id;
+
+        $resultId = intval($oppResultId);
+
+        $this->assertGreaterThan(0, $resultId);
+    }
+
+
+    /**
+     * Test that calling submitResult in 'accept challenge' mode with a higher
+     * score renders an opponent result in the corresponding challenges table
+     * row.
+     *
+     * @return void
+     */
+    public function testSubmitResultAddsRowInDatabaseAcceptHigherScore()
+    {
+        $results = new TableResult();
+        $challenges = new TableChallenges();
+
+        $results->user_id = 19;
+        $results->result_bonus = 0;
+        $results->result_1 = 0;
+        $results->result_2 = 0;
+        $results->result_3 = 0;
+        $results->result_4 = 0;
+        $results->result_5 = 0;
+        $results->result_6 = 0;
+        $results->result_one_pair = 0;
+        $results->result_two_pairs = 0;
+        $results->result_three = 0;
+        $results->result_four = 0;
+        $results->result_small_straight = 0;
+        $results->result_large_straight = 0;
+        $results->result_full_house = 0;
+        $results->result_chance = 0;
+        $results->result_yatzy = 999;
+        $results->save();
+
+        $latestResult = $results->orderByDesc('id')
+                                ->limit(1)
+                                ->get();
+        $latestResultId = $latestResult[0]->id;
+
+        $challenges->bet = 200;
+        $challenges->challenger_user_id = 19;
+        $challenges->challenger_result_id = $latestResultId;
+        $challenges->opponent_user_id = 22;
+        $challenges->save();
+
+        $latestChallenge = $challenges->orderByDesc('id')
+                                ->limit(1)
+                                ->get();
+        $latestChallengeId = $latestChallenge[0]->id;
+
+        $resultsHandler = new ResultsHandler();
+
+        $post = [
+            'mode' => 'accept',
+            'score' => 1000,
+            'bet' => 200,
             'user_id' => 22,
             'opponent' => 19,
             'challengeId' => $latestChallengeId,

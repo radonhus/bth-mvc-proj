@@ -45,15 +45,14 @@ stored in an SQLite database (an example database with example results and
 members is included in the repo).
 
 In addition to the actual application code and resources for the website, the
-repo also includes test suites for unit testing using phpunit.
+repo also includes test suites for unit testing using phpunit. More testing is
+possible through phpcs, phpmd, phpmetrics and phpstan, all of which have config
+files in the root-folder of the repo. Run `make test` to run all tests.
 
 To make the application run on your local server, follow these steps:
 
-1. Download the complete repository.
-2. In a terminal, run `npm install` to install the dependencies listed in `package.json` (including SASS)
-3. Duplicate `.env.example` and name it `.env`
-4. Set the `APP_KEY` variable of the `.env`-file by running the command `php artisan key:generate`
-5. Start a local php server with the command `php S localhost:1234 -t public` in the root folder of the project
-
-If you prefer so set up your Laravel installation on your own, follow these steps
-instead:
+1. Download the repository.
+2. In a terminal, run `npm install` to install the dependencies listed in `package.json` (including SASS).
+3. Duplicate `.env.example` and name it `.env`.
+4. Set the `APP_KEY` variable of the `.env`-file by running the command `php artisan key:generate`.
+5. Start a local php server with the command `php S localhost:1234 -t public` in the root folder of the project.

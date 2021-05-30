@@ -115,6 +115,8 @@ class User extends Authenticatable
      */
     public function getRichestUsers(): array
     {
+        $users = [];
+        $richest = 1;
 
         $usersData = $this->orderByDesc('coins')
                                 ->limit(10)
@@ -123,8 +125,6 @@ class User extends Authenticatable
         if (count($usersData) >= 1) {
             $richest = intval($usersData[0]['coins']);
         }
-
-        $users = [];
 
         foreach ($usersData as $user) {
             $percent = round((intval($user->coins) / $richest) * 100);

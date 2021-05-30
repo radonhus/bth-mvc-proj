@@ -155,14 +155,14 @@ class AccountControllerTest extends TestCase
      *
      * @return void
      */
-    // protected function tearDown(): void
-    // {
-    //     $usersObject = new User();
-    //     $resultObject = new TableResult();
-    //     $challengesObject = new TableChallenges();
-    //
-    //     $usersObject->where('name', 'testperson')->delete();
-    //     $challengesObject->where('challenger_user_id', 19)->delete();
-    //     $resultObject->where('user_id', 19)->delete();
-    // }
+    protected function tearDown(): void
+    {
+        $usersObject = new User();
+        $resultObject = new TableResult();
+        $challengesObject = new TableChallenges();
+
+        $usersObject->where('name', 'testperson')->delete();
+        $challengesObject->where('challenger_user_id', 19)->delete();
+        $resultObject->where('user_id', 19)->delete();
+    }
 }

@@ -65,6 +65,7 @@ class Points
             return $pointsThisRound;
         }
 
+
         switch ($chosenRound) {
             case "one_pair":
                 $pointsThisRound = $this->calcOnePair($diceArray);
