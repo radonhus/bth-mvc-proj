@@ -10,7 +10,7 @@ use App\Models\Database\TableHistogram;
 use App\Models\Database\TableChallenges;
 use App\Models\Database\ViewResults;
 use App\Models\Database\ViewChallenges;
-use App\Models\User;
+use App\Models\Database\TableUsers;
 use App\Models\ResultsHandler;
 use Illuminate\Http\Request;
 
@@ -54,7 +54,7 @@ class ResultsController extends Controller
         $presentResult = new ViewResults();
         $topTenArray = $presentResult->getHighscores();
 
-        $users = new User();
+        $users = new TableUsers();
         $topTenRichest = $users->getRichestUsers();
 
         return view('yatzyhighscores', [

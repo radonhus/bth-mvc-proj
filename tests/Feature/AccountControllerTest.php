@@ -5,7 +5,7 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use App\Http\Controllers\AccountController;
-use App\Models\User;
+use App\Models\Database\TableUsers;
 use App\Models\Database\TableResult;
 use App\Models\Database\TableChallenges;
 
@@ -157,7 +157,7 @@ class AccountControllerTest extends TestCase
      */
     protected function tearDown(): void
     {
-        $usersObject = new User();
+        $usersObject = new TableUsers();
         $resultObject = new TableResult();
         $challengesObject = new TableChallenges();
 

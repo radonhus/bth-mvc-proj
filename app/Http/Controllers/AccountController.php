@@ -8,7 +8,7 @@ use App\Models\Database\TableChallenges;
 use App\Models\Database\ViewChallenges;
 use App\Models\Database\ViewResults;
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\Models\Database\TableUsers;
 
 class AccountController extends Controller
 {
@@ -30,7 +30,7 @@ class AccountController extends Controller
      */
     public function verifySave()
     {
-        $userObject = new User();
+        $userObject = new TableUsers();
 
         if ($userObject->checkUserNameTaken(request('name'))) {
             return back()->withErrors([
@@ -65,7 +65,7 @@ class AccountController extends Controller
         $bet = intval($post['bet']);
 
         $challenges = new TableChallenges();
-        $users = new User();
+        $users = new TableUsers();
 
         $challenges->denyChallenge($challengeId);
         $users->updateBalance($challengerId, $bet);
@@ -90,7 +90,7 @@ class AccountController extends Controller
     {
         $viewChallenges = new ViewChallenges();
         $results = new ViewResults();
-        $users = new User();
+        $users = new TableUsers();
 
         $userId = auth()->user()->id;
 

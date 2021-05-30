@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use App\Http\Controllers\YatzyController;
 use App\Models\Yatzy\Yatzy;
-use App\Models\User;
+use App\Models\Database\TableUsers;
 
 class YatzyControllerTest extends TestCase
 {
@@ -39,7 +39,7 @@ class YatzyControllerTest extends TestCase
      */
     public function testGamemode()
     {
-        $usersObject = new User();
+        $usersObject = new TableUsers();
 
         auth()->attempt(['name' => 'admin', 'password' => 'admin']);
 

@@ -40,17 +40,13 @@ the statistics.
 
 ## Installation instructions
 
-The application is written in PHP and uses the Laravel framework. Results are
-stored in an SQLite database (an example database with example results and
-members is included in the repo).
+Your system needs the following for the application to work:
+Git: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
+PHP: https://www.php.net/manual/en/install.php
+composer: https://getcomposer.org/download/
+npm (included in Node.js): https://nodejs.org/en/
 
-In addition to the actual application code and resources for the website, the
-repo also includes test suites for unit testing using phpunit. More testing is
-possible through phpcs, phpmd, phpmetrics and phpstan, all of which have config
-files in the root-folder of the repo. Run `make test` to run all tests.
-
-To make the application run on your local server, follow these steps:
-
+To run the application on your local server, follow these steps:
 1. Run `git clone https://github.com/radonhus/bth-mvc-proj` to clone the repository.
 2. Run `npm install` to install the dependencies listed in `package.json`.
 3. Duplicate `.env.example` and name it `.env`.
@@ -58,6 +54,10 @@ To make the application run on your local server, follow these steps:
 5. Run `php -S localhost:1234 -t public` to start a local php server running at port 1234.
 6. Navigate to `http://localhost:1234/`to access the application.
 
-The result and user database is filled with example users and results. If you prefer
-an empty database, run the SQL file `database/db/clear_database.sql` to clear all
-results and users.
+Results and user data is stored in an SQLite database. The database contains
+example users and results. If you prefer an empty database, run the SQL file
+`database/db/clear_database.sql` to clear all results and users.
+
+The repo includes test suites for unit testing using phpunit. More testing is
+possible through phpcs, phpmd, phpmetrics and phpstan, all of which have config
+files in the root-folder of the repo. Run `make test` to run all tests.

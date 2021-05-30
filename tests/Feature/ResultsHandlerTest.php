@@ -9,7 +9,7 @@ use Tests\TestCase;
 use App\Models\Database\TableResult;
 use App\Models\Database\TableHistogram;
 use App\Models\Database\TableChallenges;
-use App\Models\User;
+use App\Models\Database\TableUsers;
 use App\Models\ResultsHandler;
 
 use ReflectionMethod;
@@ -384,7 +384,7 @@ class ResultsHandlerTest extends TestCase
      */
     public function testSaveSingle()
     {
-        $users = new User();
+        $users = new TableUsers();
         $resultsHandler = new ResultsHandler();
 
         $userBefore = $users->where('id', 19)
@@ -573,7 +573,7 @@ class ResultsHandlerTest extends TestCase
      */
     protected function tearDown(): void
     {
-        $userObject = new User();
+        $userObject = new TableUsers();
         $resultObject = new TableResult();
         $histogramObject = new TableHistogram();
         $challengesObject = new TableChallenges();

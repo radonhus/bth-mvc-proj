@@ -8,7 +8,13 @@
 
     <h1>Register</h1>
 
-    @include('formerror')
+    @if(count($errors))
+        <div class="error-box">
+            @foreach($errors->all() as $error)
+                {{$error}}<br>
+            @endforeach
+        </div>
+    @endif
 
     <form method="post" action="{{ url('/register') }}">
         @csrf

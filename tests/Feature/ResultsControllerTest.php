@@ -8,7 +8,7 @@ use App\Http\Controllers\ResultsController;
 use App\Models\Database\TableResult;
 use App\Models\Database\TableHistogram;
 use App\Models\Database\TableChallenges;
-use App\Models\User;
+use App\Models\Database\TableUsers;
 
 use ReflectionMethod;
 
@@ -286,7 +286,7 @@ class ResultsControllerTest extends TestCase
      */
     protected function tearDown(): void
     {
-        $userObject = new User();
+        $userObject = new TableUsers();
         $resultObject = new TableResult();
         $histogramObject = new TableHistogram();
         $challengesObject = new TableChallenges();

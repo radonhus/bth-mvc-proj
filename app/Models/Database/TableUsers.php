@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Models;
+namespace App\Models\Database;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -21,7 +21,7 @@ use Illuminate\Notifications\Notifiable;
 * @method orderByDesc(string $column)
 * @method create(array $request)
 */
-class User extends Authenticatable
+class TableUsers extends Authenticatable
 {
     use HasFactory;
     use Notifiable;

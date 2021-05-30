@@ -5,7 +5,6 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use App\Http\Controllers\SessionController;
-use App\Models\User;
 
 class SessionControllerTest extends TestCase
 {

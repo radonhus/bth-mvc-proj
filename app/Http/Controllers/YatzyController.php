@@ -6,7 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Yatzy\Yatzy;
-use App\Models\User;
+use App\Models\Database\TableUsers;
 use Illuminate\Http\Request;
 
 class YatzyController extends Controller
@@ -21,7 +21,7 @@ class YatzyController extends Controller
      */
     public function gamemode()
     {
-        $usersObject = new User();
+        $usersObject = new TableUsers();
 
         $users = $usersObject->getAllUsers();
         $coins = $usersObject->getCoins(auth()->user()->id);
@@ -56,7 +56,7 @@ class YatzyController extends Controller
         $challengeId = $post['challengeId'];
 
         if ($opponent != 0) {
-            $usersObject = new User();
+            $usersObject = new TableUsers();
             $opponentName = $usersObject->getName(intval($opponent));
         }
 

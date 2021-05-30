@@ -8,7 +8,7 @@ use App\Models\Database\TableResult;
 use App\Models\Database\TableHistogram;
 use App\Models\Database\TableChallenges;
 use App\Models\Database\ViewResults;
-use App\Models\User;
+use App\Models\Database\TableUsers;
 
 class ResultsHandler
 {
@@ -56,7 +56,7 @@ class ResultsHandler
     private function newChallenge(array $post, int $resultId): void
     {
         $challenges = new TableChallenges();
-        $users = new User();
+        $users = new TableUsers();
 
         $bet = intval($post['bet']);
         $userId = intval($post['user_id']);
@@ -78,7 +78,7 @@ class ResultsHandler
      */
     private function single(array $post): void
     {
-        $users = new User();
+        $users = new TableUsers();
 
         $score = intval($post['score']);
         $bet = intval($post['bet']);
@@ -111,7 +111,7 @@ class ResultsHandler
     private function acceptedChallenge(array $post, int $resultId): void
     {
         $challenges = new TableChallenges();
-        $users = new User();
+        $users = new TableUsers();
         $results = new ViewResults();
 
         $score = intval($post['score']);
