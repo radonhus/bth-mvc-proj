@@ -134,6 +134,8 @@ class AccountControllerTest extends TestCase
                                 ->get();
         $challengeId = $latestChallenge[0]->id;
 
+        auth()->attempt(['name' => 'admin', 'password' => 'admin']);
+
         $this->withHeaders([
             'X-Header' => 'Value',
         ])->post('/myaccount', [

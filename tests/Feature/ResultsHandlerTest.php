@@ -170,7 +170,7 @@ class ResultsHandlerTest extends TestCase
                                 ->get();
         $latestResultId = $latestResult[0]->id;
 
-        $challenges->bet = 200;
+        $challenges->bet = 0;
         $challenges->challenger_user_id = 19;
         $challenges->challenger_result_id = $latestResultId;
         $challenges->opponent_user_id = 22;
@@ -186,7 +186,7 @@ class ResultsHandlerTest extends TestCase
         $post = [
             'mode' => 'accept',
             'score' => 999,
-            'bet' => 200,
+            'bet' => 0,
             'user_id' => 22,
             'opponent' => 19,
             'challengeId' => $latestChallengeId,
@@ -263,7 +263,7 @@ class ResultsHandlerTest extends TestCase
                                 ->get();
         $latestResultId = $latestResult[0]->id;
 
-        $challenges->bet = 200;
+        $challenges->bet = 0;
         $challenges->challenger_user_id = 19;
         $challenges->challenger_result_id = $latestResultId;
         $challenges->opponent_user_id = 22;
@@ -279,7 +279,7 @@ class ResultsHandlerTest extends TestCase
         $post = [
             'mode' => 'accept',
             'score' => 1000,
-            'bet' => 200,
+            'bet' => 0,
             'user_id' => 22,
             'opponent' => 19,
             'challengeId' => $latestChallengeId,
@@ -581,12 +581,10 @@ class ResultsHandlerTest extends TestCase
         $challengesObject->where('challenger_user_id', 19)->delete();
         $histogramObject->where('dice_6', 999)->delete();
 
-        $userObject->where('user_id', 19)
-                    ->update(['coins' => 100]);
-        $resultObject->where('user_id', 19)->delete();
+        $userObject->where('id', 19)->update(['coins' => 100]);
+        $userObject->where('id', 22)->update(['coins' => 100]);
 
-        $userObject->where('user_id', 22)
-                    ->update(['coins' => 100]);
         $resultObject->where('user_id', 22)->delete();
+        $resultObject->where('user_id', 19)->delete();
     }
 }

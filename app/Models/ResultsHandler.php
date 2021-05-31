@@ -19,9 +19,9 @@ class ResultsHandler
      * @param array $post
      * @property array $post
      * @property string $resultId
-     * @return Object
+     * @return int $resultId
      */
-    public function submitResult(array $post): object
+    public function submitResult(array $post): int
     {
         $resultId = $this->saveResult($post);
 
@@ -29,17 +29,15 @@ class ResultsHandler
 
         if ($mode == 'challenge') {
             $this->newChallenge($post, $resultId);
-            return redirect()->route('highscores');
+            return $resultId;
         }
 
         if ($mode == 'accept') {
             $this->acceptedChallenge($post, $resultId);
-            return redirect()->route('challenge', ['id' => $post['challengeId']]);
+            return $resultId;
         }
-
         $this->single($post);
-
-        return redirect()->route('highscores');
+        return $resultId;
     }
 
     /**
@@ -173,25 +171,7 @@ class ResultsHandler
             $post[$key] = intval($value);
         };
 
-        $result->saveResult(
-            $post['user_id'],
-            $post['bonus'],
-            $post['1'],
-            $post['2'],
-            $post['3'],
-            $post['4'],
-            $post['5'],
-            $post['6'],
-            $post['one_pair'],
-            $post['two_pairs'],
-            $post['three'],
-            $post['four'],
-            $post['small_straight'],
-            $post['large_straight'],
-            $post['full_house'],
-            $post['chance'],
-            $post['yatzy']
-        );
+        $result->saveResult($post);
 
         $resultId = $result->getLatestResult()->id;
 

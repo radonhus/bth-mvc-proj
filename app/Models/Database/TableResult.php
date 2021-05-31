@@ -69,61 +69,29 @@ class TableResult extends Model
     /**
      * Save new result in results table
      *
-     * @param  int  $userId
-     * @param  int  $resultBonus
-     * @param  int  $result1
-     * @param  int  $result2
-     * @param  int  $result3
-     * @param  int  $result4
-     * @param  int  $result5
-     * @param  int  $result6
-     * @param  int  $resultOnePair
-     * @param  int  $resultTwoPairs
-     * @param  int  $resultThree
-     * @param  int  $resultFour
-     * @param  int  $resultSmallStraight
-     * @param  int  $resultLargeStraight
-     * @param  int  $resultFullHouse
-     * @param  int  $resultChance
-     * @param  int  $resultYatzy
+     * @param  array $post
+
      * @return bool
      */
-    public function saveResult(
-        int $userId,
-        int $resultBonus,
-        int $result1,
-        int $result2,
-        int $result3,
-        int $result4,
-        int $result5,
-        int $result6,
-        int $resultOnePair,
-        int $resultTwoPairs,
-        int $resultThree,
-        int $resultFour,
-        int $resultSmallStraight,
-        int $resultLargeStraight,
-        int $resultFullHouse,
-        int $resultChance,
-        int $resultYatzy
-    ) {
-        $this->user_id = $userId;
-        $this->result_bonus = $resultBonus;
-        $this->result_1 = $result1;
-        $this->result_2 = $result2;
-        $this->result_3 = $result3;
-        $this->result_4 = $result4;
-        $this->result_5 = $result5;
-        $this->result_6 = $result6;
-        $this->result_one_pair = $resultOnePair;
-        $this->result_two_pairs = $resultTwoPairs;
-        $this->result_three = $resultThree;
-        $this->result_four = $resultFour;
-        $this->result_small_straight = $resultSmallStraight;
-        $this->result_large_straight = $resultLargeStraight;
-        $this->result_full_house = $resultFullHouse;
-        $this->result_chance = $resultChance;
-        $this->result_yatzy = $resultYatzy;
+    public function saveResult(array $post)
+    {
+        $this->user_id = $post['user_id'];
+        $this->result_bonus = $post['bonus'];
+        $this->result_1 = $post['1'];
+        $this->result_2 = $post['2'];
+        $this->result_3 = $post['3'];
+        $this->result_4 = $post['4'];
+        $this->result_5 = $post['5'];
+        $this->result_6 = $post['6'];
+        $this->result_one_pair = $post['one_pair'];
+        $this->result_two_pairs = $post['two_pairs'];
+        $this->result_three = $post['three'];
+        $this->result_four = $post['four'];
+        $this->result_small_straight = $post['small_straight'];
+        $this->result_large_straight = $post['large_straight'];
+        $this->result_full_house = $post['full_house'];
+        $this->result_chance = $post['chance'];
+        $this->result_yatzy = $post['yatzy'];
 
         return $this->save();
     }

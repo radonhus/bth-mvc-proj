@@ -51,13 +51,15 @@ To run the application on your local server, follow these steps:
 2. Run `npm install` to install the dependencies listed in `package.json`.
 3. Duplicate `.env.example` and name it `.env`.
 4. Run `php artisan key:generate` to set the `APP_KEY` variable of the `.env`-file.
-5. Run `php -S localhost:1234 -t public` to start a local php server running at port 1234.
+5. Run `php -S localhost:1234 -t public` to start a local PHP development server running at port 1234.
 6. Navigate to `http://localhost:1234/`to access the application.
 
 Results and user data is stored in an SQLite database. The database contains
 example users and results. If you prefer an empty database, run the SQL file
 `database/db/clear_database.sql` to clear all results and users.
 
-The repo includes test suites for unit testing using phpunit. More testing is
-possible through phpcs, phpmd, phpmetrics and phpstan, all of which have config
-files in the root-folder of the repo. Run `make test` to run all tests.
+The repo includes test suites for unit testing using phpunit. For unit tests that
+require a database to work, a separate database (database/db/test.db) is used.
+More testing is possible through phpcs, phpmd, phpmetrics and phpstan, all of
+which have config files in the root-folder of the repo. Run `make test` to run
+all tests.
