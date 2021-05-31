@@ -14,7 +14,7 @@ class AccountController extends Controller
 {
 
     /**
-     * Return view to create new user.
+     * Return (start)view to create a new user.
      * @return Object
      */
     public function start()
@@ -25,7 +25,7 @@ class AccountController extends Controller
     }
 
     /**
-     * Authenticate input, save new user to db, redirect.
+     * Authenticate name and password, save new user to db, redirect to myAccount.
      * @return Object
      */
     public function verifySave()
@@ -51,7 +51,7 @@ class AccountController extends Controller
     }
 
     /**
-     * Mark challenge as denied, return myAccount view
+     * Mark challenge as denied, return the myAccount view
      * @param Request $request
      * @property array $post
      * @property string $challengeId

@@ -19,21 +19,21 @@ use App\Http\Controllers\SessionController;
 */
 
 Route::get('/', [SessionController::class, 'start']);
-Route::get('/login', [SessionController::class, 'start']);
+Route::get('/login', [SessionController::class, 'start'])->name('login');
 Route::post('/login', [SessionController::class, 'verifyCreate']);
-Route::get('/logout', [SessionController::class, 'logoutDestroy']);
+Route::get('/logout', [SessionController::class, 'logoutDestroy'])->middleware('auth');
 
 Route::get('/register', [AccountController::class, 'start']);
 Route::post('/register', [AccountController::class, 'verifySave']);
-Route::post('/myaccount', [AccountController::class, 'denyChallenge']);
-Route::get('/myaccount', [AccountController::class, 'myAccount'])->name('myaccount');
+Route::post('/myaccount', [AccountController::class, 'denyChallenge'])->middleware('auth');
+Route::get('/myaccount', [AccountController::class, 'myAccount'])->name('myaccount')->middleware('auth');
 
-Route::get('/gamemode', [YatzyController::class, 'gamemode']);
-Route::post('/yatzysetup', [YatzyController::class, 'setup']);
-Route::post('/yatzyplay', [YatzyController::class, 'play']);
-Route::get('/yatzyview', [YatzyController::class, 'yatzyview'])->name('yatzyview');
+Route::get('/gamemode', [YatzyController::class, 'gamemode'])->middleware('auth');
+Route::post('/yatzysetup', [YatzyController::class, 'setup'])->middleware('auth');
+Route::post('/yatzyplay', [YatzyController::class, 'play'])->middleware('auth');
+Route::get('/yatzyview', [YatzyController::class, 'yatzyview'])->name('yatzyview')->middleware('auth');
 
-Route::post('/highscores', [ResultsController::class, 'submitResult']);
+Route::post('/highscores', [ResultsController::class, 'submitResult'])->middleware('auth');
 Route::get('/highscores', [ResultsController::class, 'highScores'])->name('highscores');
 
 Route::get('/result/{id}', function ($id) {
