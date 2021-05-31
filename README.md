@@ -53,6 +53,7 @@ To run the application on your local server, follow these steps:
 4. Run `php artisan key:generate` to set the `APP_KEY` variable of the `.env`-file.
 5. Run `php -S localhost:1234 -t public` to start a local PHP development server running at port 1234.
 6. Navigate to `http://localhost:1234/`to access the application.
+7. Before online publication, edit the rewrite parameters in `public/.htaccess` to reflect your URL.
 
 Results and user data is stored in an SQLite database. The database contains
 example users and results. If you prefer an empty database, run the SQL file
