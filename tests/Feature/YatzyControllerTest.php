@@ -102,6 +102,8 @@ class YatzyControllerTest extends TestCase
      */
     public function testStartSingle()
     {
+        auth()->attempt(['name' => 'admin', 'password' => 'admin']);
+
         $response = $this->withHeaders([
             'X-Header' => 'Value',
         ])->post('/yatzysetup', [
@@ -112,6 +114,7 @@ class YatzyControllerTest extends TestCase
         ]);
 
         $response->assertStatus(302);
+        $response->assertRedirect("yatzyview");
     }
 
     /**
@@ -122,6 +125,8 @@ class YatzyControllerTest extends TestCase
      */
     public function testStartChallenge()
     {
+        auth()->attempt(['name' => 'admin', 'password' => 'admin']);
+
         $response = $this->withHeaders([
             'X-Header' => 'Value',
         ])->post('/yatzysetup', [
@@ -132,6 +137,7 @@ class YatzyControllerTest extends TestCase
         ]);
 
         $response->assertStatus(302);
+        $response->assertRedirect("yatzyview");
     }
 
     /**
@@ -156,5 +162,6 @@ class YatzyControllerTest extends TestCase
         ]);
 
         $response->assertStatus(302);
+        $response->assertRedirect("yatzyview");
     }
 }

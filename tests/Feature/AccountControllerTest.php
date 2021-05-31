@@ -64,6 +64,7 @@ class AccountControllerTest extends TestCase
 
         $response->assertStatus(302);
         $response->assertSee('Redirect');
+        $response->assertRedirect('myaccount');
     }
 
     /**
@@ -85,6 +86,7 @@ class AccountControllerTest extends TestCase
         $response->assertSessionHasErrors();
         $response->assertStatus(302);
         $response->assertSee('Redirect');
+        $response->assertRedirect('/');
     }
 
     /**

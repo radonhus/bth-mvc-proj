@@ -79,6 +79,8 @@ class ResultsControllerTest extends TestCase
      */
     public function testSubmitResultReturns302Single()
     {
+        auth()->attempt(['name' => 'admin', 'password' => 'admin']);
+
         $response = $this->withHeaders([
             'X-Header' => 'Value',
         ])->post('/highscores', [
@@ -114,6 +116,7 @@ class ResultsControllerTest extends TestCase
 
         $response->assertStatus(302);
         $response->assertSee('Redirect');
+        $response->assertRedirect('highscores');
     }
 
     /**
@@ -162,6 +165,8 @@ class ResultsControllerTest extends TestCase
                                 ->get();
         $latestChallengeId = $latestChallenge[0]->id;
 
+        auth()->attempt(['name' => 'admin', 'password' => 'admin']);
+
         $response = $this->withHeaders([
             'X-Header' => 'Value',
         ])->post('/highscores', [
@@ -197,6 +202,7 @@ class ResultsControllerTest extends TestCase
 
         $response->assertStatus(302);
         $response->assertSee('Redirect');
+        $response->assertRedirect('challenge/' . $latestChallengeId);
     }
 
     /**
@@ -295,8 +301,8 @@ class ResultsControllerTest extends TestCase
 
         $histogramObject->where('dice_6', 999)->delete();
 
-        $userObject->where('user_id', 19)->update(['coins' => 100]);
-        $userObject->where('user_id', 22)->update(['coins' => 100]);
+        $userObject->where('id', 19)->update(['coins' => 100]);
+        $userObject->where('id', 22)->update(['coins' => 100]);
 
         $resultObject->where('user_id', 22)->delete();
         $resultObject->where('user_id', 19)->delete();

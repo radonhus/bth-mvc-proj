@@ -263,7 +263,7 @@ class ResultsHandlerTest extends TestCase
                                 ->get();
         $latestResultId = $latestResult[0]->id;
 
-        $challenges->bet = 0;
+        $challenges->bet = 200;
         $challenges->challenger_user_id = 19;
         $challenges->challenger_result_id = $latestResultId;
         $challenges->opponent_user_id = 22;
@@ -279,7 +279,7 @@ class ResultsHandlerTest extends TestCase
         $post = [
             'mode' => 'accept',
             'score' => 1000,
-            'bet' => 0,
+            'bet' => 200,
             'user_id' => 22,
             'opponent' => 19,
             'challengeId' => $latestChallengeId,
