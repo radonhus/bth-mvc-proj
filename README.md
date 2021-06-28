@@ -60,7 +60,7 @@ example users and results. If you prefer an empty database, run the SQL file
 `database/db/clear_database.sql` to clear all results and users.
 
 The repo includes test suites for unit testing using phpunit. For unit tests that
-require a database to work, a separate db (database/db/test.db) is used.
+require a database to work, a separate database (database/db/test.db) is used.
 More testing is possible through phpcs, phpmd, phpmetrics and phpstan, all of
 which have config files in the root-folder of the repo. Run `make test` to run
 all tests.
