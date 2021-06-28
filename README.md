@@ -1,6 +1,6 @@
-Scrutinizer CI: [![Build Status](https://scrutinizer-ci.com/g/radonhus/bth-mvc-proj/badges/build.png?b=main)](https://scrutinizer-ci.com/g/radonhus/bth-mvc-proj/build-status/main) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/radonhus/bth-mvc-proj/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/radonhus/bth-mvc-proj/?branch=main) [![Code Coverage](https://scrutinizer-ci.com/g/radonhus/bth-mvc-proj/badges/coverage.png?b=main)](https://scrutinizer-ci.com/g/radonhus/bth-mvc-proj/?branch=main)
+Scrutinizer CI: [![Build Status](https://scrutinizer-ci.com/g/xlsson/bth-mvc-proj/badges/build.png?b=main)](https://scrutinizer-ci.com/g/xlsson/bth-mvc-proj/build-status/main) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/xlsson/bth-mvc-proj/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/xlsson/bth-mvc-proj/?branch=main) [![Code Coverage](https://scrutinizer-ci.com/g/xlsson/bth-mvc-proj/badges/coverage.png?b=main)](https://scrutinizer-ci.com/g/xlsson/bth-mvc-proj/?branch=main)
 
-Travis CI: [![Build Status](https://travis-ci.com/radonhus/bth-mvc-proj.svg?branch=main)](https://travis-ci.com/radonhus/bth-mvc-proj)
+Travis CI: [![Build Status](https://travis-ci.com/xlsson/bth-mvc-proj.svg?branch=main)](https://travis-ci.com/xlsson/bth-mvc-proj)
 
 # ¥atzyBonanza
 
@@ -10,7 +10,7 @@ Yatzy clone with a micro-community where members can either play alone
 or challenge another member. The application is written in PHP, and uses the
 Laravel framework.
 
-![Yatzy](https://github.com/radonhus/bth-mvc-proj/blob/main/doc/design/yatzy_screenshot.png?raw=true)
+![Yatzy](https://github.com/xlsson/bth-mvc-proj/blob/main/doc/design/yatzy_screenshot.png?raw=true)
 
 ## Features
 
@@ -47,7 +47,7 @@ composer: https://getcomposer.org/download/
 npm (included in Node.js): https://nodejs.org/en/
 
 To run the application on your local server, follow these steps:
-1. Run `git clone https://github.com/radonhus/bth-mvc-proj` to clone the repository.
+1. Run `git clone https://github.com/xlsson/bth-mvc-proj` to clone the repository.
 2. Run `npm install` to install the dependencies listed in `package.json`.
 3. Duplicate `.env.example` and name it `.env`.
 4. Run `php artisan key:generate` to set the `APP_KEY` variable of the `.env`-file.
